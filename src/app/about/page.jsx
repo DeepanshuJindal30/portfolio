@@ -41,14 +41,26 @@ const AboutPage = () => {
             <h1 className="font-bold text-2xl">BIOGRAPHY</h1>
             {/* BIOGRAPHY DESC */}
             <p className="text-lg">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              harum quibusdam cupiditate nobis accusamus sed aut aperiam,
-              reiciendis numquam! Voluptas voluptatibus obcaecati dolore itaque
-              suscipit! Vel doloremque numquam quam nihil.
+            
+
+Deepanshu Jindal
+
+Deepanshu Jindal is a passionate and driven computer science student hailing from Mohali, Punjab. Currently pursuing his Bachelor's degree in Computer Science from Chandigarh University, Deepanshu has consistently demonstrated a strong academic prowess, maintaining an impressive cumulative GPA of 8.6.
+
+With a keen interest in technology and innovation, Deepanshu has actively engaged in various projects and research endeavors. Notably, he has undertaken over 20 projects, showcasing his proficiency in programming languages such as C++, Python, and Java. His project portfolio includes the development of cutting-edge solutions, such as the 'Automated Food Calorimetry via YOLOv8-Enhanced Convolutional Neural Networks', where he achieved remarkable accuracy in food item recognition and calorie estimation.
+
+In addition to his academic and project work, Deepanshu has made significant contributions to the field of research. As a researcher at Chandigarh University, he has been involved in pioneering projects like 'Multilingual Cross-Modal Image Synthesis', leveraging advanced technologies such as TensorFlow and GANs to generate diverse visual content from text across languages.
+
+Deepanshu's dedication to his craft is reflected in his numerous achievements and accolades. He has earned top ratings on platforms like Hackerrank and LeetCode, showcasing his proficiency in problem-solving and algorithmic skills. Furthermore, his publications, including patents and papers, highlight his commitment to addressing real-world challenges through innovative solutions.
+
+Beyond his academic and professional pursuits, Deepanshu is actively involved in community initiatives and open-source projects. His acceptance as a mentee in JWOC (Open Source) and recognition in various hackathons and competitions underscore his collaborative spirit and leadership qualities.
+
+In summary, Deepanshu Jindal is a dynamic and talented individual with a passion for leveraging technology to drive positive change. With a strong foundation in computer science and a track record of impactful contributions, he is poised to make significant strides in his future endeavors.
+
             </p>
             {/* BIOGRAPHY QUOTE */}
             <span className="italic">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            "Embrace the challenges, for they are the stepping stones to greatness. With persistence, passion, and purpose, every obstacle becomes an opportunity for growth."
             </span>
             {/* BIOGRAPHY SIGN SVG*/}
             <div className="self-end">
@@ -107,81 +119,41 @@ const AboutPage = () => {
               animate={isSkillRefInView ? { x: 0 } : {}}
               className="flex gap-4 flex-wrap"
             >
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                JavaScript
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                TypeScript
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                React.js
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Next.js
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                SCSS
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Tailwind CSS
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                MongoDB
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                PostgreSQL
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Node.js
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Nest.js
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Express.js
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Spring Boot
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                GraphQL
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Apollo
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Redux
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Framer Motion
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Three.js
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                WebGL
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Webpack
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Vite
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Docker
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                AWS
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Firebase
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Git
-              </div>
-              <div className="rounded  p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-                Figma
-              </div>
+    
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  C++/C
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Python
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Java
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  TensorFlow
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  HTML/CSS
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  JavaScript
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Solidity
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  React
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Kotlin
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  SQL
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  AWS
+</div>
+
             </motion.div>
             {/* SKILL SCROLL SVG */}
             <motion.svg
