@@ -9,20 +9,36 @@ const items = [
     id: 1,
     color: "from-red-300 to-blue-300",
     title: "Automated Food Calorimetry via YOLOv8-Enhanced Convolutional Neural Networks",
-    desc: "Integrated YOLOv8 architecture with CNNs for precise food item recognition and calorie estimation.",
-    img: "https://images.pexels.com/photos/18073372/pexels-photo-18073372/free-photo-of-young-man-sitting-in-a-car-on-a-night-street.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-    link: "https://lama.dev",
+    desc: "Integrated YOLOv8 architecture with CNNs for precise food item recognition and calorie estimation. Achieved 92% estimation accuracy.",
+    img: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+    link: "https://github.com/DeepanshuJindal30/Food-Calorie-estimation",
   },
   {
     id: 2,
     color: "from-violet-300 to-purple-300",
-    title: "Margdarshan - Job Profile Prediction",
-    desc: "Engineered and optimized the dataset for job profile prediction.",
-    img: "https://images.pexels.com/photos/6894528/pexels-photo-6894528.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-    link: "https://lama.dev",
+    title: "KalpaChitra.AI - Creative Image Manipulation",
+    desc: "Developed a platform for AI-based image manipulation with 90% accuracy in image segmentation and 99% in facial recognition.",
+    img: "https://i.imgur.com/LtG6BTL.png",
+    link: "https://github.com/DeepanshuJindal30/KalpaChitra.AI",
   },
-  
+  {
+    id: 3,
+    color: "from-green-300 to-yellow-300",
+    title: "Margdarshan - Job Profile Prediction",
+    desc: "Engineered a custom machine learning pipeline using Pandas, NumPy, and Scikit-learn for job profile prediction.",
+    img: "https://images.pexels.com/photos/5668860/pexels-photo-5668860.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+    link: "https://github.com/DeepanshuJindal30/Margdarshan-Profile-Prediction",
+  },
+  {
+    id: 4,
+    color: "from-pink-300 to-orange-300",
+    title: "Multilingual Cross-Modal Image Synthesis",
+    desc: "Published research using TensorFlow and GANs for generating diverse visual content from multilingual text.",
+    img: "https://images.pexels.com/photos/7014517/pexels-photo-7014517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    link: "https://www.deepanshujindal.com",
+  },
 ];
+
 
 const PortfolioPage = () => {
   const ref = useRef();
