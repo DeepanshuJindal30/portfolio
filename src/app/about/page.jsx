@@ -245,7 +245,6 @@ const AboutPage = () => {
               transition={{ delay: 0.2 }}
               className="font-bold text-2xl"
             >
-              EXPERIENCE
             </motion.h1>
             {/* EXPERIENCE LIST */}
             <motion.div
