@@ -31,7 +31,7 @@ const AboutPage = () => {
           <div className="flex flex-col gap-12 justify-center">
             {/* BIOGRAPHY IMAGE */}
             <Image
-              src="https://images.pexels.com/photos/775358/pexels-photo-775358.jpeg?auto=compress&cs=tinysrgb&w=800"
+              src="/deepanshu.png"
               alt=""
               width={112}
               height={112}
@@ -43,21 +43,24 @@ const AboutPage = () => {
             <p className="text-lg">
             
 
-Deepanshu Jindal
 
-Deepanshu Jindal is a passionate and driven computer science student hailing from Mohali, Punjab. Currently pursuing his Bachelor&apos;s degree in Computer Science from Chandigarh University, Deepanshu has consistently demonstrated a strong academic prowess, maintaining an impressive cumulative GPA of 8.6.
-With a keen interest in technology and innovation, Deepanshu has actively engaged in various projects and research endeavors. Notably, he has undertaken over 20 projects, showcasing his proficiency in programming languages such as C++, Python, and Java. His project portfolio includes the development of cutting-edge solutions, such as the &apos;Automated Food Calorimetry via YOLOv8-Enhanced Convolutional Neural Networks&apos;, where he achieved remarkable accuracy in food item recognition and calorie estimation.
-In addition to his academic and project work, Deepanshu has made significant contributions to the field of research. As a researcher at Chandigarh University, he has been involved in pioneering projects like &apos;Multilingual Cross-Modal Image Synthesis&apos;, leveraging advanced technologies such as TensorFlow and GANs to generate diverse visual content from text across languages.
-Deepanshu&apos;s dedication to his craft is reflected in his numerous achievements and accolades. He has earned top ratings on platforms like Hackerrank and LeetCode, showcasing his proficiency in problem-solving and algorithmic skills. Furthermore, his publications, including patents and papers, highlight his commitment to addressing real-world challenges through innovative solutions.
-Beyond his academic and professional pursuits, Deepanshu is actively involved in community initiatives and open-source projects. His acceptance as a mentee in JWOC (Open Source) and recognition in various hackathons and competitions underscore his collaborative spirit and leadership qualities.
-In summary, Deepanshu Jindal is a dynamic and talented individual with a passion for leveraging technology to drive positive change. With a strong foundation in computer science and a track record of impactful contributions, he is poised to make significant strides in his future endeavors.
+<b>Deepanshu Jindal</b> is a dynamic software developer and researcher currently pursuing a Bachelor's degree in Computer Science and Engineering from Chandigarh University, Mohali. With a strong academic record, maintaining a CGPA of 8.7, he has demonstrated his passion for innovation and technology through numerous projects and research endeavors.
+
+Deepanshu's portfolio showcases over 25 projects, including notable work such as "KalpaChitra.AI," an AI-powered image manipulation platform, and "Automated Food Calorimetry via YOLOv8-enhanced CNN," where he achieved 92% accuracy in food recognition and calorie estimation. His expertise spans multiple programming languages like C++, Python, and Java, and technologies such as TensorFlow, YOLOv8, and Neural Networks.
+
+In research, Deepanshu has made significant strides in AI, NLP, and computer vision, with contributions like his work on multilingual cross-modal image synthesis using GANs and Diffusion Transformers. His contributions have led to multiple publications, including patents and research papers on advanced AI and machine learning topics.
+
+He is also an active participant in the open-source community and hackathons, showcasing leadership and collaboration skills. His achievements include high ratings on competitive programming platforms like HackerRank, LeetCode, Codechef, and Codeforces, and accolades such as the Best Paper Award at the CCICT'24 IEEE Conference and being in the top 1% in NPTEL IoT courses.
+
+With a well-rounded profile that blends technical expertise, research acumen, and collaborative spirit, Deepanshu Jindal is well-positioned for impactful contributions to the field of computer science and engineering​
+.
             </p>
             {/* BIOGRAPHY QUOTE */}
             <span className="italic">
             &quot;Embrace the challenges, for they are the stepping stones to greatness. With persistence, passion, and purpose, every obstacle becomes an opportunity for growth.&quot;
             </span>
             {/* BIOGRAPHY SIGN SVG*/}
-            <div className="self-end">
+            {/* <div className="self-end">
               <svg
                 width="185"
                 height="77"
@@ -71,7 +74,7 @@ In summary, Deepanshu Jindal is a dynamic and talented individual with a passion
                   strokeWidth="2"
                 />
               </svg>
-            </div>
+            </div> */}
             {/* BIOGRAPHY SCROLL SVG */}
             <motion.svg
               initial={{ opacity: 0.2, y: 0 }}
@@ -114,40 +117,106 @@ In summary, Deepanshu Jindal is a dynamic and talented individual with a passion
               className="flex gap-4 flex-wrap"
             >
   <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  C++/C
+  C
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  Python
+  C++
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
   Java
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Python
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Shell Scripting
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  LaTeX
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  HTML
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  CSS
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  JavaScript (React.js)
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Git
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Django
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  MongoDB
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Node.js
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
   TensorFlow
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  HTML/CSS
+  Neural Networks
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  JavaScript
+  OpenCV
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  Solidity
+  Pandas
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  React
+  Scikit-learn
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  Kotlin
+  NumPy
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  SQL
+  Android Studio
 </div>
 <div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
-  AWS
+  VS Code
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Eclipse
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Google Colab
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Figma
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Canva
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Bootstrap
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Communication
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Leadership
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Proactive
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Adaptability
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Logical Thinking
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Creativity
+</div>
+<div className="rounded p-2 text-sm cursor-pointer bg-black text-white hover:bg-white hover:text-black">
+  Teamwork
 </div>
 
-            </motion.div>
+</motion.div>
             {/* SKILL SCROLL SVG */}
             <motion.svg
               initial={{ opacity: 0.2, y: 0 }}
@@ -177,118 +246,8 @@ In summary, Deepanshu Jindal is a dynamic and talented individual with a passion
             className="flex flex-col gap-12 justify-center pb-48"
             ref={experienceRef}
           >
-            {/* EXPERIENCE TITLE */}
-            <motion.h1
-              initial={{ x: "-300px" }}
-              animate={isExperienceRefInView ? { x: "0" } : {}}
-              transition={{ delay: 0.2 }}
-              className="font-bold text-2xl"
-            >
-              EXPERIENCE
-            </motion.h1>
-            {/* EXPERIENCE LIST */}
-            <motion.div
-              initial={{ x: "-300px" }}
-              animate={isExperienceRefInView ? { x: "0" } : {}}
-              className=""
-            >
-              {/* EXPERIENCE LIST ITEM */}
-              <div className="flex justify-between h-48">
-                {/* LEFT */}
-                <div className="w-1/3 ">
-                  {/* JOB TITLE */}
-                  <div className="bg-white p-3 font-semibold rounded-b-lg rounded-s-lg">
-                    Senior JavaScript Engineer
-                  </div>
-                  {/* JOB DESC */}
-                  <div className="p-3 text-sm italic">
-                    I led web development, offering expertise in JavaScript
-                    frameworks.{" "}
-                  </div>
-                  {/* JOB DATE */}
-                  <div className="p-3 text-red-400 text-sm font-semibold">
-                    2024 - Present
-                  </div>
-                  {/* JOB COMPANY */}
-                  <div className="p-1 rounded bg-white text-sm font-semibold w-fit">
-                    Apple
-                  </div>
-                </div>
-                {/* CENTER */}
-                <div className="w-1/6 flex justify-center">
-                  {/* LINE */}
-                  <div className="w-1 h-full bg-gray-600 rounded relative">
-                    {/* LINE CIRCLE */}
-                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400 bg-white -left-2"></div>
-                  </div>
-                </div>
-                {/* RIGHT */}
-                <div className="w-1/3 "></div>
-              </div>
-              {/* EXPERIENCE LIST ITEM */}
-              <div className="flex justify-between h-48">
-                {/* LEFT */}
-                <div className="w-1/3 "></div>
-                {/* CENTER */}
-                <div className="w-1/6 flex justify-center">
-                  {/* LINE */}
-                  <div className="w-1 h-full bg-gray-600 rounded relative">
-                    {/* LINE CIRCLE */}
-                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400 bg-white -left-2"></div>
-                  </div>
-                </div>
-                {/* RIGHT */}
-                <div className="w-1/3 ">
-                  {/* JOB TITLE */}
-                  <div className="bg-white p-3 font-semibold rounded-b-lg rounded-s-lg">
-                    Senior React Developer
-                  </div>
-                  {/* JOB DESC */}
-                  <div className="p-3 text-sm italic">
-                    I spearheaded React-based application development,
-                    leveraging advanced skills.{" "}
-                  </div>
-                  {/* JOB DATE */}
-                  <div className="p-3 text-red-400 text-sm font-semibold">
-                    2019 - 2024{" "}
-                  </div>
-                  {/* JOB COMPANY */}
-                  <div className="p-1 rounded bg-white text-sm font-semibold w-fit">
-                    Microsoft
-                  </div>
-                </div>
-              </div>
-              {/* EXPERIENCE LIST ITEM */}
-              <div className="flex justify-between h-48">
-                {/* LEFT */}
-                <div className="w-1/3 ">
-                  {/* JOB TITLE */}
-                  <div className="bg-white p-3 font-semibold rounded-b-lg rounded-s-lg">
-                    Freelancer{" "}
-                  </div>
-                  {/* JOB DESC */}
-                  <div className="p-3 text-sm italic">
-                    I provided web solutions, applying a range of technologies
-                    to address client requirements.{" "}
-                  </div>
-                  {/* JOB DATE */}
-                  <div className="p-3 text-red-400 text-sm font-semibold">
-                    2010 - 2019{" "}
-                  </div>
-                </div>
-                {/* CENTER */}
-                <div className="w-1/6 flex justify-center">
-                  {/* LINE */}
-                  <div className="w-1 h-full bg-gray-600 rounded relative">
-                    {/* LINE CIRCLE */}
-                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400 bg-white -left-2"></div>
-                  </div>
-                </div>
-                {/* RIGHT */}
-                <div className="w-1/3 "></div>
-              </div>
-            </motion.div>
-          </div>
+           
+                      </div>
         </div>
         {/* SVG CONTAINER */}
         <div className="hidden lg:block w-1/3 sticky top-0 z-30 xl:w-1/2">
