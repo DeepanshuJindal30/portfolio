@@ -41,19 +41,11 @@ const AboutPage = () => {
             <h1 className="font-bold text-2xl">BIOGRAPHY</h1>
             {/* BIOGRAPHY DESC */}
             <p className="text-lg">
-
-
-
               <b>Deepanshu Jindal</b> is a dynamic software developer and researcher currently pursuing a Bachelor&apos;s degree in Computer Science and Engineering from Chandigarh University, Mohali. With a strong academic record, maintaining a CGPA of 8.7, he has demonstrated his passion for innovation and technology through numerous projects and research endeavors.
-
               Deepanshu&apos;s portfolio showcases over 25 projects, including notable work such as &quot;KalpaChitra.AI,&quot; an AI-powered image manipulation platform, and &quot;Automated Food Calorimetry via YOLOv8-enhanced CNN,&quot; where he achieved 92% accuracy in food recognition and calorie estimation. His expertise spans multiple programming languages like C++, Python, and Java, and technologies such as TensorFlow, YOLOv8, and Neural Networks.
-
               In research, Deepanshu has made significant strides in AI, NLP, and computer vision, with contributions like his work on multilingual cross-modal image synthesis using GANs and Diffusion Transformers. His contributions have led to multiple publications, including patents and research papers on advanced AI and machine learning topics.
-
               He is also an active participant in the open-source community and hackathons, showcasing leadership and collaboration skills. His achievements include high ratings on competitive programming platforms like HackerRank, LeetCode, Codechef, and Codeforces, and accolades such as the Best Paper Award at the CCICT&apos;24 IEEE Conference and being in the top 1% in NPTEL IoT courses.
-
-              With a well-rounded profile that blends technical expertise, research acumen, and collaborative spirit, Deepanshu Jindal is well-positioned for impactful contributions to the field of computer science and engineering
-              .
+              With a well-rounded profile that blends technical expertise, research acumen, and collaborative spirit, Deepanshu Jindal is well-positioned for impactful contributions to the field of computer science and engineering.
             </p>
             {/* BIOGRAPHY QUOTE */}
             <span className="italic">
