@@ -5,10 +5,12 @@ import {
   ArrowRight,
   Download,
   Github,
+  ImageIcon,
   Play,
 } from "lucide-react";
 import { mobileApps } from "@/data/projects";
 import { PhoneMockup } from "@/components/ui/PhoneMockup";
+import { AppScreenshotGallery } from "@/components/ui/AppScreenshotGallery";
 import { SkillBadge } from "@/components/ui/SkillBadge";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
@@ -103,6 +105,10 @@ export function MobileSection() {
                   <Play className="w-4 h-4" aria-hidden="true" />
                   Watch Demo
                 </Button>
+                <Button href="#app-screenshots" variant="ghost">
+                  <ImageIcon className="w-4 h-4" aria-hidden="true" />
+                  Screenshots
+                </Button>
               </div>
             </div>
 
@@ -118,6 +124,25 @@ export function MobileSection() {
             </div>
           </div>
         </motion.article>
+
+        {app.screenshotGallery && app.screenshotGallery.length > 0 && (
+          <motion.div
+            id="app-screenshots"
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-10 md:mt-12"
+          >
+            <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2 text-center">
+              App Screenshots
+            </h3>
+            <p className="text-sm text-stone-500 text-center mb-8 max-w-lg mx-auto">
+              Real UI from the production build — home, catalog, cart, orders,
+              profile, and admin dashboard.
+            </p>
+            <AppScreenshotGallery screenshots={app.screenshotGallery} />
+          </motion.div>
+        )}
       </div>
     </section>
   );

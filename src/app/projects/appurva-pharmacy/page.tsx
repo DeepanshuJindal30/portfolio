@@ -9,6 +9,7 @@ import { AnimatedGrid } from "@/components/layout/AnimatedGrid";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PhoneMockup } from "@/components/ui/PhoneMockup";
+import { AppScreenshotGallery } from "@/components/ui/AppScreenshotGallery";
 import { withBasePath } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -169,22 +170,26 @@ export default function AppurvaPharmacyCaseStudyPage() {
               >
                 Screenshots
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {study.screenshots.map((screenshot, i) => (
-                  <div
-                    key={screenshot}
-                    className="relative aspect-[9/16] rounded-xl overflow-hidden border border-white/10 bg-zinc-900"
-                  >
-                    <Image
-                      src={screenshot}
-                      alt={`${study.title} screenshot ${i + 1}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 50vw, 33vw"
-                    />
-                  </div>
-                ))}
-              </div>
+              {study.screenshotGallery ? (
+                <AppScreenshotGallery screenshots={study.screenshotGallery} />
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {study.screenshots.map((screenshot, i) => (
+                    <div
+                      key={screenshot}
+                      className="relative aspect-[9/16] rounded-xl overflow-hidden border border-white/10 bg-zinc-900"
+                    >
+                      <Image
+                        src={screenshot}
+                        alt={`${study.title} screenshot ${i + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, 33vw"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </section>
 
             <section aria-labelledby="challenges-heading">

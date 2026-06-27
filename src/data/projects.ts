@@ -20,9 +20,24 @@ export interface ProductionProject {
   featured?: boolean;
 }
 
+export interface AppScreenshot {
+  src: string;
+  label: string;
+}
+
+export const appurvaPharmacyScreenshots: AppScreenshot[] = [
+  { src: "/app-screenshots/home.png", label: "Home" },
+  { src: "/app-screenshots/categories.png", label: "Categories" },
+  { src: "/app-screenshots/cart.png", label: "Cart" },
+  { src: "/app-screenshots/orders.png", label: "Orders" },
+  { src: "/app-screenshots/profile.png", label: "Profile" },
+  { src: "/app-screenshots/admin-dashboard.png", label: "Admin Dashboard" },
+];
+
 export interface MobileApp extends ProductionProject {
   features: string[];
   screenshots: string[];
+  screenshotGallery?: AppScreenshot[];
   demoVideo?: string;
 }
 
@@ -36,6 +51,7 @@ export interface CaseStudy {
   techStack: string[];
   architecture: string[];
   screenshots: string[];
+  screenshotGallery?: AppScreenshot[];
   demoVideo?: string;
   challenges: string[];
   futureImprovements: string[];
@@ -144,12 +160,8 @@ export const mobileApps: MobileApp[] = [
       "Android APK",
     ],
     category: "mobile",
-    screenshots: [
-      "/app-screenshots/home.png",
-      "/app-screenshots/catalog.svg",
-      "/app-screenshots/cart.svg",
-      "/app-screenshots/admin.svg",
-    ],
+    screenshots: appurvaPharmacyScreenshots.map((s) => s.src),
+    screenshotGallery: appurvaPharmacyScreenshots,
     demoVideo: "/videos/appurva-pharmacy-demo.mp4",
     links: {
       caseStudy: "/projects/appurva-pharmacy",
@@ -308,14 +320,8 @@ export const appurvaPharmacyCaseStudy: CaseStudy = {
     "Admin role-based access control",
     "EAS Build pipeline for Android APK",
   ],
-  screenshots: [
-    "/app-screenshots/home.png",
-    "/app-screenshots/catalog.svg",
-    "/app-screenshots/cart.svg",
-    "/app-screenshots/checkout.svg",
-    "/app-screenshots/orders.svg",
-    "/app-screenshots/admin.svg",
-  ],
+  screenshots: appurvaPharmacyScreenshots.map((s) => s.src),
+  screenshotGallery: appurvaPharmacyScreenshots,
   demoVideo: "/videos/appurva-pharmacy-demo.mp4",
   challenges: [
     "Designing prescription upload flow with validation and admin review",
