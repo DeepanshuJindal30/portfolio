@@ -43,14 +43,21 @@ export function Button({
 
   if (href) {
     return (
-      <a href={href} className={classes} {...props}>
+      <a
+        href={href}
+        className={classes}
+        {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
         {children}
       </a>
     );
   }
 
   return (
-    <button className={classes} {...(props as ButtonProps)}>
+    <button
+      className={classes}
+      {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
       {children}
     </button>
   );
