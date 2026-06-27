@@ -18,10 +18,15 @@ export function CountUp({
   duration = 1.8,
   className,
 }: CountUpProps) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(end);
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    setCount(0);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -70,9 +75,9 @@ export function CountUp({
   }, [started, end, duration, prefersReducedMotion]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={className} suppressHydrationWarning>
       {prefix}
-      {prefersReducedMotion ? end : count}
+      {prefersReducedMotion || !started ? end : count}
       {suffix}
     </span>
   );
