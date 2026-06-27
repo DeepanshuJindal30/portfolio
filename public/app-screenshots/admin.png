@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="780" viewBox="0 0 360 780">
+  <rect width="360" height="780" fill="#0f172a"/>
+  <rect x="0" y="0" width="360" height="60" fill="#7c2d12"/>
+  <text x="24" y="38" fill="#f8fafc" font-family="system-ui" font-size="18" font-weight="bold">Admin Dashboard</text>
+  <rect x="24" y="80" width="145" height="70" rx="12" fill="#1e293b"/>
+  <text x="40" y="110" fill="#f97316" font-family="system-ui" font-size="22" font-weight="bold">24</text>
+  <text x="40" y="132" fill="#94a3b8" font-family="system-ui" font-size="11">Pending Orders</text>
+  <rect x="191" y="80" width="145" height="70" rx="12" fill="#1e293b"/>
+  <text x="207" y="110" fill="#22c55e" font-family="system-ui" font-size="22" font-weight="bold">156</text>
+  <text x="207" y="132" fill="#94a3b8" font-family="system-ui" font-size="11">Products</text>
+  <text x="24" y="190" fill="#f97316" font-family="system-ui" font-size="14" font-weight="bold">Recent Orders</text>
+  <rect x="24" y="205" width="312" height="60" rx="8" fill="#1e293b"/>
+  <text x="40" y="232" fill="#f8fafc" font-family="system-ui" font-size="13">#AP-2847 - Pending Review</text>
+  <text x="40" y="250" fill="#94a3b8" font-family="system-ui" font-size="11">Prescription attached</text>
+  <rect x="24" y="280" width="312" height="60" rx="8" fill="#1e293b"/>
+  <text x="40" y="307" fill="#f8fafc" font-family="system-ui" font-size="13">#AP-2846 - Ready for Pickup</text>
+</svg>

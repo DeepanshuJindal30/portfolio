@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="780" viewBox="0 0 360 780">
+  <rect width="360" height="780" fill="#0f172a"/>
+  <rect x="0" y="0" width="360" height="60" fill="#1e1b4b"/>
+  <text x="24" y="38" fill="#f8fafc" font-family="system-ui" font-size="18" font-weight="bold">My Cart (3 items)</text>
+  <rect x="24" y="80" width="312" height="80" rx="12" fill="#1e293b"/>
+  <text x="40" y="110" fill="#f8fafc" font-family="system-ui" font-size="14">Paracetamol 500mg</text>
+  <text x="40" y="135" fill="#f97316" font-family="system-ui" font-size="13">�25 � 2</text>
+  <rect x="24" y="175" width="312" height="80" rx="12" fill="#1e293b"/>
+  <text x="40" y="205" fill="#f8fafc" font-family="system-ui" font-size="14">Vitamin C 1000mg</text>
+  <text x="40" y="230" fill="#f97316" font-family="system-ui" font-size="13">�199 � 1</text>
+  <rect x="24" y="290" width="312" height="120" rx="12" fill="#1e293b"/>
+  <text x="40" y="320" fill="#94a3b8" font-family="system-ui" font-size="13">Delivery</text>
+  <text x="40" y="345" fill="#f8fafc" font-family="system-ui" font-size="14">Home Delivery " 30-45 min</text>
+  <text x="40" y="375" fill="#22c55e" font-family="system-ui" font-size="13">Self Pickup also available</text>
+  <rect x="24" y="650" width="312" height="52" rx="26" fill="#f97316"/>
+  <text x="130" y="682" fill="white" font-family="system-ui" font-size="16" font-weight="bold">Checkout �249</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <rect width="390" height="844" fill="#0a0a0f"/>
+  <text x="30" y="80" fill="#fff" font-family="system-ui" font-size="18" font-weight="bold">Checkout</text>
+  <rect x="20" y="110" width="350" height="60" rx="10" fill="#18181b"/>
+  <rect x="20" y="190" width="350" height="60" rx="10" fill="#18181b"/>
+  <rect x="20" y="270" width="165" height="80" rx="10" fill="#1e1b4b" stroke="#6366f1"/>
+  <rect x="205" y="270" width="165" height="80" rx="10" fill="#18181b"/>
+  <text x="102" y="320" text-anchor="middle" fill="#818cf8" font-family="system-ui" font-size="12">Delivery</text>
+  <text x="287" y="320" text-anchor="middle" fill="#a1a1aa" font-family="system-ui" font-size="12">Pickup</text>
+  <rect x="20" y="750" width="350" height="50" rx="25" fill="#22c55e"/>
+  <text x="195" y="782" text-anchor="middle" fill="#fff" font-family="system-ui" font-size="14">Place Order</text>
+</svg>

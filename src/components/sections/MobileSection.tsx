@@ -1,0 +1,119 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  ArrowRight,
+  Download,
+  Github,
+  ImageIcon,
+} from "lucide-react";
+import { mobileApps } from "@/data/projects";
+import { PhoneMockup } from "@/components/ui/PhoneMockup";
+import { SkillBadge } from "@/components/ui/SkillBadge";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+import { withBasePath } from "@/lib/utils";
+
+export function MobileSection() {
+  const prefersReducedMotion = useReducedMotion();
+  const app = mobileApps[0];
+
+  return (
+    <section
+      id="mobile"
+      className="section-padding"
+      aria-labelledby="mobile-heading"
+    >
+      <div className="max-w-7xl mx-auto">
+        <SectionHeader
+          label="Product Engineering"
+          title="Mobile Apps & Product Builds"
+          description="End-to-end mobile products with React Native, Expo, and production APK delivery."
+        />
+
+        <motion.article
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="rounded-2xl glass-card gradient-border overflow-hidden"
+        >
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-0">
+            <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center order-2 lg:order-1">
+              <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-3">
+                React Native · Expo · Supabase
+              </span>
+              <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+                {app.title}
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+                {app.description}
+              </p>
+
+              <ul className="space-y-2 mb-6" role="list">
+                {app.features.slice(0, 5).map((feature) => (
+                  <li
+                    key={feature}
+                    className="text-sm text-zinc-400 flex items-start gap-2"
+                  >
+                    <span className="text-cyan-500 mt-0.5" aria-hidden="true">
+                      ✓
+                    </span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-wrap gap-2 mb-8">
+                {app.technologies.map((tech) => (
+                  <SkillBadge key={tech} label={tech} variant="accent" />
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/projects/appurva-pharmacy"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-black hover:bg-zinc-200 border border-white/20 shadow-lg shadow-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                >
+                  View Case Study
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+                {app.links?.apk && (
+                  <Button href={withBasePath(app.links.apk)} variant="outline">
+                    <Download className="w-4 h-4" aria-hidden="true" />
+                    Download APK
+                  </Button>
+                )}
+                {app.links?.github && (
+                  <Button
+                    href={app.links.github}
+                    variant="ghost"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="w-4 h-4" aria-hidden="true" />
+                    GitHub Repo
+                  </Button>
+                )}
+                <Button href="#mobile-screenshots" variant="ghost">
+                  <ImageIcon className="w-4 h-4" aria-hidden="true" />
+                  Screenshots
+                </Button>
+              </div>
+            </div>
+
+            <div
+              id="mobile-screenshots"
+              className="relative p-8 md:p-12 flex items-center justify-center bg-gradient-to-br from-indigo-500/5 to-cyan-500/5 order-1 lg:order-2"
+            >
+              <PhoneMockup
+                screenshots={app.screenshots}
+                alt={app.title}
+              />
+            </div>
+          </div>
+        </motion.article>
+      </div>
+    </section>
+  );
+}

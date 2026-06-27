@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="780" viewBox="0 0 360 780">
+  <rect width="360" height="780" fill="#0f172a"/>
+  <rect x="0" y="0" width="360" height="120" fill="#1e1b4b"/>
+  <text x="24" y="50" fill="#f8fafc" font-family="system-ui" font-size="22" font-weight="bold">Appurva Pharmacy</text>
+  <text x="24" y="80" fill="#94a3b8" font-family="system-ui" font-size="13">Healthcare at your doorstep</text>
+  <rect x="24" y="140" width="312" height="44" rx="22" fill="#1e293b"/>
+  <text x="48" y="168" fill="#64748b" font-family="system-ui" font-size="14">Search medicines...</text>
+  <text x="24" y="220" fill="#f97316" font-family="system-ui" font-size="14" font-weight="bold">Categories</text>
+  <rect x="24" y="240" width="90" height="90" rx="12" fill="#1e293b"/><text x="48" y="295" fill="#f8fafc" font-size="11" font-family="system-ui">Medicines</text>
+  <rect x="130" y="240" width="90" height="90" rx="12" fill="#1e293b"/><text x="142" y="295" fill="#f8fafc" font-size="11" font-family="system-ui">Healthcare</text>
+  <rect x="236" y="240" width="90" height="90" rx="12" fill="#1e293b"/><text x="258" y="295" fill="#f8fafc" font-size="11" font-family="system-ui">Vitamins</text>
+  <text x="24" y="370" fill="#f97316" font-family="system-ui" font-size="14" font-weight="bold">Popular Products</text>
+  <rect x="24" y="390" width="150" height="180" rx="12" fill="#1e293b"/>
+  <rect x="186" y="390" width="150" height="180" rx="12" fill="#1e293b"/>
+</svg>

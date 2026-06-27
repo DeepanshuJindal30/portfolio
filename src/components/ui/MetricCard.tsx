@@ -1,0 +1,102 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  BookOpen,
+  Briefcase,
+  Code,
+  ExternalLink,
+  Layers,
+  Lightbulb,
+  Smartphone,
+  Star,
+  Trophy,
+  type LucideIcon,
+} from "lucide-react";
+import type { Achievement } from "@/data/achievements";
+import { cn } from "@/lib/utils";
+
+const iconMap: Record<string, LucideIcon> = {
+  briefcase: Briefcase,
+  trophy: Trophy,
+  star: Star,
+  "book-open": BookOpen,
+  lightbulb: Lightbulb,
+  code: Code,
+  layers: Layers,
+  smartphone: Smartphone,
+};
+
+interface MetricCardProps {
+  achievement: Achievement;
+  index?: number;
+}
+
+export function MetricCard({ achievement, index = 0 }: MetricCardProps) {
+  const prefersReducedMotion = useReducedMotion();
+  const Icon = iconMap[achievement.icon] ?? Trophy;
+
+  const content = (
+    <>
+      <div className="flex items-start justify-between mb-4">
+        <div className="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+          <Icon className="w-5 h-5 text-indigo-400" aria-hidden="true" />
+        </div>
+        <div className="flex items-center gap-1.5">
+          {achievement.url && (
+            <ExternalLink
+              className="w-3.5 h-3.5 text-zinc-600 group-hover:text-indigo-400 transition-colors"
+              aria-hidden="true"
+            />
+          )}
+          <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
+            {achievement.label}
+          </span>
+        </div>
+      </div>
+      <h3 className="text-xl md:text-2xl font-semibold text-white mb-1.5">
+        {achievement.value}
+      </h3>
+      <p className="text-sm text-zinc-400 leading-relaxed">
+        {achievement.description}
+      </p>
+    </>
+  );
+
+  const className = cn(
+    "group relative rounded-2xl p-5 md:p-6",
+    "glass-card gradient-border",
+    "hover:bg-white/[0.05] transition-colors duration-300",
+    achievement.url && "cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500"
+  );
+
+  if (achievement.url) {
+    return (
+      <motion.a
+        href={achievement.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.4, delay: index * 0.05 }}
+        className={className}
+        aria-label={`${achievement.value} — ${achievement.description}`}
+      >
+        {content}
+      </motion.a>
+    );
+  }
+
+  return (
+    <motion.article
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      className={className}
+    >
+      {content}
+    </motion.article>
+  );
+}
