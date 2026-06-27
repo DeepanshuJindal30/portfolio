@@ -1,12 +1,11 @@
-import { productionProjects } from "@/data/projects";
+import {
+  personalProjects,
+  additionalPersonalProjects,
+} from "@/data/projects";
 import { ProjectCard } from "@/components/ui/ProjectCard";
-import { FeaturedProjectCard } from "@/components/ui/FeaturedProjectCard";
-import { GlowCard } from "@/components/ui/GlowCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export function ProjectsSection() {
-  const [featured, ...rest] = productionProjects;
-
   return (
     <section
       id="projects"
@@ -15,20 +14,34 @@ export function ProjectsSection() {
     >
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          label="Production Systems"
-          title="Featured Production Projects"
-          description="Case-study style deep dives into enterprise systems I've designed and shipped."
+          label="My Work"
+          title="AI / ML / Research Projects"
+          description="From RAG chatbots and generative AI to reinforcement learning and computer vision — personal builds, research, and open-source."
         />
 
-        {featured && <FeaturedProjectCard project={featured} />}
-
-        <div className="grid grid-cols-1 gap-6 md:gap-8 mt-8">
-          {rest.map((project, index) => (
-            <GlowCard key={project.id} className="glass-card gradient-border">
-              <ProjectCard project={project} index={index + 1} variant="nested" />
-            </GlowCard>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          {personalProjects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              variant="compact"
+            />
           ))}
         </div>
+
+        {additionalPersonalProjects.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mt-6">
+            {additionalPersonalProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index + personalProjects.length}
+                variant="compact"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -37,7 +37,9 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 mb-4">
                 <Sparkles className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-accent-muted">
-                  Flagship Production System
+                  {project.category === "enterprise"
+                    ? "Flagship Enterprise System"
+                    : "Flagship Project"}
                 </span>
               </div>
 

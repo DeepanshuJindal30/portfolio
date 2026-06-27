@@ -7,8 +7,8 @@ import { PillarsSection } from "@/components/sections/PillarsSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { EnterpriseProjectsSection } from "@/components/sections/EnterpriseProjectsSection";
 import { MobileSection } from "@/components/sections/MobileSection";
-import { AiMlSection } from "@/components/sections/AiMlSection";
 import { ResearchSection } from "@/components/sections/ResearchSection";
 import { CompetitiveProgrammingSection } from "@/components/sections/CompetitiveProgrammingSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
@@ -28,7 +28,7 @@ export default function HomePage() {
         <ExperienceSection />
         <ProjectsSection />
         <MobileSection />
-        <AiMlSection />
+        <EnterpriseProjectsSection />
         <ResearchSection />
         <CompetitiveProgrammingSection />
         <EducationSection />

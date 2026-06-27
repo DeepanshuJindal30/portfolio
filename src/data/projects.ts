@@ -9,7 +9,7 @@ export interface ProductionProject {
   impact?: string[];
   architecture?: ProjectArchitecture;
   technologies: string[];
-  category: "production" | "ai-ml" | "mobile";
+  category: "production" | "ai-ml" | "mobile" | "enterprise";
   links?: {
     live?: string;
     github?: string;
@@ -43,7 +43,7 @@ export interface CaseStudy {
   };
 }
 
-export const productionProjects: ProductionProject[] = [
+export const enterpriseProjects: ProductionProject[] = [
   {
     id: "agentic-ai-perf",
     title: "Agentic AI Performance Testing Platform",
@@ -76,7 +76,7 @@ export const productionProjects: ProductionProject[] = [
       "Docker",
       "Redis",
     ],
-    category: "production",
+    category: "enterprise",
     featured: true,
   },
   {
@@ -94,7 +94,7 @@ export const productionProjects: ProductionProject[] = [
       "Splunk",
       "Dynatrace",
     ],
-    category: "production",
+    category: "enterprise",
     featured: true,
   },
   {
@@ -110,10 +110,13 @@ export const productionProjects: ProductionProject[] = [
       "JWT",
       "Identity",
     ],
-    category: "production",
+    category: "enterprise",
     featured: true,
   },
 ];
+
+/** @deprecated Use enterpriseProjects */
+export const productionProjects = enterpriseProjects;
 
 export const mobileApps: MobileApp[] = [
   {
@@ -155,7 +158,7 @@ export const mobileApps: MobileApp[] = [
   },
 ];
 
-export const aiMlProjects: ProductionProject[] = [
+export const personalProjects: ProductionProject[] = [
   {
     id: "docusense",
     title: "DocuSense PDF Chatbot",
@@ -170,6 +173,7 @@ export const aiMlProjects: ProductionProject[] = [
       "Docker",
     ],
     category: "ai-ml",
+    featured: true,
     links: {
       live: "https://chat-with-pdf-file.streamlit.app/",
       github: "https://github.com/DeepanshuJindal30/Swipe-Assignment-Task",
@@ -190,6 +194,7 @@ export const aiMlProjects: ProductionProject[] = [
       "OpenCV",
     ],
     category: "ai-ml",
+    featured: true,
     links: {
       live: "https://kalpa-chitra.netlify.app/",
       github: "https://github.com/DeepanshuJindal30/KalpChitra.AI",
@@ -209,6 +214,7 @@ export const aiMlProjects: ProductionProject[] = [
       "Python",
     ],
     category: "ai-ml",
+    featured: true,
     links: {
       live: "https://stock-visualiser.streamlit.app/",
       github:
@@ -222,10 +228,14 @@ export const aiMlProjects: ProductionProject[] = [
       "Computer vision system for food detection and calorie estimation using volumetric image analysis.",
     technologies: ["YOLOv8", "OpenCV", "CNN", "Image Processing"],
     category: "ai-ml",
+    featured: true,
     links: {
       github: "https://github.com/DeepanshuJindal30/Food-Calorie-estimation",
     },
   },
+];
+
+export const additionalPersonalProjects: ProductionProject[] = [
   {
     id: "hyperspectral",
     title: "Hyperspectral Imaging ML Model",
@@ -250,6 +260,12 @@ export const aiMlProjects: ProductionProject[] = [
       github: "https://github.com/DeepanshuJindal30/image-generator-streamlit",
     },
   },
+];
+
+/** @deprecated Use personalProjects + additionalPersonalProjects */
+export const aiMlProjects: ProductionProject[] = [
+  ...personalProjects,
+  ...additionalPersonalProjects,
 ];
 
 export const appurvaPharmacyCaseStudy: CaseStudy = {
