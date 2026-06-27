@@ -13,7 +13,7 @@ export function PillarsSection() {
         <SectionHeader
           label="Core Competencies"
           title="Engineering Pillars"
-          description="Four domains where I design, build, and ship production-grade systems."
+          align="center"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           {pillars.map((pillar, index) => (

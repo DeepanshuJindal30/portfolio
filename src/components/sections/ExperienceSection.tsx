@@ -10,11 +10,7 @@ export function ExperienceSection() {
       aria-labelledby="experience-heading"
     >
       <div className="max-w-7xl mx-auto">
-        <SectionHeader
-          label="Career"
-          title="Experience"
-          description="Building enterprise payroll, tax, and AI systems at ADP with scale and compliance at the core."
-        />
+        <SectionHeader label="Career" title="Experience" align="center" />
         <ExperienceTimeline items={experience} />
       </div>
     </section>

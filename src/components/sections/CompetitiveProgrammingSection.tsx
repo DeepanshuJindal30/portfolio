@@ -19,7 +19,7 @@ export function CompetitiveProgrammingSection() {
         <SectionHeader
           label="Problem Solving"
           title="Competitive Programming"
-          description="Structured algorithmic practice at elite competitive programming tiers."
+          align="center"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {competitiveProgramming.platforms.map((platform, index) => (
@@ -50,13 +50,12 @@ export function CompetitiveProgrammingSection() {
               <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-1">
                 {platform.name}
               </p>
-              <p className="text-2xl font-bold text-white mb-1">
+              <p className="text-2xl font-bold text-white">
                 {platform.badge}{" "}
                 <span className="text-lg font-medium text-accent">
                   {platform.rating}
                 </span>
               </p>
-              <p className="text-sm text-zinc-400">{platform.description}</p>
             </motion.a>
           ))}
         </div>

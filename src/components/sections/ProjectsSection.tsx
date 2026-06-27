@@ -15,12 +15,14 @@ export function ProjectsSection() {
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           label="My Work"
-          title="AI / ML / Research Projects"
-          description="From RAG chatbots and generative AI to reinforcement learning and computer vision — personal builds, research, and open-source."
+          title="More Projects"
+          description="Quick links to other AI, ML, and research builds."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          {personalProjects.map((project, index) => (
+          {personalProjects
+            .filter((project) => !project.showcased)
+            .map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}

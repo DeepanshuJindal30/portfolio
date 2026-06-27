@@ -76,7 +76,10 @@ export function HeroDeveloperCharacter({
       const next = getSize();
       if (next.width < 2 || next.height < 2) return;
       renderer.setSize(next.width, next.height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, isMobile ? 1.25 : 2)
+      );
       camera.aspect = next.width / next.height;
       camera.updateProjectionMatrix();
     };

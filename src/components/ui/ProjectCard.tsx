@@ -48,10 +48,10 @@ export function ProjectCard({
                     : "Mobile App"}
             </span>
           </div>
-          <h3 className="text-xl md:text-2xl font-semibold text-white mt-2 mb-3 group-hover:text-accent-muted transition-colors">
+          <h3 className="text-lg md:text-xl font-semibold text-white mt-2 mb-2 group-hover:text-accent-muted transition-colors">
             {project.title}
           </h3>
-          <p className="text-sm text-zinc-400 leading-relaxed">
+          <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">
             {project.description}
           </p>
         </div>

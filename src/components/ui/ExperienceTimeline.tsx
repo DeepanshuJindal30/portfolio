@@ -78,7 +78,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
             )}
 
             <ul className="space-y-2 mb-5" role="list">
-              {item.highlights.map((highlight) => (
+              {item.highlights.slice(0, 3).map((highlight) => (
                 <li
                   key={highlight}
                   className="text-sm text-zinc-400 leading-relaxed flex items-start gap-2"

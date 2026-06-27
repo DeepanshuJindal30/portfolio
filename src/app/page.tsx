@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { AnimatedGrid } from "@/components/layout/AnimatedGrid";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -5,15 +6,79 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { MetricsSection } from "@/components/sections/MetricsSection";
 import { PillarsSection } from "@/components/sections/PillarsSection";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { ExperienceSection } from "@/components/sections/ExperienceSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { EnterpriseProjectsSection } from "@/components/sections/EnterpriseProjectsSection";
-import { MobileSection } from "@/components/sections/MobileSection";
-import { ResearchSection } from "@/components/sections/ResearchSection";
-import { CompetitiveProgrammingSection } from "@/components/sections/CompetitiveProgrammingSection";
-import { SkillsSection } from "@/components/sections/SkillsSection";
-import { EducationSection } from "@/components/sections/EducationSection";
-import { ContactSection } from "@/components/sections/ContactSection";
+import { SectionSkeleton } from "@/components/ui/SectionSkeleton";
+
+const ExperienceSection = dynamic(
+  () =>
+    import("@/components/sections/ExperienceSection").then(
+      (m) => m.ExperienceSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
+const FeaturedDemosSection = dynamic(
+  () =>
+    import("@/components/sections/FeaturedDemosSection").then(
+      (m) => m.FeaturedDemosSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
+const ProjectsSection = dynamic(
+  () =>
+    import("@/components/sections/ProjectsSection").then(
+      (m) => m.ProjectsSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
+const EnterpriseProjectsSection = dynamic(
+  () =>
+    import("@/components/sections/EnterpriseProjectsSection").then(
+      (m) => m.EnterpriseProjectsSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
+const ResearchSection = dynamic(
+  () =>
+    import("@/components/sections/ResearchSection").then(
+      (m) => m.ResearchSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
+const CompetitiveProgrammingSection = dynamic(
+  () =>
+    import("@/components/sections/CompetitiveProgrammingSection").then(
+      (m) => m.CompetitiveProgrammingSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
+const EducationSection = dynamic(
+  () =>
+    import("@/components/sections/EducationSection").then(
+      (m) => m.EducationSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
+const SkillsSection = dynamic(
+  () =>
+    import("@/components/sections/SkillsSection").then(
+      (m) => m.SkillsSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
+const ContactSection = dynamic(
+  () =>
+    import("@/components/sections/ContactSection").then(
+      (m) => m.ContactSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
 
 export default function HomePage() {
   return (
@@ -26,8 +91,8 @@ export default function HomePage() {
         <PillarsSection />
         <AboutSection />
         <ExperienceSection />
+        <FeaturedDemosSection />
         <ProjectsSection />
-        <MobileSection />
         <EnterpriseProjectsSection />
         <ResearchSection />
         <CompetitiveProgrammingSection />

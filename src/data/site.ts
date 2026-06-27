@@ -26,7 +26,7 @@ export const siteConfig = {
   heroFirstName: "Deepanshu",
   heroRole: "Software Engineer",
   subheadline:
-    "I build payroll systems processing 3M+ transactions/month and ship agentic AI platforms that cut engineering workflows from days to hours.",
+    "Payroll at scale · Agentic AI · Full-stack & mobile products.",
   proofStrip: [
     { label: "SDE-I @ ADP", href: "https://www.linkedin.com/in/deepanshu-jindal-65a163204/" },
     { label: "LeetCode 2166", href: "https://leetcode.com/Deepanshu_Jindal/" },
@@ -47,6 +47,32 @@ export const siteConfig = {
 I build high-throughput distributed APIs with Redis caching, Kafka event pipelines, circuit breakers, and rate limiting. I also ship agentic AI systems powered by LLMs, RAG, and MCP orchestration that automate complex engineering workflows — reducing setup time from days to hours.
 
 Beyond enterprise systems, I'm a published IEEE-SCOPUS researcher with 7 papers and 2 patents, Academic Topper at Chandigarh University (CGPA 8.9), and a competitive programmer — LeetCode Guardian (2166) and CodeChef 5★ (2003) with 600+ DSA problems solved.`,
+  aboutHighlights: [
+    {
+      id: "adp",
+      label: "Enterprise Scale",
+      value: "3M+ payrolls / month",
+      icon: "server",
+    },
+    {
+      id: "ai",
+      label: "Agentic AI",
+      value: "Days → hours",
+      icon: "brain",
+    },
+    {
+      id: "research",
+      label: "Research",
+      value: "7 papers · 2 patents",
+      icon: "file",
+    },
+    {
+      id: "dsa",
+      label: "Competitive",
+      value: "LC Guardian 2166",
+      icon: "trophy",
+    },
+  ],
   navLinks: [
     { label: "Home", href: "#hero" },
     { label: "About", href: "#about" },

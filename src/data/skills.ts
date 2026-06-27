@@ -1,8 +1,62 @@
+export interface SkillOrbitCategory {
+  id: string;
+  label: string;
+  color: string;
+  emissive: string;
+  skills: string[];
+}
+
 export interface SkillGroup {
   id: string;
   title: string;
   skills: string[];
 }
+
+/** Visual orbit categories — 6 nodes for 3D + mobile UI */
+export const skillOrbitCategories: SkillOrbitCategory[] = [
+  {
+    id: "frontend",
+    label: "Frontend",
+    color: "#38bdf8",
+    emissive: "#0ea5e9",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Chakra UI"],
+  },
+  {
+    id: "backend",
+    label: "Backend",
+    color: "#a78bfa",
+    emissive: "#7c3aed",
+    skills: ["Node.js", "FastAPI", "ASP.NET Core", "REST APIs", "Microservices", "JWT"],
+  },
+  {
+    id: "data",
+    label: "Data & Cache",
+    color: "#34d399",
+    emissive: "#059669",
+    skills: ["SQL Server", "PostgreSQL", "MongoDB", "Redis", "Kafka", "Supabase"],
+  },
+  {
+    id: "ai",
+    label: "AI / ML",
+    color: "#fbbf24",
+    emissive: "#d97706",
+    skills: ["LLMs", "RAG", "MCP", "LangChain", "Gemini", "PyTorch", "YOLOv8"],
+  },
+  {
+    id: "mobile",
+    label: "Mobile",
+    color: "#f472b6",
+    emissive: "#db2777",
+    skills: ["React Native", "Expo", "EAS Build", "Android APK", "Mobile UX"],
+  },
+  {
+    id: "cloud",
+    label: "Cloud & DevOps",
+    color: "#fb923c",
+    emissive: "#ea580c",
+    skills: ["Docker", "AWS", "Azure", "CI/CD", "GitHub Actions", "Splunk"],
+  },
+];
 
 export const skillGroups: SkillGroup[] = [
   {

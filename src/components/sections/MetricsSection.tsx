@@ -13,7 +13,7 @@ export function MetricsSection() {
         <SectionHeader
           label="Track Record"
           title="Achievement Metrics"
-          description="Engineering impact across enterprise systems, research, and competitive programming."
+          align="center"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {achievements.map((achievement, index) => (

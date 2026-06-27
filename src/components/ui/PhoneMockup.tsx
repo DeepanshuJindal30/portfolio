@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { cn, withBasePath } from "@/lib/utils";
+import { LazyVideo } from "@/components/ui/LazyVideo";
 
 interface PhoneMockupProps {
   screenshots: string[];
@@ -48,17 +49,10 @@ export function PhoneMockup({
           <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-full z-10" />
           <div className="relative rounded-[2rem] overflow-hidden bg-zinc-950 aspect-[9/19.5]">
             {videoUrl ? (
-              <video
+              <LazyVideo
                 src={videoUrl}
-                className="absolute inset-0 w-full h-full object-cover object-top bg-zinc-900"
-                controls
-                playsInline
-                autoPlay
-                muted
-                loop
-                preload="auto"
                 poster={primaryScreenshot}
-                aria-label={`${alt} demo video`}
+                ariaLabel={`${alt} demo video`}
               />
             ) : (
               /* eslint-disable-next-line @next/next/no-img-element */

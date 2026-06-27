@@ -2,6 +2,23 @@ export interface ProjectArchitecture {
   steps: string[];
 }
 
+export interface ShowcaseProject {
+  id: string;
+  title: string;
+  tagline: string;
+  category: string;
+  technologies: string[];
+  demoVideo: string;
+  layout: "browser" | "phone";
+  poster?: string;
+  screenshots?: string[];
+  links: {
+    live?: string;
+    github?: string;
+    apk?: string;
+  };
+}
+
 export interface ProductionProject {
   id: string;
   title: string;
@@ -18,6 +35,7 @@ export interface ProductionProject {
     screenshots?: string;
   };
   featured?: boolean;
+  showcased?: boolean;
   logo?: string;
 }
 
@@ -61,6 +79,38 @@ export interface CaseStudy {
     apk?: string;
   };
 }
+
+export const featuredShowcases: ShowcaseProject[] = [
+  {
+    id: "appurva-herbals",
+    title: "Appurva Herbals",
+    tagline:
+      "Visual-first doctor catalogue — 15 products, search, filters & one-tap WhatsApp enquiry.",
+    category: "Product · Next.js · Vercel",
+    technologies: ["Next.js", "Chakra UI", "Framer Motion", "NextAuth", "Vercel"],
+    demoVideo: "/videos/appurva-herbals-demo.mp4",
+    layout: "browser",
+    poster: "/app-screenshots/catalog.png",
+    links: {
+      live: "https://appurvaherbals.vercel.app",
+      github: "https://github.com/DeepanshuJindal30/Appurva-Herbals",
+    },
+  },
+  {
+    id: "docusense",
+    title: "DocuSense PDF Chatbot",
+    tagline:
+      "Upload PDFs, chat with your documents — Gemini + LangChain RAG pipeline.",
+    category: "AI · Streamlit · RAG",
+    technologies: ["Streamlit", "Gemini", "LangChain", "FAISS", "Docker"],
+    demoVideo: "/videos/docusense-demo.mp4",
+    layout: "browser",
+    links: {
+      live: "https://gmultichat.streamlit.app/",
+      github: "https://github.com/DeepanshuJindal30/chatwithpdf1",
+    },
+  },
+];
 
 export const enterpriseProjects: ProductionProject[] = [
   {
@@ -142,36 +192,30 @@ export const productionProjects = enterpriseProjects;
 
 export const mobileApps: MobileApp[] = [
   {
-    id: "appurva-pharmacy",
-    title: "Appurva Pharmacy",
+    id: "appurva-herbals",
+    title: "Appurva Herbals",
     description:
-      "A Tata 1mg-inspired healthcare app with medicine ordering, prescription upload, veterinary medicines, pet care, voice search, and a polished mobile-first UX — built with React Native, Expo, and Supabase.",
+      "Doctor-ready product catalogue with search, filters, admin portal, and instant enquiry actions.",
     features: [
-      "Smart search with voice input for medicines",
-      "Order medicines — safe and quick delivery",
-      "Upload prescription (Rx) workflow",
-      "Veterinary medicines & pet care categories",
-      "Cart, orders, and prescription hub navigation",
-      "Admin order, stock & product management",
-      "Production Android APK via Expo EAS Build",
+      "15-product visual catalogue with landing collage",
+      "Category search & filters",
+      "One-tap WhatsApp, call & email enquiry",
+      "Admin portal for products & pricing",
+      "Mobile-first, less text / more visuals",
     ],
     technologies: [
-      "React Native",
-      "Expo",
-      "TypeScript",
-      "Supabase",
-      "EAS Build",
-      "Android APK",
+      "Next.js",
+      "Chakra UI",
+      "Framer Motion",
+      "NextAuth",
+      "Vercel",
     ],
     category: "mobile",
-    screenshots: appurvaPharmacyScreenshots.map((s) => s.src),
-    screenshotGallery: appurvaPharmacyScreenshots,
-    demoVideo: "/videos/appurva-pharmacy-demo.mp4",
+    screenshots: ["/app-screenshots/catalog.png"],
+    demoVideo: "/videos/appurva-herbals-demo.mp4",
     links: {
-      caseStudy: "/projects/appurva-pharmacy",
       github: "https://github.com/DeepanshuJindal30/Appurva-Herbals",
-      apk: "/appurva-pharmacy.apk",
-      screenshots: "/app-screenshots/",
+      live: "https://appurvaherbals.vercel.app",
     },
     featured: true,
   },
@@ -181,28 +225,26 @@ export const personalProjects: ProductionProject[] = [
   {
     id: "docusense",
     title: "DocuSense PDF Chatbot",
-    description:
-      "RAG-based PDF chatbot for document question answering with FAISS vector search — reduced query latency by 25% through optimized chunking and indexing.",
+    description: "RAG PDF chatbot with Gemini + FAISS vector search.",
     technologies: [
       "Streamlit",
-      "Gemini Pro",
+      "Gemini",
       "LangChain",
       "FAISS",
-      "PyPDF2",
       "Docker",
     ],
     category: "ai-ml",
     featured: true,
+    showcased: true,
     links: {
-      live: "https://chat-with-pdf-file.streamlit.app/",
-      github: "https://github.com/DeepanshuJindal30/Swipe-Assignment-Task",
+      live: "https://gmultichat.streamlit.app/",
+      github: "https://github.com/DeepanshuJindal30/chatwithpdf1",
     },
   },
   {
     id: "kalpchitra",
     title: "KalpChitra.AI",
-    description:
-      "Multilingual cross-modal image synthesis using Stable Diffusion and GPT-3 with Kafka-backed async inference queue — Best Paper Award at CCICT'24.",
+    description: "Multilingual image synthesis — Best Paper @ CCICT'24.",
     technologies: [
       "React.js",
       "Python",
@@ -222,8 +264,7 @@ export const personalProjects: ProductionProject[] = [
   {
     id: "drl-stock",
     title: "DRL Stock Market Prediction",
-    description:
-      "Deep reinforcement learning trading strategy using Dow 30 data, technical indicators, and backtesting.",
+    description: "Deep RL trading strategy with FinRL backtesting.",
     technologies: [
       "FinRL",
       "Stable-Baselines3",
@@ -243,8 +284,7 @@ export const personalProjects: ProductionProject[] = [
   {
     id: "food-calorie",
     title: "Food Calorie Detection with YOLOv8",
-    description:
-      "Computer vision system for food detection and calorie estimation using volumetric image analysis.",
+    description: "YOLOv8 food detection & calorie estimation.",
     technologies: ["YOLOv8", "OpenCV", "CNN", "Image Processing"],
     category: "ai-ml",
     featured: true,
@@ -265,18 +305,6 @@ export const additionalPersonalProjects: ProductionProject[] = [
     links: {
       github:
         "https://github.com/DeepanshuJindal30/Hyperspectral-Imaging-ML-Model",
-    },
-  },
-  {
-    id: "image-generator",
-    title: "IMAGINATE HUB — Text-to-Image Streamlit App",
-    description:
-      "Streamlit app with six cutting-edge text-to-image models for instant visual generation from user prompts.",
-    technologies: ["Streamlit", "Stable Diffusion", "Python", "Computer Vision"],
-    category: "ai-ml",
-    links: {
-      live: "https://image-generator-app.streamlit.app/",
-      github: "https://github.com/DeepanshuJindal30/image-generator-streamlit",
     },
   },
 ];

@@ -1,12 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Tilt3D } from "@/components/ui/Tilt3D";
 import { BrandLogo, type BrandId } from "@/components/ui/BrandLogo";
 import { ProfileImage } from "@/components/ui/ProfileImage";
-import { useState } from "react";
+import { useVisualPerformance } from "@/hooks/useVisualPerformance";
 
 const HeroDeveloperCharacter = dynamic(
   () =>
@@ -117,9 +118,15 @@ export function HeroIllustration({
   onViewChange,
 }: HeroIllustrationProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [showCharacter, setShowCharacter] = useState(true);
+  const { enableHero3D } = useVisualPerformance();
+  const [showCharacter, setShowCharacter] = useState(false);
   const [characterReady, setCharacterReady] = useState(false);
   const avatarSrc = avatar;
+
+  useEffect(() => {
+    setShowCharacter(enableHero3D);
+    if (!enableHero3D) onViewChange?.(false);
+  }, [enableHero3D, onViewChange]);
 
   const toggleView = () => {
     setShowCharacter((prev) => {
@@ -154,7 +161,7 @@ export function HeroIllustration({
 
       <div className="relative z-10 h-full min-h-[400px] sm:min-h-[480px] lg:min-h-[540px]">
         <AnimatePresence mode="wait">
-          {showCharacter && !prefersReducedMotion ? (
+          {showCharacter && enableHero3D && !prefersReducedMotion ? (
             <motion.div
               key="character"
               initial={{ opacity: 0, scale: 0.96 }}

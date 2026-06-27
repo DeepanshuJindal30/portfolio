@@ -9,9 +9,8 @@ export interface Pillar {
 export const pillars: Pillar[] = [
   {
     id: "fullstack",
-    title: "Full-Stack Web Engineering",
-    description:
-      "Building performant, type-safe web applications with modern React ecosystems and enterprise-grade APIs.",
+    title: "Full-Stack Web",
+    description: "",
     technologies: [
       "React",
       "Next.js",
@@ -25,9 +24,8 @@ export const pillars: Pillar[] = [
   },
   {
     id: "backend",
-    title: "Backend & Distributed Systems",
-    description:
-      "Designing scalable backend architectures with caching, event-driven patterns, and production observability.",
+    title: "Distributed Systems",
+    description: "",
     technologies: [
       "Kafka",
       "Redis",
@@ -41,9 +39,8 @@ export const pillars: Pillar[] = [
   },
   {
     id: "ai",
-    title: "AI / ML / Agentic AI",
-    description:
-      "Shipping intelligent systems — from RAG pipelines and LLM agents to computer vision and deep learning models.",
+    title: "AI / Agentic AI",
+    description: "",
     technologies: [
       "LLMs",
       "RAG",
@@ -60,9 +57,8 @@ export const pillars: Pillar[] = [
   },
   {
     id: "mobile",
-    title: "Mobile App & Product Engineering",
-    description:
-      "End-to-end mobile product development with React Native, Expo builds, and real-world delivery flows.",
+    title: "Mobile Products",
+    description: "",
     technologies: [
       "React Native",
       "Expo",
