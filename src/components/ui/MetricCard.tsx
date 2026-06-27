@@ -14,6 +14,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Achievement } from "@/data/achievements";
+import { CountUp } from "./CountUp";
+import { GlowCard } from "./GlowCard";
 import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -55,7 +57,15 @@ export function MetricCard({ achievement, index = 0 }: MetricCardProps) {
         </div>
       </div>
       <h3 className="text-xl md:text-2xl font-semibold text-white mb-1.5">
-        {achievement.value}
+        {achievement.countUp ? (
+          <CountUp
+            end={achievement.countUp.end}
+            prefix={achievement.countUp.prefix}
+            suffix={achievement.countUp.suffix}
+          />
+        ) : (
+          achievement.value
+        )}
       </h3>
       <p className="text-sm text-zinc-400 leading-relaxed">
         {achievement.description}
@@ -64,39 +74,38 @@ export function MetricCard({ achievement, index = 0 }: MetricCardProps) {
   );
 
   const className = cn(
-    "group relative rounded-2xl p-5 md:p-6",
     "glass-card gradient-border",
-    "hover:bg-white/[0.05] transition-colors duration-300",
     achievement.url && "cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500"
   );
 
   if (achievement.url) {
     return (
-      <motion.a
-        href={achievement.url}
-        target="_blank"
-        rel="noopener noreferrer"
+      <motion.div
         initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.4, delay: index * 0.05 }}
-        className={className}
-        aria-label={`${achievement.value} — ${achievement.description}`}
       >
-        {content}
-      </motion.a>
+        <GlowCard
+          as="a"
+          href={achievement.url}
+          ariaLabel={`${achievement.value} — ${achievement.description}`}
+          className={cn(className, "block p-5 md:p-6")}
+        >
+          {content}
+        </GlowCard>
+      </motion.div>
     );
   }
 
   return (
-    <motion.article
+    <motion.div
       initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className={className}
     >
-      {content}
-    </motion.article>
+      <GlowCard className={cn(className, "p-5 md:p-6")}>{content}</GlowCard>
+    </motion.div>
   );
 }

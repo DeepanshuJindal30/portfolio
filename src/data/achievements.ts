@@ -5,6 +5,12 @@ export interface Achievement {
   description: string;
   icon: string;
   url?: string;
+  countUp?: {
+    end: number;
+    prefix?: string;
+    suffix?: string;
+    staticText?: string;
+  };
 }
 
 export const achievements: Achievement[] = [
@@ -23,6 +29,7 @@ export const achievements: Achievement[] = [
     description: "Elite competitive programming tier",
     icon: "trophy",
     url: "https://leetcode.com/Deepanshu_Jindal/",
+    countUp: { end: 2166, prefix: "Guardian " },
   },
   {
     id: "codechef",
@@ -31,6 +38,7 @@ export const achievements: Achievement[] = [
     description: "Top 1% competitive programming",
     icon: "star",
     url: "https://www.codechef.com/users/deepanshu_30",
+    countUp: { end: 2003, prefix: "5★ · " },
   },
   {
     id: "papers",
@@ -39,6 +47,7 @@ export const achievements: Achievement[] = [
     description: "IEEE-SCOPUS published · Best Paper CCICT'24",
     icon: "book-open",
     url: "https://drive.google.com/drive/u/1/folders/1PVf49c1CzqOH0FoLb0FYPgNoEej8z4g4",
+    countUp: { end: 7, suffix: " IEEE Papers" },
   },
   {
     id: "patents",
@@ -47,6 +56,7 @@ export const achievements: Achievement[] = [
     description: "AI & healthcare technology patents",
     icon: "lightbulb",
     url: "https://drive.google.com/file/d/1iRJaoJPVe8h8PBBiYsnCcdwBM5lKyykB/view?usp=sharing",
+    countUp: { end: 2, suffix: " Patents" },
   },
   {
     id: "dsa",
@@ -55,6 +65,7 @@ export const achievements: Achievement[] = [
     description: "Structured algorithmic mastery",
     icon: "code",
     url: "https://leetcode.com/Deepanshu_Jindal/",
+    countUp: { end: 600, suffix: "+ Problems" },
   },
   {
     id: "fullstack",

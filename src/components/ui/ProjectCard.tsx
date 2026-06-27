@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 interface ProjectCardProps {
   project: ProductionProject;
   index?: number;
-  variant?: "case-study" | "compact";
+  variant?: "case-study" | "compact" | "nested";
 }
 
 export function ProjectCard({
@@ -27,8 +27,8 @@ export function ProjectCard({
       transition={{ duration: 0.5, delay: index * 0.08 }}
       className={cn(
         "group relative rounded-2xl overflow-hidden",
-        "glass-card gradient-border",
-        variant === "case-study" ? "p-6 md:p-8" : "p-5"
+        variant !== "nested" && "glass-card gradient-border",
+        variant === "case-study" || variant === "nested" ? "p-6 md:p-8" : "p-5"
       )}
     >
       <div className="flex flex-col h-full">

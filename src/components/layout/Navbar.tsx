@@ -1,13 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { useActiveSection } from "@/hooks/useActiveSection";
+import { SystemStatusBar } from "@/components/layout/SystemStatusBar";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const sectionIds = useMemo(
+    () => siteConfig.navLinks.map((link) => link.href.replace("#", "")),
+    []
+  );
+  const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -16,22 +24,29 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  const linkClass = (href: string) => {
+    const id = href.replace("#", "");
+    const isActive = activeSection === id;
+    return cn(
+      "relative px-3 py-2 text-sm transition-colors rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500",
+      isActive
+        ? "text-white bg-white/[0.08]"
+        : "text-zinc-400 hover:text-white hover:bg-white/5"
+    );
+  };
 
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-[#050508]/80 backdrop-blur-xl border-b border-white/5"
+          ? "bg-[#050508]/85 backdrop-blur-xl border-b border-white/5"
           : "bg-transparent"
       )}
     >
@@ -40,7 +55,7 @@ export function Navbar() {
         aria-label="Main navigation"
       >
         <a
-          href="#"
+          href="#hero"
           className="text-sm font-semibold text-white tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
         >
           DJ<span className="text-indigo-400">.</span>
@@ -49,11 +64,14 @@ export function Navbar() {
         <ul className="hidden lg:flex items-center gap-1" role="list">
           {siteConfig.navLinks.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                className="px-3 py-2 text-sm text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-              >
+              <a href={link.href} className={linkClass(link.href)}>
                 {link.label}
+                {activeSection === link.href.replace("#", "") && (
+                  <span
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-400"
+                    aria-hidden="true"
+                  />
+                )}
               </a>
             </li>
           ))}
@@ -70,7 +88,7 @@ export function Navbar() {
           </a>
           <a
             href="#contact"
-            className="text-sm px-4 py-2 rounded-lg bg-white text-black font-medium hover:bg-zinc-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            className="text-sm px-4 py-2 rounded-lg bg-white text-black font-medium hover:bg-zinc-200 hover:scale-[1.02] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           >
             Contact
           </a>
@@ -88,6 +106,8 @@ export function Navbar() {
         </button>
       </nav>
 
+      {scrolled && <SystemStatusBar />}
+
       {isOpen && (
         <div
           id="mobile-menu"
@@ -98,7 +118,12 @@ export function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="block px-4 py-3 text-lg text-zinc-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                  className={cn(
+                    "block px-4 py-3 text-lg rounded-lg transition-colors",
+                    activeSection === link.href.replace("#", "")
+                      ? "text-white bg-white/10"
+                      : "text-zinc-300 hover:text-white hover:bg-white/5"
+                  )}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}

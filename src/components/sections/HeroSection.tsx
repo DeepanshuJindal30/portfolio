@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { Button } from "@/components/ui/Button";
+import { ProofStrip } from "@/components/ui/ProofStrip";
 import { withBasePath } from "@/lib/utils";
 
 const ArchitectureDiagram = dynamic(
@@ -28,10 +29,20 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center pt-16"
+      className="relative min-h-screen flex items-center pt-16 overflow-hidden"
       aria-labelledby="hero-heading"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 w-full">
+      <div
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-1/4 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"
+        aria-hidden="true"
+      />
+      <div className="noise-overlay pointer-events-none" aria-hidden="true" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 w-full relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
             <motion.div
@@ -48,12 +59,13 @@ export function HeroSection() {
               >
                 <span className="text-gradient">{siteConfig.name}</span>
               </h1>
-              <p className="text-lg md:text-xl text-zinc-400 leading-relaxed mb-4 max-w-xl">
+              <p className="text-lg md:text-xl text-zinc-300 leading-relaxed mb-4 max-w-xl">
                 {siteConfig.subheadline}
               </p>
-              <p className="text-sm font-mono text-zinc-500 mb-8 leading-relaxed max-w-xl">
+              <p className="text-sm font-mono text-zinc-500 mb-6 leading-relaxed max-w-xl">
                 {siteConfig.badge}
               </p>
+              <ProofStrip />
             </motion.div>
 
             <motion.div
@@ -62,7 +74,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="flex flex-wrap gap-3"
             >
-              <Button href="#projects" variant="primary">
+              <Button href="#projects" variant="primary" className="hover:scale-[1.02] transition-transform">
                 View Projects
                 <ArrowDown className="w-4 h-4" aria-hidden="true" />
               </Button>
