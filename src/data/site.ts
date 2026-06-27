@@ -22,6 +22,9 @@ export const siteConfig = {
   avatar: "https://avatars.githubusercontent.com/u/87767438?v=4",
   badge:
     "SDE-I @ ADP · Payroll & Tax at Scale · Agentic AI · Distributed Systems",
+  heroGreeting: "Hey, I am",
+  heroFirstName: "Deepanshu",
+  heroRole: "Software Engineer",
   subheadline:
     "I build payroll systems processing 3M+ transactions/month and ship agentic AI platforms that cut engineering workflows from days to hours.",
   proofStrip: [
@@ -45,13 +48,10 @@ I build high-throughput distributed APIs with Redis caching, Kafka event pipelin
 
 Beyond enterprise systems, I'm a published IEEE-SCOPUS researcher with 7 papers and 2 patents, Academic Topper at Chandigarh University (CGPA 8.9), and a competitive programmer — LeetCode Guardian (2166) and CodeChef 5★ (2003) with 600+ DSA problems solved.`,
   navLinks: [
+    { label: "Home", href: "#hero" },
     { label: "About", href: "#about" },
     { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
-    { label: "Mobile", href: "#mobile" },
-    { label: "Research", href: "#research" },
-    { label: "Education", href: "#education" },
-    { label: "Skills", href: "#skills" },
     { label: "Contact", href: "#contact" },
   ],
   links: {

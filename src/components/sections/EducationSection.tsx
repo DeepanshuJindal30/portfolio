@@ -35,9 +35,9 @@ export function EducationSection() {
             >
               <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 shrink-0">
+                  <div className="p-2 rounded-lg bg-accent/10 border border-accent/20 shrink-0">
                     <GraduationCap
-                      className="w-4 h-4 text-indigo-400"
+                      className="w-4 h-4 text-accent"
                       aria-hidden="true"
                     />
                   </div>
@@ -45,7 +45,7 @@ export function EducationSection() {
                     <h3 className="text-lg font-semibold text-white">
                       {item.degree}
                     </h3>
-                    <p className="text-indigo-400 text-sm">{item.institution}</p>
+                    <p className="text-accent text-sm">{item.institution}</p>
                   </div>
                 </div>
                 <span className="text-xs font-mono text-zinc-500">
@@ -60,7 +60,7 @@ export function EducationSection() {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 mt-3 ml-11 text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+                  className="inline-flex items-center gap-1.5 mt-3 ml-11 text-xs text-accent hover:text-accent-muted transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                   View Certificate
@@ -70,7 +70,7 @@ export function EducationSection() {
           ))}
         </div>
 
-        <h3 className="text-sm font-mono uppercase tracking-widest text-indigo-400 mb-4">
+        <h3 className="text-sm font-mono uppercase tracking-widest text-accent mb-4">
           Certifications
         </h3>
         <div className="flex flex-wrap gap-2">

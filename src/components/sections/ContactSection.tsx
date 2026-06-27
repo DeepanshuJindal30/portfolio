@@ -32,14 +32,14 @@ export function ContactSection() {
         >
           <div className="flex flex-col items-center gap-2 mb-6 text-sm text-zinc-400">
             <span className="inline-flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-indigo-400" aria-hidden="true" />
+              <MapPin className="w-4 h-4 text-accent" aria-hidden="true" />
               {siteConfig.location}
             </span>
             <a
               href={`tel:${siteConfig.phone}`}
               className="inline-flex items-center gap-2 hover:text-white transition-colors"
             >
-              <Phone className="w-4 h-4 text-indigo-400" aria-hidden="true" />
+              <Phone className="w-4 h-4 text-accent" aria-hidden="true" />
               {siteConfig.phone}
             </a>
           </div>
@@ -84,7 +84,7 @@ export function ContactSection() {
 
           <a
             href={`mailto:${siteConfig.email}?subject=Portfolio%20Inquiry`}
-            className="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+            className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-muted transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
           >
             <Send className="w-4 h-4" aria-hidden="true" />
             Send me a message

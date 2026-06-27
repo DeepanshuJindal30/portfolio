@@ -18,8 +18,8 @@ export function ResearchCard({ paper, index = 0 }: ResearchCardProps) {
   const inner = (
     <>
       <div className="flex items-start gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 shrink-0">
-          <FileText className="w-4 h-4 text-indigo-400" aria-hidden="true" />
+        <div className="p-2 rounded-lg bg-accent/10 border border-accent/20 shrink-0">
+          <FileText className="w-4 h-4 text-accent" aria-hidden="true" />
         </div>
         <div className="flex-1 min-w-0">
           {paper.year && (
@@ -33,12 +33,12 @@ export function ResearchCard({ paper, index = 0 }: ResearchCardProps) {
         </div>
         {primaryUrl && (
           <ExternalLink
-            className="w-4 h-4 text-zinc-600 group-hover:text-indigo-400 shrink-0 transition-colors"
+            className="w-4 h-4 text-zinc-600 group-hover:text-accent shrink-0 transition-colors"
             aria-hidden="true"
           />
         )}
       </div>
-      <h3 className="text-base md:text-lg font-medium text-white leading-snug mb-4 group-hover:text-indigo-200 transition-colors">
+      <h3 className="text-base md:text-lg font-medium text-white leading-snug mb-4 group-hover:text-accent-muted transition-colors">
         {paper.title}
       </h3>
       <div className="flex flex-wrap gap-1.5 mb-4">
@@ -49,7 +49,7 @@ export function ResearchCard({ paper, index = 0 }: ResearchCardProps) {
       {(paper.url || paper.github) && (
         <div className="flex flex-wrap gap-2 pt-3 border-t border-white/5">
           {paper.url && (
-            <span className="inline-flex items-center gap-1 text-xs text-indigo-400">
+            <span className="inline-flex items-center gap-1 text-xs text-accent">
               <FileText className="w-3 h-3" aria-hidden="true" />
               Read Paper
             </span>

@@ -50,7 +50,7 @@ export function ResearchSection() {
           </Button>
         </div>
 
-        <h3 className="text-sm font-mono uppercase tracking-widest text-indigo-400 mb-5">
+        <h3 className="text-sm font-mono uppercase tracking-widest text-accent mb-5">
           Research Publications
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-14">

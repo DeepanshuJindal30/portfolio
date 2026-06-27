@@ -16,7 +16,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   return (
     <div className="relative" role="list">
       <div
-        className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-indigo-500/50 via-indigo-500/20 to-transparent hidden md:block"
+        className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/50 via-accent/20 to-transparent hidden md:block"
         aria-hidden="true"
       />
       <div className="space-y-8">
@@ -34,14 +34,14 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
             )}
           >
             <div
-              className="hidden md:flex absolute left-3 top-8 w-3 h-3 rounded-full bg-indigo-500 border-2 border-[#050508] ring-4 ring-indigo-500/20"
+              className="hidden md:flex absolute left-3 top-8 w-3 h-3 rounded-full bg-accent border-2 border-background ring-4 ring-accent/20"
               aria-hidden="true"
             />
             <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+                <div className="p-2.5 rounded-xl bg-accent/10 border border-accent/20">
                   <Building2
-                    className="w-5 h-5 text-indigo-400"
+                    className="w-5 h-5 text-accent"
                     aria-hidden="true"
                   />
                 </div>
@@ -49,7 +49,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                   <h3 className="text-lg md:text-xl font-semibold text-white">
                     {item.role}
                   </h3>
-                  <p className="text-indigo-400 font-medium">{item.company}</p>
+                  <p className="text-accent font-medium">{item.company}</p>
                 </div>
               </div>
               <span
@@ -59,7 +59,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                     ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                     : item.type === "internship"
                       ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
-                      : "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
+                      : "bg-accent/10 text-accent border border-accent/20"
                 )}
               >
                 {item.period}
@@ -79,7 +79,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                   key={highlight}
                   className="text-sm text-zinc-400 leading-relaxed flex items-start gap-2"
                 >
-                  <span className="text-indigo-500 mt-1 shrink-0" aria-hidden="true">
+                  <span className="text-accent mt-1 shrink-0" aria-hidden="true">
                     ▸
                   </span>
                   {highlight}
@@ -88,8 +88,8 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
             </ul>
 
             {item.scale && (
-              <div className="mb-5 p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/10">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-indigo-400 mb-2">
+              <div className="mb-5 p-4 rounded-xl bg-accent/5 border border-accent/10">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-accent mb-2">
                   Scale & Constraints
                 </h4>
                 <div className="flex flex-wrap gap-3">
@@ -111,7 +111,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-300 ml-1 transition-colors"
+                  className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent-muted ml-1 transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                   View Certificate

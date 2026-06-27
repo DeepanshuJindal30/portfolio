@@ -40,7 +40,7 @@ export function MobileSection() {
         >
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-0">
             <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center order-2 lg:order-1">
-              <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-3">
+              <span className="text-xs font-mono uppercase tracking-wider text-accent-secondary mb-3">
                 React Native · Expo · Supabase
               </span>
               <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
@@ -56,7 +56,7 @@ export function MobileSection() {
                     key={feature}
                     className="text-sm text-zinc-400 flex items-start gap-2"
                   >
-                    <span className="text-cyan-500 mt-0.5" aria-hidden="true">
+                    <span className="text-accent-secondary mt-0.5" aria-hidden="true">
                       ✓
                     </span>
                     {feature}
@@ -73,7 +73,7 @@ export function MobileSection() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/projects/appurva-pharmacy"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-black hover:bg-zinc-200 border border-white/20 shadow-lg shadow-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-black hover:bg-zinc-200 border border-white/20 shadow-lg shadow-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   View Case Study
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -108,7 +108,7 @@ export function MobileSection() {
 
             <div
               id="mobile-screenshots"
-              className="relative p-8 md:p-12 flex items-center justify-center bg-gradient-to-br from-indigo-500/5 to-cyan-500/5 order-1 lg:order-2"
+              className="relative p-8 md:p-12 flex items-center justify-center bg-gradient-to-br from-accent/5 to-accent-secondary/5 order-1 lg:order-2"
             >
               <PhoneMockup
                 screenshots={app.screenshots}

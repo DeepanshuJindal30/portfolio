@@ -23,10 +23,10 @@ export function SectionHeader({
         className
       )}
     >
-      <p className="text-xs font-mono uppercase tracking-[0.2em] text-indigo-400 mb-3">
+      <p className="text-xs font-mono uppercase tracking-[0.2em] text-accent mb-3">
         {label}
       </p>
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-4">
+      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
         {title}
       </h2>
       {description && (

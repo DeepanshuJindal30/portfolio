@@ -5,14 +5,14 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/5 bg-black/20">
+    <footer className="border-t border-white/5 bg-surface/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <p className="text-lg font-semibold text-white mb-1">
-              {siteConfig.name}
+            <p className="font-display text-lg font-bold text-white mb-1 lowercase">
+              deepanshu<span className="text-accent">.</span>
             </p>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-stone-500">
               Full-Stack & AI Systems Engineer
             </p>
           </div>
@@ -24,7 +24,7 @@ export function Footer() {
                   href={siteConfig.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                  className="p-2 text-stone-500 hover:text-accent transition-colors rounded-lg hover:bg-accent/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   aria-label="GitHub profile"
                 >
                   <Github className="w-5 h-5" />
@@ -35,7 +35,7 @@ export function Footer() {
                   href={siteConfig.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                  className="p-2 text-stone-500 hover:text-accent transition-colors rounded-lg hover:bg-accent/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   aria-label="LinkedIn profile"
                 >
                   <Linkedin className="w-5 h-5" />
@@ -44,7 +44,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="p-2 text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                  className="p-2 text-stone-500 hover:text-accent transition-colors rounded-lg hover:bg-accent/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   aria-label="Send email"
                 >
                   <Mail className="w-5 h-5" />
@@ -55,9 +55,8 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-white/5 text-center">
-          <p className="text-xs text-zinc-600">
-            © {year} {siteConfig.name}. Built with Next.js, TypeScript & Tailwind
-            CSS.
+          <p className="text-xs text-stone-600">
+            © {year} {siteConfig.name}. Crafted with Next.js & TypeScript.
           </p>
         </div>
       </div>

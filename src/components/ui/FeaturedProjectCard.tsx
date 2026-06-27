@@ -24,19 +24,19 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
       <GlowCard className="glass-card gradient-border overflow-hidden">
         <div className="relative p-6 md:p-10 lg:p-12">
           <div
-            className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"
+            className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"
             aria-hidden="true"
           />
           <div
-            className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/8 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none"
+            className="absolute bottom-0 left-0 w-64 h-64 bg-accent-secondary/8 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none"
             aria-hidden="true"
           />
 
           <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-400" aria-hidden="true" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-indigo-300">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 mb-4">
+                <Sparkles className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-accent-muted">
                   Flagship Production System
                 </span>
               </div>
@@ -80,7 +80,7 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
                 <div className="space-y-3">
                   {project.architecture.steps.map((step, i) => (
                     <div key={step} className="flex items-center gap-3">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/15 border border-indigo-500/25 text-xs font-mono text-indigo-400">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/15 border border-accent/25 text-xs font-mono text-accent">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <div className="flex-1 rounded-lg border border-white/8 bg-white/[0.03] px-4 py-2.5">

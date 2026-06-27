@@ -24,7 +24,7 @@ export function SkillBadge({
         variant === "subtle" &&
           "bg-white/[0.03] text-zinc-400 border border-white/[0.06]",
         variant === "accent" &&
-          "bg-indigo-500/10 text-indigo-300 border border-indigo-500/20",
+          "bg-accent/10 text-accent-muted border border-accent/20",
         className
       )}
     >

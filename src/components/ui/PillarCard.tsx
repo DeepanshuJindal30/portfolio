@@ -41,8 +41,8 @@ export function PillarCard({ pillar, index = 0 }: PillarCardProps) {
       )}
     >
       <div className="flex items-center gap-3 mb-5">
-        <div className="p-3 rounded-xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/10 border border-white/10">
-          <Icon className="w-6 h-6 text-indigo-300" aria-hidden="true" />
+        <div className="p-3 rounded-xl bg-gradient-to-br from-accent/20 to-accent-secondary/10 border border-white/10">
+          <Icon className="w-6 h-6 text-accent-muted" aria-hidden="true" />
         </div>
         <h3 className="text-lg md:text-xl font-semibold text-white">
           {pillar.title}

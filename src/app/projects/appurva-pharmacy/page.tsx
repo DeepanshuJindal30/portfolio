@@ -26,14 +26,14 @@ export default function AppurvaPharmacyCaseStudyPage() {
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors mb-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+            className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors mb-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
           >
             <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             Back to Portfolio
           </Link>
 
           <header className="mb-12">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-cyan-400 mb-3">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-accent-secondary mb-3">
               Case Study
             </p>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
@@ -101,7 +101,7 @@ export default function AppurvaPharmacyCaseStudyPage() {
                     key={feature}
                     className="text-sm text-zinc-400 flex items-start gap-2 p-3 rounded-lg bg-white/[0.03] border border-white/5"
                   >
-                    <span className="text-cyan-500 shrink-0" aria-hidden="true">
+                    <span className="text-accent-secondary shrink-0" aria-hidden="true">
                       ✓
                     </span>
                     {feature}
@@ -134,7 +134,7 @@ export default function AppurvaPharmacyCaseStudyPage() {
               <div className="rounded-xl p-6 bg-black/30 border border-white/5 space-y-3">
                 {study.architecture.map((step, i) => (
                   <div key={step} className="flex items-center gap-3">
-                    <span className="text-xs font-mono text-indigo-400 w-6">
+                    <span className="text-xs font-mono text-accent w-6">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="text-sm text-zinc-300">{step}</span>

@@ -41,13 +41,13 @@ export function MetricCard({ achievement, index = 0 }: MetricCardProps) {
   const content = (
     <>
       <div className="flex items-start justify-between mb-4">
-        <div className="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
-          <Icon className="w-5 h-5 text-indigo-400" aria-hidden="true" />
+        <div className="p-2.5 rounded-xl bg-accent/10 border border-accent/20">
+          <Icon className="w-5 h-5 text-accent" aria-hidden="true" />
         </div>
         <div className="flex items-center gap-1.5">
           {achievement.url && (
             <ExternalLink
-              className="w-3.5 h-3.5 text-zinc-600 group-hover:text-indigo-400 transition-colors"
+              className="w-3.5 h-3.5 text-zinc-600 group-hover:text-accent transition-colors"
               aria-hidden="true"
             />
           )}
@@ -75,7 +75,7 @@ export function MetricCard({ achievement, index = 0 }: MetricCardProps) {
 
   const className = cn(
     "glass-card gradient-border",
-    achievement.url && "cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500"
+    achievement.url && "cursor-pointer focus-within:ring-2 focus-within:ring-accent"
   );
 
   if (achievement.url) {

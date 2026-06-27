@@ -26,7 +26,7 @@ export function ProofStrip() {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs sm:text-sm font-mono text-zinc-500 hover:text-indigo-400 transition-colors underline-offset-4 hover:underline"
+              className="text-xs sm:text-sm font-mono text-zinc-500 hover:text-accent transition-colors underline-offset-4 hover:underline"
             >
               {item.label}
             </a>

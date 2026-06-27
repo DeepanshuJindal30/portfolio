@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { Menu, X } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { SystemStatusBar } from "@/components/layout/SystemStatusBar";
-import { cn } from "@/lib/utils";
+import { cn, withBasePath } from "@/lib/utils";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,10 +33,10 @@ export function Navbar() {
     const id = href.replace("#", "");
     const isActive = activeSection === id;
     return cn(
-      "relative px-3 py-2 text-sm transition-colors rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500",
+      "relative px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg",
       isActive
-        ? "text-white bg-white/[0.08]"
-        : "text-zinc-400 hover:text-white hover:bg-white/5"
+        ? "nav-link-active text-accent"
+        : "text-stone-400 hover:text-white"
     );
   };
 
@@ -46,7 +45,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-[#050508]/85 backdrop-blur-xl border-b border-white/5"
+          ? "bg-background/90 backdrop-blur-xl border-b border-white/5"
           : "bg-transparent"
       )}
     >
@@ -56,47 +55,33 @@ export function Navbar() {
       >
         <a
           href="#hero"
-          className="text-sm font-semibold text-white tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+          className="text-lg font-display font-bold text-white tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded lowercase"
         >
-          DJ<span className="text-indigo-400">.</span>
+          deepanshu<span className="text-accent">.</span>
         </a>
 
-        <ul className="hidden lg:flex items-center gap-1" role="list">
+        <ul className="hidden lg:flex items-center gap-2" role="list">
           {siteConfig.navLinks.map((link) => (
             <li key={link.href}>
               <a href={link.href} className={linkClass(link.href)}>
                 {link.label}
-                {activeSection === link.href.replace("#", "") && (
-                  <span
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-400"
-                    aria-hidden="true"
-                  />
-                )}
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <a
-            href={siteConfig.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-zinc-400 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded px-3 py-2"
-          >
-            GitHub
-          </a>
-          <a
-            href="#contact"
-            className="text-sm px-4 py-2 rounded-lg bg-white text-black font-medium hover:bg-zinc-200 hover:scale-[1.02] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-          >
-            Contact
-          </a>
-        </div>
+        <a
+          href={withBasePath(siteConfig.resume)}
+          download="Deepanshu-Jindal-Resume.pdf"
+          className="hidden lg:inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-white/15 text-stone-300 hover:text-white hover:border-accent/40 hover:bg-accent/5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          <Download className="w-4 h-4" aria-hidden="true" />
+          Download Resume
+        </a>
 
         <button
           type="button"
-          className="lg:hidden p-2 text-zinc-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+          className="lg:hidden p-2 text-stone-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
@@ -106,12 +91,10 @@ export function Navbar() {
         </button>
       </nav>
 
-      {scrolled && <SystemStatusBar />}
-
       {isOpen && (
         <div
           id="mobile-menu"
-          className="lg:hidden fixed inset-0 top-16 bg-[#050508]/95 backdrop-blur-xl z-40"
+          className="lg:hidden fixed inset-0 top-16 bg-background/98 backdrop-blur-xl z-40"
         >
           <ul className="flex flex-col p-6 gap-2" role="list">
             {siteConfig.navLinks.map((link) => (
@@ -121,8 +104,8 @@ export function Navbar() {
                   className={cn(
                     "block px-4 py-3 text-lg rounded-lg transition-colors",
                     activeSection === link.href.replace("#", "")
-                      ? "text-white bg-white/10"
-                      : "text-zinc-300 hover:text-white hover:bg-white/5"
+                      ? "text-accent bg-accent/10"
+                      : "text-stone-300 hover:text-white hover:bg-white/5"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
@@ -132,11 +115,13 @@ export function Navbar() {
             ))}
             <li className="pt-4 border-t border-white/10">
               <a
-                href="#contact"
-                className="block text-center px-4 py-3 rounded-lg bg-white text-black font-medium"
+                href={withBasePath(siteConfig.resume)}
+                download="Deepanshu-Jindal-Resume.pdf"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full border border-white/15 text-stone-300"
                 onClick={() => setIsOpen(false)}
               >
-                Contact
+                <Download className="w-4 h-4" />
+                Download Resume
               </a>
             </li>
           </ul>

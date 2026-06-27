@@ -30,7 +30,7 @@ export function SkillsSection() {
               transition={{ duration: 0.4, delay: index * 0.05 }}
               className="rounded-2xl p-5 md:p-6 glass-card gradient-border"
             >
-              <h3 className="text-sm font-mono uppercase tracking-wider text-indigo-400 mb-4">
+              <h3 className="text-sm font-mono uppercase tracking-wider text-accent mb-4">
                 {group.title}
               </h3>
               <div className="flex flex-wrap gap-2">

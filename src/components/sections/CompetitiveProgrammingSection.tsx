@@ -31,7 +31,7 @@ export function CompetitiveProgrammingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="group rounded-2xl p-6 glass-card gradient-border hover:bg-white/[0.04] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+              className="group rounded-2xl p-6 glass-card gradient-border hover:bg-white/[0.04] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <div className="flex items-center justify-between mb-4">
                 <Trophy
@@ -48,7 +48,7 @@ export function CompetitiveProgrammingSection() {
               </p>
               <p className="text-2xl font-bold text-white mb-1">
                 {platform.badge}{" "}
-                <span className="text-lg font-medium text-indigo-400">
+                <span className="text-lg font-medium text-accent">
                   {platform.rating}
                 </span>
               </p>

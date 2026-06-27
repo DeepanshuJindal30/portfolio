@@ -33,14 +33,14 @@ export function ProjectCard({
     >
       <div className="flex flex-col h-full">
         <div className="mb-4">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-indigo-400">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-accent">
             {project.category === "production"
               ? "Production System"
               : project.category === "ai-ml"
                 ? "AI / ML Project"
                 : "Mobile App"}
           </span>
-          <h3 className="text-xl md:text-2xl font-semibold text-white mt-2 mb-3 group-hover:text-indigo-200 transition-colors">
+          <h3 className="text-xl md:text-2xl font-semibold text-white mt-2 mb-3 group-hover:text-accent-muted transition-colors">
             {project.title}
           </h3>
           <p className="text-sm text-zinc-400 leading-relaxed">
@@ -105,7 +105,7 @@ export function ProjectCard({
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-indigo-400 hover:text-indigo-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+                className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-muted transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
                 <ExternalLink className="w-4 h-4" aria-hidden="true" />
                 Live Demo
@@ -116,7 +116,7 @@ export function ProjectCard({
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+                className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
                 <Github className="w-4 h-4" aria-hidden="true" />
                 GitHub
@@ -125,7 +125,7 @@ export function ProjectCard({
             {project.links.caseStudy && (
               <a
                 href={project.links.caseStudy}
-                className="inline-flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+                className="inline-flex items-center gap-1.5 text-sm text-accent-secondary hover:text-accent-secondary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
                 Case Study
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />

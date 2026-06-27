@@ -37,19 +37,19 @@ export function GlowCard({
     ? undefined
     : {
         background: isHovered
-          ? `radial-gradient(600px circle at ${position.x}% ${position.y}%, rgba(99, 102, 241, 0.14), transparent 40%)`
+          ? `radial-gradient(600px circle at ${position.x}% ${position.y}%, rgba(249, 115, 22, 0.14), transparent 40%)`
           : undefined,
       };
 
   const classes = cn(
     "group relative rounded-2xl transition-all duration-300",
-    "hover:scale-[1.01] hover:shadow-xl hover:shadow-indigo-500/5",
+    "hover:scale-[1.01] hover:shadow-xl hover:shadow-accent/10",
     className
   );
 
   const inner = (
     <>
-      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ring-1 ring-indigo-500/20" />
+      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ring-1 ring-accent/20" />
       {children}
     </>
   );
