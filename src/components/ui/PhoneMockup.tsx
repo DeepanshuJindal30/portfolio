@@ -18,7 +18,7 @@ export function PhoneMockup({
 }: PhoneMockupProps) {
   const prefersReducedMotion = useReducedMotion();
   const primaryScreenshot = withBasePath(
-    screenshots[0] ?? "/app-screenshots/home.png"
+    screenshots[0] ?? "/app-screenshots/home.jpg"
   );
   const videoUrl = videoSrc
     ? `${withBasePath(videoSrc)}#t=0.1`

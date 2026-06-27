@@ -27,12 +27,12 @@ export interface AppScreenshot {
 }
 
 export const appurvaPharmacyScreenshots: AppScreenshot[] = [
-  { src: "/app-screenshots/home.png", label: "Home" },
-  { src: "/app-screenshots/categories.png", label: "Categories" },
-  { src: "/app-screenshots/cart.png", label: "Cart" },
-  { src: "/app-screenshots/orders.png", label: "Orders" },
-  { src: "/app-screenshots/profile.png", label: "Profile" },
-  { src: "/app-screenshots/admin-dashboard.png", label: "Admin Dashboard" },
+  { src: "/app-screenshots/home.jpg", label: "Home" },
+  { src: "/app-screenshots/categories.jpg", label: "Categories" },
+  { src: "/app-screenshots/cart.jpg", label: "Cart" },
+  { src: "/app-screenshots/orders.jpg", label: "Orders" },
+  { src: "/app-screenshots/profile.jpg", label: "Profile" },
+  { src: "/app-screenshots/admin-dashboard.jpg", label: "Admin Dashboard" },
 ];
 
 export interface MobileApp extends ProductionProject {
