@@ -17,7 +17,10 @@ export function getBasePath(): string {
 }
 
 export function withBasePath(path: string): string {
-  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
   if (path.startsWith("http")) return path;
+  const base =
+    typeof window !== "undefined"
+      ? getBasePath()
+      : process.env.NEXT_PUBLIC_BASE_PATH || "";
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }

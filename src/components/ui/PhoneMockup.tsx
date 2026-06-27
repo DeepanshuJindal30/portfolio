@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn, withBasePath } from "@/lib/utils";
 
 interface PhoneMockupProps {
   screenshots: string[];
@@ -16,7 +15,9 @@ export function PhoneMockup({
   className,
 }: PhoneMockupProps) {
   const prefersReducedMotion = useReducedMotion();
-  const primaryScreenshot = screenshots[0] ?? "/app-screenshots/home.png";
+  const primaryScreenshot = withBasePath(
+    screenshots[0] ?? "/app-screenshots/home.png"
+  );
 
   return (
     <motion.div
@@ -37,13 +38,11 @@ export function PhoneMockup({
         <div className="relative rounded-[2.5rem] p-3 bg-gradient-to-b from-zinc-700 to-zinc-900 shadow-2xl shadow-black/50 border border-white/10">
           <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-full z-10" />
           <div className="relative rounded-[2rem] overflow-hidden bg-zinc-950 aspect-[9/19.5]">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={primaryScreenshot}
               alt={`${alt} app screenshot`}
-              fill
-              className="object-cover object-top"
-              sizes="280px"
-              priority
+              className="absolute inset-0 w-full h-full object-cover object-top"
             />
           </div>
         </div>

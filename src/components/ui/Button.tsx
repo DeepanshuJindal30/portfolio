@@ -40,9 +40,8 @@ export function Button({
   );
 
   if (href) {
-    const { href: linkHref, ...linkProps } = props as LinkProps;
     return (
-      <a href={linkHref} className={classes} {...linkProps}>
+      <a href={href} className={classes} {...props}>
         {children}
       </a>
     );

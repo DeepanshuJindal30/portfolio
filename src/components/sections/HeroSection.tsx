@@ -78,7 +78,11 @@ export function HeroSection() {
                 View Projects
                 <ArrowDown className="w-4 h-4" aria-hidden="true" />
               </Button>
-              <Button href={withBasePath(siteConfig.resume)} variant="outline">
+              <Button
+                href={withBasePath(siteConfig.resume)}
+                variant="outline"
+                download="Deepanshu-Jindal-Resume.pdf"
+              >
                 <Download className="w-4 h-4" aria-hidden="true" />
                 Download Resume
               </Button>

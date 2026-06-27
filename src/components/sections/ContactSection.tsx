@@ -72,7 +72,11 @@ export function ContactSection() {
               <Linkedin className="w-4 h-4" aria-hidden="true" />
               LinkedIn
             </Button>
-            <Button href={withBasePath(siteConfig.resume)} variant="ghost">
+            <Button
+              href={withBasePath(siteConfig.resume)}
+              variant="ghost"
+              download="Deepanshu-Jindal-Resume.pdf"
+            >
               <Download className="w-4 h-4" aria-hidden="true" />
               Resume
             </Button>
