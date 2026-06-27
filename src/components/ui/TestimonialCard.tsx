@@ -44,6 +44,8 @@ export function TestimonialCard({ className }: TestimonialCardProps) {
                 fill
                 className="object-cover"
                 sizes="40px"
+                unoptimized
+                referrerPolicy="no-referrer"
               />
             </div>
             <div>

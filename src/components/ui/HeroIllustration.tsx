@@ -83,6 +83,8 @@ export function HeroIllustration({
                 className="object-cover"
                 sizes="(max-width: 640px) 240px, 320px"
                 priority
+                unoptimized
+                referrerPolicy="no-referrer"
               />
             </div>
           </div>

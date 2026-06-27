@@ -18,24 +18,29 @@ export function SkillsSection() {
         <SectionHeader
           label="Toolkit"
           title="Skills"
-          description="Technologies and platforms I use to build production systems end-to-end."
+          description="Languages, frameworks, and platforms I use to build production systems — from payroll APIs at scale to agentic AI and mobile apps."
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {skillGroups.map((group, index) => (
             <motion.div
               key={group.id}
               initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="rounded-2xl p-5 md:p-6 glass-card gradient-border"
+              transition={{ duration: 0.4, delay: index * 0.04 }}
+              whileHover={prefersReducedMotion ? undefined : { y: -4 }}
+              className="rounded-2xl p-5 md:p-6 glass-card gradient-border hover:border-accent/20 transition-colors"
             >
               <h3 className="text-sm font-mono uppercase tracking-wider text-accent mb-4">
                 {group.title}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
-                  <SkillBadge key={skill} label={skill} />
+                  <SkillBadge
+                    key={skill}
+                    label={skill}
+                    variant={group.id === "competitive" ? "accent" : "default"}
+                  />
                 ))}
               </div>
             </motion.div>

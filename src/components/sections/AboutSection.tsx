@@ -32,6 +32,8 @@ export function AboutSection() {
                 className="object-cover"
                 sizes="256px"
                 priority
+                unoptimized
+                referrerPolicy="no-referrer"
               />
             </div>
             <p className="mt-4 text-center lg:text-left text-sm text-zinc-500">
