@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "framer-motion";
 import { Download, Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { siteConfig } from "@/data/site";
@@ -7,16 +8,27 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
 import { withBasePath } from "@/lib/utils";
 
+const SectionSkyDecor = dynamic(
+  () =>
+    import("@/components/three/SectionSkyDecor").then(
+      (mod) => mod.SectionSkyDecor
+    ),
+  { ssr: false }
+);
+
 export function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
       id="contact"
-      className="section-padding"
+      className="section-padding relative overflow-hidden"
       aria-labelledby="contact-heading"
     >
-      <div className="max-w-7xl mx-auto">
+      {!prefersReducedMotion && (
+        <SectionSkyDecor className="opacity-35 max-h-[280px] top-8 left-0 right-auto w-[min(100%,380px)]" />
+      )}
+      <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeader
           label="Get in Touch"
           title="Contact"

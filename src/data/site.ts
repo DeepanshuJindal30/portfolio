@@ -19,7 +19,7 @@ export const siteConfig = {
   leetcode: "https://leetcode.com/Deepanshu_Jindal/",
   codechef: "https://www.codechef.com/users/deepanshu_30",
   resume: "/resume.pdf",
-  avatar: "https://avatars.githubusercontent.com/u/87767438?v=4",
+  avatar: "/profile.png",
   badge:
     "SDE-I @ ADP · Payroll & Tax at Scale · Agentic AI · Distributed Systems",
   heroGreeting: "Hey, I am",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { siteConfig } from "@/data/site";
@@ -11,6 +12,7 @@ import { SocialPlatformBar } from "@/components/ui/SocialPlatformBar";
 
 export function HeroSection() {
   const prefersReducedMotion = useReducedMotion();
+  const [showCharacter, setShowCharacter] = useState(true);
 
   return (
     <section
@@ -84,13 +86,20 @@ export function HeroSection() {
             initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative order-1 lg:order-2 flex flex-col items-center gap-6 lg:gap-0 lg:pb-32"
+            className="relative order-1 lg:order-2 flex flex-col items-center gap-8 lg:gap-10"
           >
             <HeroIllustration
               avatar={siteConfig.avatar}
               name={siteConfig.name}
+              onViewChange={setShowCharacter}
             />
-            <TestimonialCard />
+            <TestimonialCard
+              className={
+                showCharacter
+                  ? "lg:relative lg:bottom-auto lg:left-auto lg:translate-y-0 mt-2"
+                  : undefined
+              }
+            />
           </motion.div>
         </div>
       </div>

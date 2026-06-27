@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Quote } from "lucide-react";
-import Image from "next/image";
+import { ProfileImage } from "@/components/ui/ProfileImage";
 import { siteConfig } from "@/data/site";
 import { Tilt3D } from "@/components/ui/Tilt3D";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,7 @@ export function TestimonialCard({ className }: TestimonialCardProps) {
       transition={{ duration: 0.6, delay: 0.5 }}
       className={cn(
         "w-full max-w-sm mx-auto lg:mx-0",
-        "lg:absolute lg:-bottom-4 lg:left-4 lg:right-auto lg:max-w-sm lg:z-30",
+        "lg:absolute lg:-bottom-8 lg:left-4 lg:right-auto lg:max-w-sm lg:z-20",
         className
       )}
     >
@@ -37,15 +37,11 @@ export function TestimonialCard({ className }: TestimonialCardProps) {
             end.&rdquo;
           </p>
           <div className="flex items-center gap-3">
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-accent/30 shrink-0">
-              <Image
+            <div className="relative h-9 w-9 sm:h-10 sm:w-10 shrink-0 overflow-hidden rounded-full border-2 border-accent/30">
+              <ProfileImage
                 src={siteConfig.avatar}
                 alt=""
-                fill
-                className="object-cover"
-                sizes="40px"
-                unoptimized
-                referrerPolicy="no-referrer"
+                className="h-full w-full object-cover"
               />
             </div>
             <div>
