@@ -100,12 +100,17 @@ function LogoSvg({ brand }: { brand: BrandId }) {
     case "leetcode":
       return (
         <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <rect width="48" height="48" rx="10" fill="#1a1a1a" />
-          <path
-            fill="#FFA116"
-            d="M30 12l-6 34-6-34h4l4 24 4-24h4z"
-          />
-          <path fill="#B3B3B3" d="M18 12h4v34h-4V12z" />
+          <rect width="48" height="48" rx="10" fill="#1E1E1E" />
+          <g transform="translate(9, 8.5) scale(1.32)">
+            <path
+              fill="#B3B3B3"
+              d="M5.6 5.9h2.8v13.5H5.6V5.9z"
+            />
+            <path
+              fill="#FFA116"
+              d="M11.241 20.987H5.6l5.6-9.5 1.402 2.402-4.202 7.098h3.799l1.401-2.402z"
+            />
+          </g>
         </svg>
       );
     case "codechef":
