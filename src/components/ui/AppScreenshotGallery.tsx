@@ -22,7 +22,7 @@ export function AppScreenshotGallery({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4",
+        "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4",
         className
       )}
       role="list"

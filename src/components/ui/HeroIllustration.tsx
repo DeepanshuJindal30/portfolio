@@ -3,13 +3,14 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Tilt3D } from "@/components/ui/Tilt3D";
 
 const techBadges = [
-  { label: "React", color: "from-sky-400 to-sky-600", x: "-20%", y: "8%", delay: 0 },
-  { label: "TS", color: "from-blue-400 to-blue-600", x: "85%", y: "5%", delay: 0.2 },
-  { label: "AI", color: "from-amber-400 to-orange-500", x: "90%", y: "45%", delay: 0.4 },
-  { label: "RN", color: "from-cyan-400 to-teal-500", x: "-15%", y: "55%", delay: 0.3 },
-  { label: ".NET", color: "from-violet-400 to-purple-600", x: "75%", y: "78%", delay: 0.5 },
+  { label: "React", color: "from-sky-400 to-sky-600", x: "4%", y: "12%", delay: 0 },
+  { label: "TS", color: "from-blue-400 to-blue-600", x: "72%", y: "6%", delay: 0.2 },
+  { label: "AI", color: "from-amber-400 to-orange-500", x: "76%", y: "42%", delay: 0.4 },
+  { label: "RN", color: "from-cyan-400 to-teal-500", x: "2%", y: "52%", delay: 0.3 },
+  { label: ".NET", color: "from-violet-400 to-purple-600", x: "68%", y: "72%", delay: 0.5 },
 ];
 
 function LightningBolt({ className }: { className?: string }) {
@@ -44,47 +45,60 @@ export function HeroIllustration({
 
   return (
     <div
-      className={cn("relative w-full max-w-md mx-auto aspect-square", className)}
+      className={cn(
+        "relative w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto aspect-square px-2",
+        className
+      )}
     >
-      <LightningBolt className="absolute -left-8 top-8 w-24 h-40 text-accent rotate-12" />
-      <LightningBolt className="absolute -right-4 bottom-16 w-20 h-32 text-accent -rotate-12 scale-x-[-1]" />
+      <LightningBolt className="absolute -left-2 sm:-left-8 top-8 w-16 sm:w-24 h-28 sm:h-40 text-accent rotate-12 opacity-80" />
+      <LightningBolt className="absolute -right-1 sm:-right-4 bottom-16 w-14 sm:w-20 h-24 sm:h-32 text-accent -rotate-12 scale-x-[-1] opacity-80" />
 
       <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent-secondary/10 rounded-full blur-3xl" />
 
-      <motion.div
-        className="relative z-10 mx-auto w-[72%] aspect-square"
-        animate={prefersReducedMotion ? undefined : { y: [0, -10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent to-accent-secondary opacity-30 blur-2xl scale-110" />
-        <div className="relative w-full h-full rounded-full p-1.5 bg-gradient-to-br from-accent via-accent-light to-accent-secondary shadow-glow">
-          <div className="relative w-full h-full rounded-full overflow-hidden bg-surface border-4 border-surface">
-            <Image
-              src={avatar}
-              alt={`${name} portrait`}
-              fill
-              className="object-cover"
-              sizes="320px"
-              priority
-            />
+      <Tilt3D intensity={16} className="h-full">
+        <motion.div
+          className="relative z-10 mx-auto w-[68%] sm:w-[72%] aspect-square"
+          animate={prefersReducedMotion ? undefined : { y: [0, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <div
+            className="absolute inset-0 rounded-full bg-gradient-to-br from-accent to-accent-secondary opacity-30 blur-2xl scale-110"
+            style={{ transform: "translateZ(-20px)" }}
+          />
+          <div className="relative w-full h-full rounded-full p-1.5 bg-gradient-to-br from-accent via-accent-light to-accent-secondary shadow-glow">
+            <div className="relative w-full h-full rounded-full overflow-hidden bg-surface border-4 border-surface">
+              <Image
+                src={avatar}
+                alt={`${name} portrait`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 240px, 320px"
+                priority
+              />
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </Tilt3D>
 
       {techBadges.map((badge) => (
         <motion.div
           key={badge.label}
           className={cn(
-            "absolute z-20 w-14 h-14 rounded-2xl flex items-center justify-center",
-            "text-xs font-bold text-white shadow-lg",
+            "absolute z-20 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl",
+            "flex items-center justify-center text-[10px] sm:text-xs font-bold text-white shadow-lg",
             "bg-gradient-to-br border border-white/20",
             badge.color
           )}
-          style={{ left: badge.x, top: badge.y }}
+          style={{ left: badge.x, top: badge.y, transformStyle: "preserve-3d" }}
           animate={
             prefersReducedMotion
               ? undefined
-              : { y: [0, -8, 0], rotate: [0, 3, 0] }
+              : {
+                  y: [0, -8, 0],
+                  rotate: [0, 3, 0],
+                  rotateY: [0, 12, 0],
+                }
           }
           transition={{
             duration: 3 + badge.delay,
@@ -97,8 +111,8 @@ export function HeroIllustration({
         </motion.div>
       ))}
 
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-4 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-sm">
-        <span className="text-xs font-mono text-accent-muted uppercase tracking-wider">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2 sm:translate-y-4 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-sm whitespace-nowrap">
+        <span className="text-[10px] sm:text-xs font-mono text-accent-muted uppercase tracking-wider">
           SDE-I @ ADP
         </span>
       </div>

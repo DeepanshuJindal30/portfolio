@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode, type MouseEvent } from "react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface GlowCardProps {
@@ -23,14 +23,22 @@ export function GlowCard({
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!ref.current || prefersReducedMotion) return;
     const rect = ref.current.getBoundingClientRect();
-    setPosition({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    });
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setPosition({ x, y });
+    const tiltX = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
+    const tiltY = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ x: 0, y: 0 });
   };
 
   const glowStyle = prefersReducedMotion
@@ -42,10 +50,18 @@ export function GlowCard({
       };
 
   const classes = cn(
-    "group relative rounded-2xl transition-all duration-300",
-    "hover:scale-[1.01] hover:shadow-xl hover:shadow-accent/10",
+    "group relative rounded-2xl transition-all duration-300 [transform-style:preserve-3d]",
+    "hover:shadow-xl hover:shadow-accent/10",
     className
   );
+
+  const tiltStyle = prefersReducedMotion
+    ? undefined
+    : {
+        rotateX: tilt.x,
+        rotateY: tilt.y,
+        scale: isHovered ? 1.01 : 1,
+      };
 
   const inner = (
     <>
@@ -56,32 +72,34 @@ export function GlowCard({
 
   if (as === "a" && href) {
     return (
-      <a
+      <motion.a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={ariaLabel}
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={glowStyle}
+        onMouseLeave={handleMouseLeave}
+        style={{ ...glowStyle, ...tiltStyle }}
         className={classes}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
         {inner}
-      </a>
+      </motion.a>
     );
   }
 
   return (
-    <div
+    <motion.div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={glowStyle}
+      onMouseLeave={handleMouseLeave}
+      style={{ ...glowStyle, ...tiltStyle }}
       className={classes}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       {inner}
-    </div>
+    </motion.div>
   );
 }

@@ -40,8 +40,8 @@ export function MobileSection() {
           viewport={{ once: true }}
           className="rounded-2xl glass-card gradient-border overflow-hidden"
         >
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-0">
-            <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center order-2 lg:order-1">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            <div className="p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center order-2 lg:order-1">
               <span className="text-xs font-mono uppercase tracking-wider text-accent-secondary mb-3">
                 React Native · Expo · Supabase
               </span>
@@ -72,7 +72,7 @@ export function MobileSection() {
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-3">
                 <Link
                   href="/projects/appurva-pharmacy"
                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-white text-black hover:bg-zinc-200 border border-white/20 shadow-lg shadow-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
@@ -114,7 +114,7 @@ export function MobileSection() {
 
             <div
               id="app-demo-video"
-              className="relative p-8 md:p-12 flex items-center justify-center bg-gradient-to-br from-accent/5 to-accent-secondary/5 order-1 lg:order-2"
+              className="relative p-6 sm:p-8 md:p-12 flex items-center justify-center bg-gradient-to-br from-accent/5 to-accent-secondary/5 order-1 lg:order-2 min-h-[320px] sm:min-h-[380px]"
             >
               <PhoneMockup
                 screenshots={app.screenshots}
