@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { AppurvaLogo } from "@/components/ui/AppurvaLogo";
 import { ArrowLeft, Download, Github } from "lucide-react";
 import { appurvaPharmacyCaseStudy } from "@/data/projects";
 import { Button } from "@/components/ui/Button";
@@ -35,6 +36,7 @@ export default function AppurvaPharmacyCaseStudyPage() {
           </Link>
 
           <header className="mb-12">
+            <AppurvaLogo height={56} className="mb-6" />
             <p className="text-xs font-mono uppercase tracking-[0.2em] text-accent-secondary mb-3">
               Case Study
             </p>

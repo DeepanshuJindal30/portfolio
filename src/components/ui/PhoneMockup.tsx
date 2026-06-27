@@ -20,7 +20,9 @@ export function PhoneMockup({
   const primaryScreenshot = withBasePath(
     screenshots[0] ?? "/app-screenshots/home.png"
   );
-  const videoUrl = videoSrc ? withBasePath(videoSrc) : undefined;
+  const videoUrl = videoSrc
+    ? `${withBasePath(videoSrc)}#t=0.1`
+    : undefined;
 
   return (
     <motion.div
@@ -48,12 +50,13 @@ export function PhoneMockup({
             {videoUrl ? (
               <video
                 src={videoUrl}
-                className="absolute inset-0 w-full h-full object-cover object-top"
+                className="absolute inset-0 w-full h-full object-cover object-top bg-zinc-900"
                 controls
                 playsInline
+                autoPlay
                 muted
                 loop
-                preload="metadata"
+                preload="auto"
                 poster={primaryScreenshot}
                 aria-label={`${alt} demo video`}
               />

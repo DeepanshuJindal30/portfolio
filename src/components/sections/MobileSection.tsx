@@ -12,7 +12,7 @@ import { mobileApps } from "@/data/projects";
 import { PhoneMockup } from "@/components/ui/PhoneMockup";
 import { AppScreenshotGallery } from "@/components/ui/AppScreenshotGallery";
 import { SkillBadge } from "@/components/ui/SkillBadge";
-import { BrandLogoBadge } from "@/components/ui/BrandLogo";
+import { AppurvaLogo } from "@/components/ui/AppurvaLogo";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
@@ -47,7 +47,7 @@ export function MobileSection() {
                 React Native · Expo · Supabase
               </span>
               <div className="flex items-center gap-3 mb-4">
-                <BrandLogoBadge brand="appurva" size={48} />
+                <AppurvaLogo height={48} />
                 <h3 className="text-2xl md:text-3xl font-semibold text-white">
                   {app.title}
                 </h3>
