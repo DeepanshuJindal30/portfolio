@@ -33,6 +33,7 @@ export function setupCharacterAnimations(gltf: GLTF) {
   const introClip = gltf.animations.find(
     (clip) => clip.name === "introAnimation"
   );
+
   if (introClip) {
     const introAction = mixer.clipAction(introClip);
     introAction.setLoop(THREE.LoopOnce, 1);
@@ -64,12 +65,27 @@ export function setupCharacterAnimations(gltf: GLTF) {
   function playIntro() {
     if (!introClip) return;
     const introAction = mixer.clipAction(introClip);
+    introAction.setLoop(THREE.LoopOnce, 1);
     introAction.clampWhenFinished = true;
     introAction.reset().play();
     setTimeout(() => {
       const blink = gltf.animations.find((clip) => clip.name === "Blink");
       if (blink) mixer.clipAction(blink).play().fadeIn(0.5);
     }, 2500);
+  }
+
+  function startTyping() {
+    ["key1", "key2", "key5", "key6"].forEach((name) => {
+      const clip = THREE.AnimationClip.findByName(gltf.animations, name);
+      if (clip) {
+        const action = mixer.clipAction(clip);
+        action.reset().play();
+        action.timeScale = 1.2;
+      }
+    });
+    if (typingAction) {
+      typingAction.reset().play();
+    }
   }
 
   function bindHover(hoverDiv: HTMLDivElement) {
@@ -108,15 +124,22 @@ export function setupCharacterAnimations(gltf: GLTF) {
     };
   }
 
-  return { mixer, playIntro, bindHover };
+  return { mixer, playIntro, startTyping, bindHover };
 }
 
 export function applyHeadRotation(
   headBone: THREE.Object3D,
   mouseX: number,
   mouseY: number,
-  lerp: (from: number, to: number, t: number) => number
+  lerp: (from: number, to: number, t: number) => number,
+  enabled = true
 ) {
+  if (!enabled) {
+    headBone.rotation.y = lerp(headBone.rotation.y, 0, 0.08);
+    headBone.rotation.x = lerp(headBone.rotation.x, 0, 0.08);
+    return;
+  }
+
   const maxRotation = Math.PI / 6;
   headBone.rotation.y = lerp(
     headBone.rotation.y,

@@ -16,7 +16,7 @@ const HeroDeveloperCharacter = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-full min-h-[280px] items-center justify-center">
+      <div className="flex h-full min-h-[380px] items-center justify-center">
         <div className="h-10 w-10 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
       </div>
     ),
@@ -31,11 +31,11 @@ const techBadges: {
   y: string;
   delay: number;
 }[] = [
-  { brand: "react", color: "from-sky-400/20 to-sky-600/20", x: "4%", y: "12%", delay: 0 },
-  { label: "TS", color: "from-blue-400 to-blue-600", x: "72%", y: "6%", delay: 0.2 },
-  { label: "AI", color: "from-amber-400 to-orange-500", x: "76%", y: "42%", delay: 0.4 },
-  { brand: "expo", color: "from-cyan-400/20 to-teal-500/20", x: "2%", y: "52%", delay: 0.3 },
-  { label: ".NET", color: "from-violet-400 to-purple-600", x: "68%", y: "72%", delay: 0.5 },
+  { brand: "react", color: "from-sky-400/20 to-sky-600/20", x: "4%", y: "8%", delay: 0 },
+  { label: "TS", color: "from-blue-400 to-blue-600", x: "72%", y: "4%", delay: 0.2 },
+  { label: "AI", color: "from-amber-400 to-orange-500", x: "76%", y: "38%", delay: 0.4 },
+  { brand: "expo", color: "from-cyan-400/20 to-teal-500/20", x: "2%", y: "48%", delay: 0.3 },
+  { label: ".NET", color: "from-violet-400 to-purple-600", x: "68%", y: "68%", delay: 0.5 },
 ];
 
 function LightningBolt({ className }: { className?: string }) {
@@ -67,30 +67,30 @@ export function HeroIllustration({
   className,
 }: HeroIllustrationProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [showCharacter, setShowCharacter] = useState(false);
+  const [showCharacter, setShowCharacter] = useState(true);
 
   const toggleView = () => setShowCharacter((prev) => !prev);
 
   return (
     <div
       className={cn(
-        "relative w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto aspect-square px-2",
+        "relative w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto min-h-[400px] sm:min-h-[480px] lg:min-h-[540px] px-2",
         className
       )}
     >
       <LightningBolt className="absolute -left-2 sm:-left-8 top-8 w-16 sm:w-24 h-28 sm:h-40 text-accent rotate-12 opacity-80" />
       <LightningBolt className="absolute -right-1 sm:-right-4 bottom-16 w-14 sm:w-20 h-24 sm:h-32 text-accent -rotate-12 scale-x-[-1] opacity-80" />
 
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent-secondary/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent-secondary/10 rounded-3xl blur-3xl" />
 
-      <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px]">
+      <div className="relative z-10 h-full min-h-[400px] sm:min-h-[480px] lg:min-h-[540px]">
         <AnimatePresence mode="wait">
           {showCharacter && !prefersReducedMotion ? (
             <motion.div
               key="character"
-              initial={{ opacity: 0, scale: 0.92 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.92 }}
+              exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35 }}
               className="absolute inset-0"
             >
@@ -99,19 +99,19 @@ export function HeroIllustration({
           ) : (
             <motion.div
               key="photo"
-              initial={{ opacity: 0, scale: 0.92 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.92 }}
+              exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35 }}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <Tilt3D intensity={16} className="h-full w-full">
+              <Tilt3D intensity={16} className="h-full w-full flex items-center justify-center">
                 <motion.button
                   type="button"
                   onClick={toggleView}
                   disabled={!!prefersReducedMotion}
                   className={cn(
-                    "relative z-10 mx-auto w-[68%] sm:w-[72%] aspect-square",
+                    "relative z-10 mx-auto w-[58%] sm:w-[52%] max-w-[280px] aspect-square",
                     !prefersReducedMotion && "cursor-pointer group"
                   )}
                   aria-label={
