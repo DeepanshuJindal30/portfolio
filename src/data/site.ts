@@ -4,7 +4,7 @@ export const siteConfig = {
     "Deepanshu Jindal | SDE-I @ ADP | Full-Stack & AI Systems Engineer",
   description:
     "Software Engineer building scalable full-stack systems, distributed backends, agentic AI platforms, and production mobile apps. SDE-I @ ADP · 2× Patents · 7 IEEE Papers · LeetCode Guardian (2166).",
-  url: "https://deepanshujindal30.github.io/Portfolio",
+  url: "https://deepanshujindal30.github.io/portfolio",
   ogImage: "/og-image.svg",
   email: "deepanshujindal.dev@gmail.com",
   phone: "+91-9760315073",
