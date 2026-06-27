@@ -4,6 +4,15 @@ Premium personal portfolio website built with Next.js 15, TypeScript, Tailwind C
 
 **Theme:** AI Product Engineering Command Center
 
+**Live site:** [deepanshujindal30.github.io/portfolio](https://deepanshujindal30.github.io/portfolio)
+
+## Demo
+
+<video width="100%" controls>
+  <source src="public/videos/portfolio-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag. <a href="public/videos/portfolio-demo.mp4">Download the demo video</a>.
+</video>
+
 ## Tech Stack
 
 - **Framework:** Next.js 15 (App Router)
@@ -108,6 +117,7 @@ Upload the `out/` folder contents to your GitHub Pages branch.
 - `public/profile.jpg` — Your profile photo
 - `public/resume.pdf` — Your resume PDF
 - `public/og-image.png` — OpenGraph social preview image
+- `public/videos/portfolio-demo.mp4` — Portfolio walkthrough demo video
 - `public/app-screenshots/` — Mobile app screenshots
 - `public/appurva-pharmacy.apk` — Android APK file
 
