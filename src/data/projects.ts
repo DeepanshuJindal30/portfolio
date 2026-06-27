@@ -23,6 +23,7 @@ export interface ProductionProject {
 export interface MobileApp extends ProductionProject {
   features: string[];
   screenshots: string[];
+  demoVideo?: string;
 }
 
 export interface CaseStudy {
@@ -35,6 +36,7 @@ export interface CaseStudy {
   techStack: string[];
   architecture: string[];
   screenshots: string[];
+  demoVideo?: string;
   challenges: string[];
   futureImprovements: string[];
   links: {
@@ -148,6 +150,7 @@ export const mobileApps: MobileApp[] = [
       "/app-screenshots/cart.svg",
       "/app-screenshots/admin.svg",
     ],
+    demoVideo: "/videos/appurva-pharmacy-demo.mp4",
     links: {
       caseStudy: "/projects/appurva-pharmacy",
       github: "https://github.com/DeepanshuJindal30/Appurva-Herbals",
@@ -313,6 +316,7 @@ export const appurvaPharmacyCaseStudy: CaseStudy = {
     "/app-screenshots/orders.svg",
     "/app-screenshots/admin.svg",
   ],
+  demoVideo: "/videos/appurva-pharmacy-demo.mp4",
   challenges: [
     "Designing prescription upload flow with validation and admin review",
     "Managing real-time stock updates across concurrent orders",

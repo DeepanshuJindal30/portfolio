@@ -5,7 +5,7 @@ import {
   ArrowRight,
   Download,
   Github,
-  ImageIcon,
+  Play,
 } from "lucide-react";
 import { mobileApps } from "@/data/projects";
 import { PhoneMockup } from "@/components/ui/PhoneMockup";
@@ -99,20 +99,21 @@ export function MobileSection() {
                     GitHub Repo
                   </Button>
                 )}
-                <Button href="#mobile-screenshots" variant="ghost">
-                  <ImageIcon className="w-4 h-4" aria-hidden="true" />
-                  Screenshots
+                <Button href="#app-demo-video" variant="ghost">
+                  <Play className="w-4 h-4" aria-hidden="true" />
+                  Watch Demo
                 </Button>
               </div>
             </div>
 
             <div
-              id="mobile-screenshots"
+              id="app-demo-video"
               className="relative p-8 md:p-12 flex items-center justify-center bg-gradient-to-br from-accent/5 to-accent-secondary/5 order-1 lg:order-2"
             >
               <PhoneMockup
                 screenshots={app.screenshots}
                 alt={app.title}
+                videoSrc={app.demoVideo}
               />
             </div>
           </div>

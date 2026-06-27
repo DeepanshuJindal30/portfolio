@@ -8,6 +8,7 @@ import { SkillBadge } from "@/components/ui/SkillBadge";
 import { AnimatedGrid } from "@/components/layout/AnimatedGrid";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PhoneMockup } from "@/components/ui/PhoneMockup";
 import { withBasePath } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -142,6 +143,24 @@ export default function AppurvaPharmacyCaseStudyPage() {
                 ))}
               </div>
             </section>
+
+            {study.demoVideo && (
+              <section aria-labelledby="demo-heading">
+                <h2
+                  id="demo-heading"
+                  className="text-xl font-semibold text-white mb-6"
+                >
+                  App Demo Video
+                </h2>
+                <div className="rounded-2xl glass-card gradient-border p-8 md:p-12 flex justify-center">
+                  <PhoneMockup
+                    screenshots={study.screenshots}
+                    alt={study.title}
+                    videoSrc={study.demoVideo}
+                  />
+                </div>
+              </section>
+            )}
 
             <section aria-labelledby="screenshots-heading">
               <h2
