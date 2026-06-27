@@ -79,7 +79,11 @@ export function MobileSection() {
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
                 {app.links?.apk && (
-                  <Button href={withBasePath(app.links.apk)} variant="outline">
+                  <Button
+                    href={withBasePath(app.links.apk)}
+                    variant="outline"
+                    download="Appurva-Pharmacy.apk"
+                  >
                     <Download className="w-4 h-4" aria-hidden="true" />
                     Download APK
                   </Button>

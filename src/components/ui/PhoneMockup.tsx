@@ -14,7 +14,7 @@ export function PhoneMockup({
   alt,
   className,
 }: PhoneMockupProps) {
-  const primaryScreenshot = screenshots[0] ?? "/app-screenshots/home.svg";
+  const primaryScreenshot = screenshots[0] ?? "/app-screenshots/home.png";
 
   return (
     <div
@@ -31,7 +31,7 @@ export function PhoneMockup({
               src={primaryScreenshot}
               alt={`${alt} app screenshot`}
               fill
-              className="object-cover"
+              className="object-cover object-top"
               sizes="280px"
               priority
             />

@@ -55,7 +55,11 @@ export default function AppurvaPharmacyCaseStudyPage() {
                 </Button>
               )}
               {study.links.apk && (
-                <Button href={withBasePath(study.links.apk)} variant="primary">
+                <Button
+                  href={withBasePath(study.links.apk)}
+                  variant="primary"
+                  download="Appurva-Pharmacy.apk"
+                >
                   <Download className="w-4 h-4" aria-hidden="true" />
                   Download APK
                 </Button>

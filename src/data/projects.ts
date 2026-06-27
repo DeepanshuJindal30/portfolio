@@ -120,15 +120,15 @@ export const mobileApps: MobileApp[] = [
     id: "appurva-pharmacy",
     title: "Appurva Pharmacy",
     description:
-      "A Tata 1mg / Zomato / Blinkit-inspired pharmacy ordering app where users can browse healthcare products, upload prescriptions, add items to cart, choose delivery or self-pickup, and place orders.",
+      "A Tata 1mg-inspired healthcare app with medicine ordering, prescription upload, veterinary medicines, pet care, voice search, and a polished mobile-first UX — built with React Native, Expo, and Supabase.",
     features: [
-      "Product catalog with medicine & healthcare categories",
-      "Search, filters & detailed product pages",
-      "Cart, checkout & prescription upload",
-      "Order placement, history & status tracking",
+      "Smart search with voice input for medicines",
+      "Order medicines — safe and quick delivery",
+      "Upload prescription (Rx) workflow",
+      "Veterinary medicines & pet care categories",
+      "Cart, orders, and prescription hub navigation",
       "Admin order, stock & product management",
-      "Delivery and self-pickup flow",
-      "Supabase backend with Android APK via Expo/EAS",
+      "Production Android APK via Expo EAS Build",
     ],
     technologies: [
       "React Native",
@@ -140,7 +140,7 @@ export const mobileApps: MobileApp[] = [
     ],
     category: "mobile",
     screenshots: [
-      "/app-screenshots/home.svg",
+      "/app-screenshots/home.png",
       "/app-screenshots/catalog.svg",
       "/app-screenshots/cart.svg",
       "/app-screenshots/admin.svg",
@@ -290,7 +290,7 @@ export const appurvaPharmacyCaseStudy: CaseStudy = {
     "EAS Build pipeline for Android APK",
   ],
   screenshots: [
-    "/app-screenshots/home.svg",
+    "/app-screenshots/home.png",
     "/app-screenshots/catalog.svg",
     "/app-screenshots/cart.svg",
     "/app-screenshots/checkout.svg",
