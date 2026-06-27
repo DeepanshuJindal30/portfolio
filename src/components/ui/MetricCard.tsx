@@ -14,6 +14,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Achievement } from "@/data/achievements";
+import { BrandLogoBadge, type BrandId } from "@/components/ui/BrandLogo";
 import { CountUp } from "./CountUp";
 import { GlowCard } from "./GlowCard";
 import { cn } from "@/lib/utils";
@@ -37,13 +38,18 @@ interface MetricCardProps {
 export function MetricCard({ achievement, index = 0 }: MetricCardProps) {
   const prefersReducedMotion = useReducedMotion();
   const Icon = iconMap[achievement.icon] ?? Trophy;
+  const brandLogo = achievement.logo as BrandId | undefined;
 
   const content = (
     <>
       <div className="flex items-start justify-between mb-4">
-        <div className="p-2.5 rounded-xl bg-accent/10 border border-accent/20">
-          <Icon className="w-5 h-5 text-accent" aria-hidden="true" />
-        </div>
+        {brandLogo ? (
+          <BrandLogoBadge brand={brandLogo} size={40} />
+        ) : (
+          <div className="p-2.5 rounded-xl bg-accent/10 border border-accent/20">
+            <Icon className="w-5 h-5 text-accent" aria-hidden="true" />
+          </div>
+        )}
         <div className="flex items-center gap-1.5">
           {achievement.url && (
             <ExternalLink

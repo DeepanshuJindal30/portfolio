@@ -18,6 +18,7 @@ export interface ProductionProject {
     screenshots?: string;
   };
   featured?: boolean;
+  logo?: string;
 }
 
 export interface AppScreenshot {
@@ -65,6 +66,7 @@ export const enterpriseProjects: ProductionProject[] = [
   {
     id: "agentic-ai-perf",
     title: "Agentic AI Performance Testing Platform",
+    logo: "adp",
     description:
       "Built an end-to-end agentic AI platform that converts Jira tickets into executable performance testing assets such as API validations, LoadRunner VuGen scripts, and controller scenarios.",
     impact: [
@@ -100,6 +102,7 @@ export const enterpriseProjects: ProductionProject[] = [
   {
     id: "unified-tax-api",
     title: "Unified Tax API / Payroll Backend System",
+    logo: "adp",
     description:
       "Designed backend API architecture for unified tax withholding workflows — consolidating Federal and State APIs into a unified GET/PUT contract with backward compatibility, zero-downtime rollout, feature flags, and SLA-focused observability.",
     technologies: [
@@ -118,6 +121,7 @@ export const enterpriseProjects: ProductionProject[] = [
   {
     id: "pes-data-portal",
     title: "PES Data Portal / Trustee Initiative POC",
+    logo: "adp",
     description:
       "Built CRUD and authentication POCs for internal data portal workflows with clean layered architecture.",
     technologies: [
@@ -348,6 +352,7 @@ export const competitiveProgramming = {
   platforms: [
     {
       name: "LeetCode",
+      logo: "leetcode",
       badge: "Guardian",
       rating: "2166",
       description: "Max rating — elite competitive tier",
@@ -355,6 +360,7 @@ export const competitiveProgramming = {
     },
     {
       name: "CodeChef",
+      logo: "codechef",
       badge: "5★",
       rating: "2003",
       description: "Top 1% competitive programming",
@@ -362,6 +368,7 @@ export const competitiveProgramming = {
     },
     {
       name: "DSA Problems",
+      logo: "leetcode",
       badge: "600+",
       rating: "Solved",
       description: "Structured algorithmic practice",
@@ -369,6 +376,7 @@ export const competitiveProgramming = {
     },
     {
       name: "HackerRank",
+      logo: "hackerrank",
       badge: "5★",
       rating: "Problem Solving",
       description: "Python (Basic) certified",

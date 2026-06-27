@@ -4,12 +4,20 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Tilt3D } from "@/components/ui/Tilt3D";
+import { BrandLogo, type BrandId } from "@/components/ui/BrandLogo";
 
-const techBadges = [
-  { label: "React", color: "from-sky-400 to-sky-600", x: "4%", y: "12%", delay: 0 },
+const techBadges: {
+  brand?: BrandId;
+  label?: string;
+  color: string;
+  x: string;
+  y: string;
+  delay: number;
+}[] = [
+  { brand: "react", color: "from-sky-400/20 to-sky-600/20", x: "4%", y: "12%", delay: 0 },
   { label: "TS", color: "from-blue-400 to-blue-600", x: "72%", y: "6%", delay: 0.2 },
   { label: "AI", color: "from-amber-400 to-orange-500", x: "76%", y: "42%", delay: 0.4 },
-  { label: "RN", color: "from-cyan-400 to-teal-500", x: "2%", y: "52%", delay: 0.3 },
+  { brand: "expo", color: "from-cyan-400/20 to-teal-500/20", x: "2%", y: "52%", delay: 0.3 },
   { label: ".NET", color: "from-violet-400 to-purple-600", x: "68%", y: "72%", delay: 0.5 },
 ];
 
@@ -83,12 +91,12 @@ export function HeroIllustration({
 
       {techBadges.map((badge) => (
         <motion.div
-          key={badge.label}
+          key={badge.brand ?? badge.label}
           className={cn(
             "absolute z-20 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl",
             "flex items-center justify-center text-[10px] sm:text-xs font-bold text-white shadow-lg",
-            "bg-gradient-to-br border border-white/20",
-            badge.color
+            "border border-white/20 ring-2 ring-accent/20",
+            badge.brand ? "bg-surface/90 p-0" : cn("bg-gradient-to-br", badge.color)
           )}
           style={{ left: badge.x, top: badge.y, transformStyle: "preserve-3d" }}
           animate={
@@ -107,11 +115,16 @@ export function HeroIllustration({
             delay: badge.delay,
           }}
         >
-          {badge.label}
+          {badge.brand ? (
+            <BrandLogo brand={badge.brand} size={40} className="w-full h-full rounded-xl sm:rounded-2xl border-0" />
+          ) : (
+            badge.label
+          )}
         </motion.div>
       ))}
 
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2 sm:translate-y-4 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-sm whitespace-nowrap">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2 sm:translate-y-4 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-sm whitespace-nowrap flex items-center gap-2">
+        <BrandLogo brand="adp" size={22} className="rounded-md border-0" />
         <span className="text-[10px] sm:text-xs font-mono text-accent-muted uppercase tracking-wider">
           SDE-I @ ADP
         </span>

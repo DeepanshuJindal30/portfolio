@@ -5,6 +5,7 @@ export interface ExperienceItem {
   period: string;
   location?: string;
   type: "full-time" | "internship" | "other";
+  logo?: string;
   highlights: string[];
   scale?: string[];
   technologies: string[];
@@ -19,6 +20,7 @@ export const experience: ExperienceItem[] = [
     period: "Dec 2025 — Present",
     location: "Hyderabad, India (Hybrid)",
     type: "full-time",
+    logo: "adp",
     highlights: [
       "Designed and owned high-throughput, multi-tenant backend APIs for payroll & tax platform processing 3M+ payrolls/month across 500K+ businesses with 99.99% SLA and <100ms p99 latency",
       "Built end-to-end agentic AI automation platform using Kafka-backed async pipeline and FastAPI — converting Jira tickets into performance-testing workflows, reducing setup time by 90% (5 days → 3 hours)",
@@ -57,6 +59,7 @@ export const experience: ExperienceItem[] = [
     period: "Jul 2025 — Nov 2025",
     location: "Hyderabad, India (Hybrid)",
     type: "internship",
+    logo: "adp",
     highlights: [
       "Engineered horizontally scalable full-stack portal (ASP.NET Core + React + Redis + MS SQL) serving 10K+ daily requests — improved scalability by 35% and reduced DB load by 60%",
       "Automated cross-service data synchronization via REST APIs and AWS (S3, Lambda), reducing manual effort by 90% (hours → 10 minutes)",
@@ -83,6 +86,7 @@ export const experience: ExperienceItem[] = [
     period: "Dec 2021 — Jan 2023",
     location: "Chandigarh University",
     type: "other",
+    logo: "ieee",
     highlights: [
       "Contributed to IEEE Photonics and Computer Society research initiatives in AI, NLP, ML, and Computer Vision",
       "Co-authored 7 IEEE-SCOPUS research papers on generative AI, finance, cybersecurity, and computer vision",
@@ -106,8 +110,8 @@ export const experience: ExperienceItem[] = [
     period: "Feb 2023 — May 2023",
     location: "Remote",
     type: "other",
+    logo: "internshala",
     highlights: [
-      "Built a vibrant student tech community of 500+ learners, enhancing platform engagement",
       "Drove awareness of tech upskilling programs, resulting in 120+ new signups",
       "Conducted online sessions on internships, resume building, and skill development",
       "Collaborated with Internshala's growth team to boost college outreach visibility",

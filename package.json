@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env GITHUB_PAGES=false next dev",
-    "dev:fresh": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true})}catch(e){}\" && next dev",
+    "dev": "cross-env GITHUB_PAGES=false next dev -H 127.0.0.1 -p 3000",
+    "dev:fresh": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true})}catch(e){}\" && cross-env GITHUB_PAGES=false next dev -H 127.0.0.1 -p 3000",
     "build": "cross-env GITHUB_PAGES=true next build",
     "start": "next start",
     "lint": "next lint"

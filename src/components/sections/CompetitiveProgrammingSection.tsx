@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ExternalLink, Trophy } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { competitiveProgramming } from "@/data/projects";
+import { BrandLogo, type BrandId } from "@/components/ui/BrandLogo";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export function CompetitiveProgrammingSection() {
@@ -34,10 +35,13 @@ export function CompetitiveProgrammingSection() {
               className="group rounded-2xl p-6 glass-card gradient-border hover:bg-white/[0.04] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <div className="flex items-center justify-between mb-4">
-                <Trophy
-                  className="w-5 h-5 text-amber-400"
-                  aria-hidden="true"
-                />
+                {"logo" in platform && platform.logo ? (
+                  <BrandLogo brand={platform.logo as BrandId} size={40} />
+                ) : (
+                  <span className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-xs font-bold">
+                    {platform.name.charAt(0)}
+                  </span>
+                )}
                 <ExternalLink
                   className="w-4 h-4 text-zinc-600 group-hover:text-zinc-400 transition-colors"
                   aria-hidden="true"

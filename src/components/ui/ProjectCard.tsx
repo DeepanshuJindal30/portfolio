@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import type { ProductionProject } from "@/data/projects";
+import { BrandLogoBadge, type BrandId } from "@/components/ui/BrandLogo";
 import { SkillBadge } from "./SkillBadge";
 import { cn } from "@/lib/utils";
 
@@ -33,15 +34,20 @@ export function ProjectCard({
     >
       <div className="flex flex-col h-full">
         <div className="mb-4">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-accent">
-            {project.category === "enterprise"
-              ? "Enterprise @ ADP"
-              : project.category === "production"
-                ? "Production System"
-                : project.category === "ai-ml"
-                  ? "AI / ML Project"
-                  : "Mobile App"}
-          </span>
+          <div className="flex items-center gap-3 mb-2">
+            {project.logo && (
+              <BrandLogoBadge brand={project.logo as BrandId} size={36} />
+            )}
+            <span className="text-[10px] font-mono uppercase tracking-wider text-accent">
+              {project.category === "enterprise"
+                ? "Enterprise @ ADP"
+                : project.category === "production"
+                  ? "Production System"
+                  : project.category === "ai-ml"
+                    ? "AI / ML Project"
+                    : "Mobile App"}
+            </span>
+          </div>
           <h3 className="text-xl md:text-2xl font-semibold text-white mt-2 mb-3 group-hover:text-accent-muted transition-colors">
             {project.title}
           </h3>

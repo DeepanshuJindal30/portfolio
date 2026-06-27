@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { HeroIllustration } from "@/components/ui/HeroIllustration";
 import { TestimonialCard } from "@/components/ui/TestimonialCard";
 import { HeroFloatingOrbs } from "@/components/ui/HeroFloatingOrbs";
+import { SocialPlatformBar } from "@/components/ui/SocialPlatformBar";
 
 export function HeroSection() {
   const prefersReducedMotion = useReducedMotion();
@@ -75,6 +76,8 @@ export function HeroSection() {
                 <Mail className="w-5 h-5" aria-hidden="true" />
               </Button>
             </motion.div>
+
+            <SocialPlatformBar />
           </div>
 
           <motion.div

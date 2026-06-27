@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import type { ProductionProject } from "@/data/projects";
+import { BrandLogoBadge, type BrandId } from "@/components/ui/BrandLogo";
 import { SkillBadge } from "./SkillBadge";
 import { GlowCard } from "./GlowCard";
 
@@ -35,6 +36,9 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
           <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 mb-4">
+                {project.logo && (
+                  <BrandLogoBadge brand={project.logo as BrandId} size={28} className="shadow-none" />
+                )}
                 <Sparkles className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-accent-muted">
                   {project.category === "enterprise"

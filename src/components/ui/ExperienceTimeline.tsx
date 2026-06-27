@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Building2, ExternalLink, MapPin } from "lucide-react";
+import { ExternalLink, MapPin } from "lucide-react";
 import type { ExperienceItem } from "@/data/experience";
+import { BrandLogoBadge, type BrandId } from "@/components/ui/BrandLogo";
 import { SkillBadge } from "./SkillBadge";
 import { cn } from "@/lib/utils";
 
@@ -39,12 +40,15 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
             />
             <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-accent/10 border border-accent/20">
-                  <Building2
-                    className="w-5 h-5 text-accent"
-                    aria-hidden="true"
-                  />
-                </div>
+                {item.logo ? (
+                  <BrandLogoBadge brand={item.logo as BrandId} size={44} />
+                ) : (
+                  <div className="p-2.5 rounded-xl bg-accent/10 border border-accent/20">
+                    <span className="text-accent text-sm font-bold" aria-hidden="true">
+                      {item.company.charAt(0)}
+                    </span>
+                  </div>
+                )}
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold text-white">
                     {item.role}
