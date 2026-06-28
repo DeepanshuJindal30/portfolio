@@ -23,6 +23,8 @@ const highlightIcons = {
   trophy: Trophy,
 } as const;
 
+type HighlightIconKey = keyof typeof highlightIcons;
+
 export function AboutSection() {
   const prefersReducedMotion = useReducedMotion();
   const { enable3D } = useVisualPerformance();
@@ -68,7 +70,7 @@ export function AboutSection() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full max-w-3xl">
             {siteConfig.aboutHighlights.map((item, index) => {
-              const Icon = highlightIcons[item.icon];
+              const Icon = highlightIcons[item.icon as HighlightIconKey];
               return (
                 <motion.div
                   key={item.id}
