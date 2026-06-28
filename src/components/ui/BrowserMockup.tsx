@@ -39,7 +39,7 @@ export function BrowserMockup({
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" aria-hidden="true" />
           <div className="flex-1 mx-2 h-6 rounded-md bg-white/5 border border-white/5 flex items-center px-3">
             <span className="text-[10px] font-mono text-zinc-500 truncate">
-              live demo
+              deployed link
             </span>
           </div>
         </div>

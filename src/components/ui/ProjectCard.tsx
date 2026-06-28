@@ -116,7 +116,7 @@ export function ProjectCard({
                 className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-muted transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
                 <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                Live Demo
+                Deployed Link
               </a>
             )}
             {project.links.github && (

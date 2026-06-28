@@ -6,7 +6,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { cn, withBasePath } from "@/lib/utils";
-import { decryptModelFile } from "@/lib/decryptModel";
+import { preloadCharacterModel } from "@/lib/characterModelCache";
 import {
   applyHeadRotation,
   setupCharacterAnimations,
@@ -56,11 +56,26 @@ export function HeroDeveloperCharacter({
     const scene = new THREE.Scene();
     const getSize = () => host.getBoundingClientRect();
 
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: window.devicePixelRatio < 2,
-      powerPreference: "high-performance",
-    });
+    const isMobileView = window.matchMedia("(max-width: 767px)").matches;
+
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: !isMobileView && window.devicePixelRatio < 2,
+        powerPreference: isMobileView ? "default" : "high-performance",
+      });
+    } catch {
+      failLoadEarly();
+      return;
+    }
+
+    function failLoadEarly() {
+      if (disposed) return;
+      setError(true);
+      setLoading(false);
+      onLoadErrorRef.current?.();
+    }
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
     renderer.domElement.style.pointerEvents = "none";
@@ -76,9 +91,8 @@ export function HeroDeveloperCharacter({
       const next = getSize();
       if (next.width < 2 || next.height < 2) return;
       renderer.setSize(next.width, next.height);
-      const isMobile = window.matchMedia("(max-width: 767px)").matches;
       renderer.setPixelRatio(
-        Math.min(window.devicePixelRatio, isMobile ? 1.25 : 2)
+        Math.min(window.devicePixelRatio, isMobileView ? 1 : 2)
       );
       camera.aspect = next.width / next.height;
       camera.updateProjectionMatrix();
@@ -92,26 +106,31 @@ export function HeroDeveloperCharacter({
     directionalLight.position.set(-0.47, -0.32, -1);
     scene.add(directionalLight);
 
+    const ambientLight = new THREE.AmbientLight(0xffffff, isMobileView ? 0.45 : 0);
+    scene.add(ambientLight);
+
     const pointLight = new THREE.PointLight(0xf97316, 0, 100, 3);
     pointLight.position.set(3, 12, 4);
     scene.add(pointLight);
 
-    new RGBELoader()
-      .setPath(withBasePath("/models/"))
-      .load(
-        "char_enviorment.hdr",
-        (texture) => {
-          if (disposed) return;
-          texture.mapping = THREE.EquirectangularReflectionMapping;
-          scene.environment = texture;
-          scene.environmentIntensity = 0;
-          scene.environmentRotation.set(5.76, 85.85, 1);
-        },
-        undefined,
-        () => {
-          /* HDR optional — scene still renders without it */
-        }
-      );
+    if (!isMobileView) {
+      new RGBELoader()
+        .setPath(withBasePath("/models/"))
+        .load(
+          "char_enviorment.hdr",
+          (texture) => {
+            if (disposed) return;
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            scene.environment = texture;
+            scene.environmentIntensity = 0;
+            scene.environmentRotation.set(5.76, 85.85, 1);
+          },
+          undefined,
+          () => {
+            /* HDR optional — scene still renders without it */
+          }
+        );
+    }
 
     const loader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
@@ -159,32 +178,45 @@ export function HeroDeveloperCharacter({
       }
     };
 
-    const onPointerMove = (event: PointerEvent) => {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    const onPointerMove = (event: PointerEvent | TouchEvent) => {
+      const clientX =
+        "touches" in event && event.touches[0]
+          ? event.touches[0].clientX
+          : (event as PointerEvent).clientX;
+      const clientY =
+        "touches" in event && event.touches[0]
+          ? event.touches[0].clientY
+          : (event as PointerEvent).clientY;
+      mouse.x = (clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(clientY / window.innerHeight) * 2 + 1;
     };
 
-    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("touchmove", onPointerMove, { passive: true });
 
     const scheduleTimeline = (
       animations: ReturnType<typeof setupCharacterAnimations>
     ) => {
+      const introDelay = isMobileView ? 200 : 600;
+      const typingDelay = isMobileView ? 1200 : 2800;
+      const deskDelay = isMobileView ? 2200 : 4800;
+
       setTimeout(() => {
         if (disposed) return;
         turnOnLights();
         animations.playIntro();
-      }, 600);
+      }, introDelay);
 
       setTimeout(() => {
         if (disposed) return;
         headTrackingEnabled = true;
         animations.startTyping();
-      }, 2800);
+      }, typingDelay);
 
       setTimeout(() => {
         if (disposed) return;
         deskRevealActive = true;
-      }, 4800);
+      }, deskDelay);
     };
 
     const failLoad = () => {
@@ -196,10 +228,7 @@ export function HeroDeveloperCharacter({
 
     (async () => {
       try {
-        const encrypted = await decryptModelFile(
-          withBasePath("/models/character.enc"),
-          "Character3D#@"
-        );
+        const encrypted = await preloadCharacterModel();
         if (disposed) return;
 
         const blobUrl = URL.createObjectURL(new Blob([encrypted]));
@@ -222,8 +251,10 @@ export function HeroDeveloperCharacter({
             sceneRefs = prepareCharacterMeshes(character);
             scene.add(character);
             headBone = character.getObjectByName("spine006") ?? null;
-            character.getObjectByName("footR")!.position.y = 3.36;
-            character.getObjectByName("footL")!.position.y = 3.36;
+            const footR = character.getObjectByName("footR");
+            const footL = character.getObjectByName("footL");
+            if (footR) footR.position.y = 3.36;
+            if (footL) footL.position.y = 3.36;
 
             const animations = setupCharacterAnimations(gltf);
             mixer = animations.mixer;
@@ -231,7 +262,13 @@ export function HeroDeveloperCharacter({
               unbindHover = animations.bindHover(hoverRef.current);
             }
 
-            await renderer.compileAsync(character, camera, scene);
+            try {
+              if (typeof renderer.compileAsync === "function") {
+                await renderer.compileAsync(character, camera, scene);
+              }
+            } catch {
+              /* compileAsync optional on older mobile GPUs */
+            }
             resizeRenderer();
             setLoading(false);
             onReadyRef.current?.();
@@ -288,6 +325,7 @@ export function HeroDeveloperCharacter({
       disposed = true;
       cancelAnimationFrame(animationId);
       window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("touchmove", onPointerMove);
       resizeObserver?.disconnect();
       unbindHover?.();
       scene.clear();
@@ -303,7 +341,7 @@ export function HeroDeveloperCharacter({
       type="button"
       onClick={onToggle}
       className={cn(
-        "relative w-full h-full min-h-[380px] sm:min-h-[460px] lg:min-h-[520px] cursor-pointer overflow-hidden",
+        "relative w-full h-full min-h-[340px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[520px] cursor-pointer overflow-hidden touch-manipulation",
         "rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent",
         className
       )}

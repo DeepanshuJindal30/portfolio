@@ -12,8 +12,8 @@ export function FeaturedDemosSection() {
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           label="Built & Shipped"
-          title="Live Demos"
-          description="Watch the products in action — minimal setup, maximum visual proof."
+          title="Deployed Projects"
+          align="center"
         />
 
         <div className="space-y-8 md:space-y-10">

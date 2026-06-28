@@ -139,6 +139,18 @@
   }
 
   .hero-canvas-host {
-    bottom: -6%;
+    bottom: -4%;
+  }
+
+  @media (max-width: 767px) {
+    .hero-canvas-host {
+      bottom: -2%;
+      min-height: 320px;
+    }
+
+    .hero-rim-glow {
+      filter: blur(32px);
+      width: min(90%, 260px) !important;
+    }
   }
 }

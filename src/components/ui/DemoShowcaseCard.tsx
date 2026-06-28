@@ -60,7 +60,7 @@ export function DemoShowcaseCard({
                 rel="noopener noreferrer"
               >
                 <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                Live Demo
+                Deployed Link
               </Button>
             )}
             {project.links.github && (

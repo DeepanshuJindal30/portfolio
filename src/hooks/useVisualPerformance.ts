@@ -15,36 +15,47 @@ interface VisualPerformanceState {
   reducedEffects: boolean;
 }
 
+function computeVisualState(prefersReducedMotion: boolean | null) {
+  if (typeof window === "undefined") {
+    return {
+      enable3D: false,
+      enableHero3D: false,
+      enableSkills3D: false,
+      canvasDpr: 1 as number | [number, number],
+      isMobile: true,
+      reducedEffects: true,
+    };
+  }
+
+  const isMobile = window.matchMedia("(max-width: 767px)").matches;
+  const connection = (
+    navigator as Navigator & { connection?: { saveData?: boolean } }
+  ).connection;
+  const saveData = connection?.saveData ?? false;
+  const lowCores = (navigator.hardwareConcurrency ?? 8) <= 4;
+  const enableHero3D = !prefersReducedMotion && !saveData;
+  const enable3D = enableHero3D && !isMobile && !lowCores;
+
+  return {
+    enable3D,
+    enableHero3D,
+    enableSkills3D: enableHero3D,
+    canvasDpr: (isMobile ? 1 : enable3D ? [1, 1.25] : 1) as
+      | number
+      | [number, number],
+    isMobile,
+    reducedEffects: Boolean(prefersReducedMotion) || isMobile,
+  };
+}
+
 export function useVisualPerformance(): VisualPerformanceState {
   const prefersReducedMotion = useReducedMotion();
-  const [state, setState] = useState<VisualPerformanceState>({
-    enable3D: false,
-    enableHero3D: false,
-    enableSkills3D: false,
-    canvasDpr: 1,
-    isMobile: true,
-    reducedEffects: true,
-  });
+  const [state, setState] = useState<VisualPerformanceState>(() =>
+    computeVisualState(prefersReducedMotion)
+  );
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const connection = (
-      navigator as Navigator & { connection?: { saveData?: boolean } }
-    ).connection;
-    const saveData = connection?.saveData ?? false;
-    const lowCores = (navigator.hardwareConcurrency ?? 8) <= 4;
-    const enableHero3D = !prefersReducedMotion && !saveData;
-    const enable3D =
-      enableHero3D && !isMobile && !lowCores;
-
-    setState({
-      enable3D,
-      enableHero3D,
-      enableSkills3D: enableHero3D,
-      canvasDpr: isMobile ? 1 : enable3D ? [1, 1.25] : 1,
-      isMobile,
-      reducedEffects: prefersReducedMotion || isMobile,
-    });
+    setState(computeVisualState(prefersReducedMotion));
   }, [prefersReducedMotion]);
 
   return state;

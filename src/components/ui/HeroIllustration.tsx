@@ -8,6 +8,7 @@ import { Tilt3D } from "@/components/ui/Tilt3D";
 import { BrandLogo, type BrandId } from "@/components/ui/BrandLogo";
 import { ProfileImage } from "@/components/ui/ProfileImage";
 import { useVisualPerformance } from "@/hooks/useVisualPerformance";
+import { HeroCharacterPreloader } from "@/components/three/HeroCharacterPreloader";
 
 const HeroDeveloperCharacter = dynamic(
   () =>
@@ -17,7 +18,7 @@ const HeroDeveloperCharacter = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-full min-h-[380px] items-center justify-center">
+      <div className="flex h-full min-h-[340px] sm:min-h-[420px] items-center justify-center">
         <div className="h-10 w-10 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
       </div>
     ),
@@ -80,8 +81,8 @@ function HeroPortrait({
       aria-label="Show 3D developer avatar"
     >
       {frame}
-      <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-[10px] font-mono text-accent-muted uppercase tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-        Click for 3D dev
+      <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-[10px] font-mono text-accent-muted uppercase tracking-wider whitespace-nowrap opacity-70 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+        Tap for 3D dev
       </span>
     </button>
   );
@@ -150,16 +151,17 @@ export function HeroIllustration({
   return (
     <div
       className={cn(
-        "relative w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto min-h-[400px] sm:min-h-[480px] lg:min-h-[540px] px-2",
+        "relative w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto min-h-[360px] sm:min-h-[440px] lg:min-h-[540px] px-2",
         className
       )}
     >
+      <HeroCharacterPreloader />
       <LightningBolt className="absolute -left-2 sm:-left-8 top-8 w-16 sm:w-24 h-28 sm:h-40 text-accent rotate-12 opacity-80 pointer-events-none z-0" />
       <LightningBolt className="absolute -right-1 sm:-right-4 bottom-24 w-14 sm:w-20 h-24 sm:h-32 text-accent -rotate-12 scale-x-[-1] opacity-80 pointer-events-none z-0" />
 
       <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent-secondary/10 rounded-3xl blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 h-full min-h-[400px] sm:min-h-[480px] lg:min-h-[540px]">
+      <div className="relative z-10 h-full min-h-[360px] sm:min-h-[440px] lg:min-h-[540px]">
         <AnimatePresence mode="wait">
           {showCharacter && enableHero3D && !prefersReducedMotion ? (
             <motion.div

@@ -59,8 +59,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   return (
     <html lang="en" className="dark">
+      <head>
+        <link
+          rel="preload"
+          href={`${basePath}/models/character.enc`}
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href={`${basePath}/draco/draco_decoder.wasm`}
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="antialiased font-sans">{children}</body>
     </html>
   );

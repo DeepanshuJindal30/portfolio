@@ -28,7 +28,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
   switch (brand) {
     case "adp":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#D0271D" />
           <text
             x="24"
@@ -45,7 +45,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "ieee":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#00629B" />
           <text
             x="24"
@@ -62,7 +62,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "internshala":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#00A5EC" />
           <text
             x="24"
@@ -79,7 +79,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "github":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#1a1a1a" />
           <path
             fill="white"
@@ -89,7 +89,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "linkedin":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#0A66C2" />
           <path
             fill="white"
@@ -99,23 +99,20 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "leetcode":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#1E1E1E" />
-          <g transform="translate(9, 8.5) scale(1.32)">
-            <path
-              fill="#B3B3B3"
-              d="M5.6 5.9h2.8v13.5H5.6V5.9z"
-            />
+          <g transform="translate(12, 12) scale(1)">
             <path
               fill="#FFA116"
-              d="M11.241 20.987H5.6l5.6-9.5 1.402 2.402-4.202 7.098h3.799l1.401-2.402z"
+              d="M11.241 20.987h-5.641l5.6-9.5 1.402 2.402-4.202 7.098h3.841l1.402-2.402z"
             />
+            <path fill="#B3B3B3" d="M5.6 5.9h2.8v13.5H5.6z" />
           </g>
         </svg>
       );
     case "codechef":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#5B3A29" />
           <text
             x="24"
@@ -132,7 +129,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "hackerrank":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#1BA94C" />
           <text
             x="24"
@@ -149,7 +146,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "gmail":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#fff" />
           <path fill="#EA4335" d="M10 16l14 10 14-10v18H10V16z" />
           <path fill="#FBBC05" d="M10 16l7 5-7 5V16z" />
@@ -159,7 +156,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "react":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#06121E" />
           <circle cx="24" cy="24" r="4" fill="#61DAFB" />
           <ellipse cx="24" cy="24" rx="16" ry="6" stroke="#61DAFB" strokeWidth="2" fill="none" />
@@ -169,21 +166,21 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "expo":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#1a1a1a" />
           <path fill="white" d="M12 32L24 12l12 20H12zm4.5-4h15L24 18l-7.5 10z" />
         </svg>
       );
     case "supabase":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#1C1C1C" />
           <path fill="#3ECF8E" d="M24 10c-2 8-8 12-8 18a8 8 0 1016 0c0-6-6-10-8-18z" />
         </svg>
       );
     case "appurva":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#0F766E" />
           <text x="13" y="30" fill="#F97316" fontSize="16" fontWeight="800" fontFamily="Arial, sans-serif">A</text>
           <text x="26" y="30" fill="white" fontSize="16" fontWeight="800" fontFamily="Arial, sans-serif">P</text>
@@ -191,7 +188,7 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "google-drive":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#fff" />
           <path fill="#4285F4" d="M24 10L38 34H10L24 10z" />
           <path fill="#FBBC05" d="M24 10l8 14H16l8-14z" opacity=".9" />
@@ -200,14 +197,14 @@ function LogoSvg({ brand }: { brand: BrandId }) {
       );
     case "patent":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#F97316" />
           <path fill="white" d="M16 12h16v4H16v-4zm0 8h16v2H16v-2zm0 6h10v2H16v-2zm0 6h14v2H16v-2zm0 6h12v2H16v-2z" />
         </svg>
       );
     case "chandigarh":
       return (
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
           <rect width="48" height="48" rx="10" fill="#7C2D12" />
           <text x="24" y="30" textAnchor="middle" fill="white" fontSize="11" fontWeight="700" fontFamily="Arial, sans-serif">CU</text>
         </svg>
