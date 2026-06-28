@@ -30,9 +30,9 @@ export function MobileSection() {
     >
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          label="Product Engineering"
-          title="Mobile Apps & Product Builds"
-          description="End-to-end mobile products with React Native, Expo, and production APK delivery."
+          label="Mobile App"
+          title="Appurva Pharmacy"
+          align="center"
         />
 
         <motion.article
@@ -52,25 +52,11 @@ export function MobileSection() {
                   {app.title}
                 </h3>
               </div>
-              <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+              <p className="text-sm text-zinc-400 leading-relaxed mb-5">
                 {app.description}
               </p>
 
-              <ul className="space-y-2 mb-6" role="list">
-                {app.features.slice(0, 5).map((feature) => (
-                  <li
-                    key={feature}
-                    className="text-sm text-zinc-400 flex items-start gap-2"
-                  >
-                    <span className="text-accent-secondary mt-0.5" aria-hidden="true">
-                      ✓
-                    </span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {app.technologies.map((tech) => (
                   <SkillBadge key={tech} label={tech} variant="accent" />
                 ))}
@@ -137,13 +123,9 @@ export function MobileSection() {
             viewport={{ once: true }}
             className="mt-10 md:mt-12"
           >
-            <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2 text-center">
+            <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-6 text-center">
               App Screenshots
             </h3>
-            <p className="text-sm text-stone-500 text-center mb-8 max-w-lg mx-auto">
-              Real UI from the production build — home, catalog, cart, orders,
-              profile, and admin dashboard.
-            </p>
             <AppScreenshotGallery screenshots={app.screenshotGallery} />
           </motion.div>
         )}

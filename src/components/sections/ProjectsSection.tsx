@@ -1,7 +1,4 @@
-import {
-  personalProjects,
-  additionalPersonalProjects,
-} from "@/data/projects";
+import { moreProjects } from "@/data/projects";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
@@ -16,13 +13,11 @@ export function ProjectsSection() {
         <SectionHeader
           label="My Work"
           title="More Projects"
-          description="Quick links to other AI, ML, and research builds."
+          align="center"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          {personalProjects
-            .filter((project) => !project.showcased)
-            .map((project, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 max-w-5xl mx-auto">
+          {moreProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
@@ -31,19 +26,6 @@ export function ProjectsSection() {
             />
           ))}
         </div>
-
-        {additionalPersonalProjects.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mt-6">
-            {additionalPersonalProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index + personalProjects.length}
-                variant="compact"
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );

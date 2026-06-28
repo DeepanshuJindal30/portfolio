@@ -8,6 +8,8 @@ interface VisualPerformanceState {
   enable3D: boolean;
   /** Hero 3D character — desktop + mobile */
   enableHero3D: boolean;
+  /** Skills 3D orbit — desktop + mobile */
+  enableSkills3D: boolean;
   canvasDpr: number | [number, number];
   isMobile: boolean;
   reducedEffects: boolean;
@@ -18,6 +20,7 @@ export function useVisualPerformance(): VisualPerformanceState {
   const [state, setState] = useState<VisualPerformanceState>({
     enable3D: false,
     enableHero3D: false,
+    enableSkills3D: false,
     canvasDpr: 1,
     isMobile: true,
     reducedEffects: true,
@@ -37,6 +40,7 @@ export function useVisualPerformance(): VisualPerformanceState {
     setState({
       enable3D,
       enableHero3D,
+      enableSkills3D: enableHero3D,
       canvasDpr: isMobile ? 1 : enable3D ? [1, 1.25] : 1,
       isMobile,
       reducedEffects: prefersReducedMotion || isMobile,

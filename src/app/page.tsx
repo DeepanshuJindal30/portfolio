@@ -24,6 +24,14 @@ const FeaturedDemosSection = dynamic(
   { loading: () => <SectionSkeleton /> }
 );
 
+const MobileSection = dynamic(
+  () =>
+    import("@/components/sections/MobileSection").then(
+      (m) => m.MobileSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+
 const ProjectsSection = dynamic(
   () =>
     import("@/components/sections/ProjectsSection").then(
@@ -92,6 +100,7 @@ export default function HomePage() {
         <AboutSection />
         <ExperienceSection />
         <FeaturedDemosSection />
+        <MobileSection />
         <ProjectsSection />
         <EnterpriseProjectsSection />
         <ResearchSection />

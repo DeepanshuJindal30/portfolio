@@ -192,32 +192,101 @@ export const productionProjects = enterpriseProjects;
 
 export const mobileApps: MobileApp[] = [
   {
-    id: "appurva-herbals",
-    title: "Appurva Herbals",
+    id: "appurva-pharmacy",
+    title: "Appurva Pharmacy",
     description:
-      "Doctor-ready product catalogue with search, filters, admin portal, and instant enquiry actions.",
+      "Healthcare mobile app — medicine ordering, Rx upload, cart & orders, admin dashboard. React Native + Expo + Supabase.",
     features: [
-      "15-product visual catalogue with landing collage",
-      "Category search & filters",
-      "One-tap WhatsApp, call & email enquiry",
-      "Admin portal for products & pricing",
-      "Mobile-first, less text / more visuals",
+      "Smart search & voice input",
+      "Prescription upload workflow",
+      "Cart, orders & delivery tracking",
+      "Admin stock & order management",
+      "Production Android APK via EAS",
     ],
     technologies: [
-      "Next.js",
-      "Chakra UI",
-      "Framer Motion",
-      "NextAuth",
-      "Vercel",
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Supabase",
+      "EAS Build",
+      "Android",
     ],
     category: "mobile",
-    screenshots: ["/app-screenshots/catalog.png"],
-    demoVideo: "/videos/appurva-herbals-demo.mp4",
+    screenshots: appurvaPharmacyScreenshots.map((s) => s.src),
+    screenshotGallery: appurvaPharmacyScreenshots,
+    demoVideo: "/videos/appurva-pharmacy-demo.mp4",
     links: {
+      caseStudy: "/projects/appurva-pharmacy",
       github: "https://github.com/DeepanshuJindal30/Appurva-Herbals",
-      live: "https://appurvaherbals.vercel.app",
+      apk: "/appurva-pharmacy.apk",
     },
     featured: true,
+  },
+];
+
+/** 2×2 grid — AI/ML projects (excludes live-demo showcases) */
+export const moreProjects: ProductionProject[] = [
+  {
+    id: "kalpchitra",
+    title: "KalpChitra.AI",
+    description: "Multilingual image synthesis — Best Paper @ CCICT'24.",
+    technologies: [
+      "React.js",
+      "Python",
+      "Stable Diffusion",
+      "GPT-3",
+      "Kafka",
+      "TensorFlow",
+      "OpenCV",
+    ],
+    category: "ai-ml",
+    featured: true,
+    links: {
+      live: "https://kalpa-chitra.netlify.app/",
+      github: "https://github.com/DeepanshuJindal30/KalpChitra.AI",
+    },
+  },
+  {
+    id: "drl-stock",
+    title: "DRL Stock Market Prediction",
+    description: "Deep RL trading strategy with FinRL backtesting.",
+    technologies: [
+      "FinRL",
+      "Stable-Baselines3",
+      "PPO",
+      "DDPG",
+      "A2C",
+      "Python",
+    ],
+    category: "ai-ml",
+    featured: true,
+    links: {
+      live: "https://stock-visualiser.streamlit.app/",
+      github:
+        "https://github.com/DeepanshuJindal30/Deep-Reinforcement-Learning-Based-Trading-Strategy",
+    },
+  },
+  {
+    id: "food-calorie",
+    title: "Food Calorie Detection with YOLOv8",
+    description: "YOLOv8 food detection & calorie estimation.",
+    technologies: ["YOLOv8", "OpenCV", "CNN", "Image Processing"],
+    category: "ai-ml",
+    featured: true,
+    links: {
+      github: "https://github.com/DeepanshuJindal30/Food-Calorie-estimation",
+    },
+  },
+  {
+    id: "hyperspectral",
+    title: "Hyperspectral Imaging ML Model",
+    description: "Neural network for crop DON detection via hyperspectral imaging.",
+    technologies: ["Python", "Neural Networks", "Hyperspectral Imaging", "ML"],
+    category: "ai-ml",
+    links: {
+      github:
+        "https://github.com/DeepanshuJindal30/Hyperspectral-Imaging-ML-Model",
+    },
   },
 ];
 
