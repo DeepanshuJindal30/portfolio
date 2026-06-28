@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Download,
@@ -21,6 +22,29 @@ import { withBasePath } from "@/lib/utils";
 export function MobileSection() {
   const prefersReducedMotion = useReducedMotion();
   const app = mobileApps[0];
+  const [showScreenshots, setShowScreenshots] = useState(false);
+
+  const scrollToDemo = () => {
+    document.getElementById("app-demo-video")?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "center",
+    });
+  };
+
+  const toggleScreenshots = () => {
+    setShowScreenshots((prev) => {
+      const next = !prev;
+      if (next) {
+        requestAnimationFrame(() => {
+          document.getElementById("app-screenshots")?.scrollIntoView({
+            behavior: prefersReducedMotion ? "auto" : "smooth",
+            block: "start",
+          });
+        });
+      }
+      return next;
+    });
+  };
 
   return (
     <section
@@ -105,11 +129,17 @@ export function MobileSection() {
                     GitHub Repo
                   </Button>
                 )}
-                <Button href="#app-demo-video" variant="ghost">
+                <Button type="button" onClick={scrollToDemo} variant="ghost">
                   <Play className="w-4 h-4" aria-hidden="true" />
                   Watch Demo
                 </Button>
-                <Button href="#app-screenshots" variant="ghost">
+                <Button
+                  type="button"
+                  onClick={toggleScreenshots}
+                  variant={showScreenshots ? "outline" : "ghost"}
+                  aria-expanded={showScreenshots}
+                  aria-controls="app-screenshots"
+                >
                   <ImageIcon className="w-4 h-4" aria-hidden="true" />
                   Screenshots
                 </Button>
@@ -124,25 +154,31 @@ export function MobileSection() {
                 screenshots={app.screenshots}
                 alt={app.title}
                 videoSrc={app.demoVideo}
+                hideScreenshotPoster
               />
             </div>
           </div>
         </motion.article>
 
-        {app.screenshotGallery && app.screenshotGallery.length > 0 && (
-          <motion.div
-            id="app-screenshots"
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-10 md:mt-12"
-          >
-            <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-6 text-center">
-              App Screenshots
-            </h3>
-            <AppScreenshotGallery screenshots={app.screenshotGallery} />
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {showScreenshots &&
+            app.screenshotGallery &&
+            app.screenshotGallery.length > 0 && (
+              <motion.div
+                id="app-screenshots"
+                initial={prefersReducedMotion ? false : { opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={prefersReducedMotion ? undefined : { opacity: 0, height: 0 }}
+                transition={{ duration: 0.35 }}
+                className="mt-10 md:mt-12 overflow-hidden"
+              >
+                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-6 text-center">
+                  App Screenshots
+                </h3>
+                <AppScreenshotGallery screenshots={app.screenshotGallery} />
+              </motion.div>
+            )}
+        </AnimatePresence>
       </div>
     </section>
   );

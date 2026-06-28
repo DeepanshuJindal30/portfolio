@@ -9,6 +9,9 @@ interface PhoneMockupProps {
   alt: string;
   className?: string;
   videoSrc?: string;
+  poster?: string;
+  /** When true, video mockup won't use a screenshot as poster */
+  hideScreenshotPoster?: boolean;
 }
 
 export function PhoneMockup({
@@ -16,6 +19,8 @@ export function PhoneMockup({
   alt,
   className,
   videoSrc,
+  poster,
+  hideScreenshotPoster = false,
 }: PhoneMockupProps) {
   const prefersReducedMotion = useReducedMotion();
   const primaryScreenshot = withBasePath(
@@ -24,6 +29,11 @@ export function PhoneMockup({
   const videoUrl = videoSrc
     ? `${withBasePath(videoSrc)}#t=0.1`
     : undefined;
+  const videoPoster = poster
+    ? withBasePath(poster)
+    : hideScreenshotPoster
+      ? undefined
+      : primaryScreenshot;
 
   return (
     <motion.div
@@ -51,7 +61,7 @@ export function PhoneMockup({
             {videoUrl ? (
               <LazyVideo
                 src={videoUrl}
-                poster={primaryScreenshot}
+                poster={videoPoster}
                 ariaLabel={`${alt} demo video`}
               />
             ) : (
