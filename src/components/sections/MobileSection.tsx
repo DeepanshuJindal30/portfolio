@@ -44,7 +44,7 @@ export function MobileSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             <div className="p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center order-2 lg:order-1">
               <span className="text-xs font-mono uppercase tracking-wider text-accent-secondary mb-3">
-                React Native · Expo · Supabase
+                React Native · Expo 56 · Supabase Realtime
               </span>
               <div className="flex items-center gap-3 mb-4">
                 <AppurvaLogo height={48} />
@@ -52,9 +52,23 @@ export function MobileSection() {
                   {app.title}
                 </h3>
               </div>
-              <p className="text-sm text-zinc-400 leading-relaxed mb-5">
+              <p className="text-sm text-zinc-400 leading-relaxed mb-4">
                 {app.description}
               </p>
+
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 mb-5" role="list">
+                {app.features.slice(0, 6).map((feature) => (
+                  <li
+                    key={feature}
+                    className="text-xs text-zinc-400 flex items-start gap-1.5"
+                  >
+                    <span className="text-accent-secondary shrink-0" aria-hidden="true">
+                      ✓
+                    </span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
 
               <div className="flex flex-wrap gap-2 mb-6">
                 {app.technologies.map((tech) => (
