@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <rect width="390" height="844" fill="#0a0a0f"/>
+  <rect x="20" y="60" width="350" height="40" rx="8" fill="#1e1b4b"/>
+  <text x="35" y="86" fill="#818cf8" font-family="system-ui" font-size="14">Appurva Pharmacy</text>
+  <rect x="20" y="120" width="165" height="120" rx="12" fill="#18181b" stroke="#27272a"/>
+  <rect x="205" y="120" width="165" height="120" rx="12" fill="#18181b" stroke="#27272a"/>
+  <rect x="20" y="260" width="165" height="120" rx="12" fill="#18181b" stroke="#27272a"/>
+  <rect x="205" y="260" width="165" height="120" rx="12" fill="#18181b" stroke="#27272a"/>
+  <text x="195" y="450" text-anchor="middle" fill="#52525b" font-family="system-ui" font-size="12">Home Screen</text>
+</svg>
