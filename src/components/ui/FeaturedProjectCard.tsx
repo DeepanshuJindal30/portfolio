@@ -4,8 +4,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import type { ProductionProject } from "@/data/projects";
 import { BrandLogoBadge, type BrandId } from "@/components/ui/BrandLogo";
+import { AgenticArchitectureFlow } from "@/components/ui/AgenticArchitectureFlow";
 import { SkillBadge } from "./SkillBadge";
 import { GlowCard } from "./GlowCard";
+import { cn } from "@/lib/utils";
 
 interface FeaturedProjectCardProps {
   project: ProductionProject;
@@ -33,7 +35,14 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
             aria-hidden="true"
           />
 
-          <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12">
+          <div
+            className={cn(
+              "relative grid gap-8 lg:gap-12",
+              project.id === "agentic-ai-perf"
+                ? "lg:grid-cols-2 lg:items-start"
+                : "lg:grid-cols-2"
+            )}
+          >
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 mb-4">
                 {project.logo && (
@@ -57,7 +66,10 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
 
               {project.impact && (
                 <ul className="space-y-2 mb-6" role="list">
-                  {project.impact.map((item) => (
+                  {(project.id === "agentic-ai-perf"
+                    ? project.impact.slice(0, 3)
+                    : project.impact
+                  ).map((item) => (
                     <li
                       key={item}
                       className="flex items-start gap-2 text-sm text-emerald-400/90"
@@ -72,30 +84,36 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
               )}
 
               <div className="flex flex-wrap gap-2">
-                {project.technologies.slice(0, 6).map((tech) => (
+                {project.technologies
+                  .slice(0, project.id === "agentic-ai-perf" ? 6 : 8)
+                  .map((tech) => (
                   <SkillBadge key={tech} label={tech} variant="accent" />
                 ))}
               </div>
             </div>
 
-            {project.architecture && (
-              <div className="flex flex-col justify-center">
-                <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
-                  Architecture Pipeline
-                </p>
-                <div className="space-y-3">
-                  {project.architecture.steps.map((step, i) => (
-                    <div key={step} className="flex items-center gap-3">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/15 border border-accent/25 text-xs font-mono text-accent">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div className="flex-1 rounded-lg border border-white/8 bg-white/[0.03] px-4 py-2.5">
-                        <p className="text-sm font-mono text-zinc-300">{step}</p>
+            {project.id === "agentic-ai-perf" ? (
+              <AgenticArchitectureFlow />
+            ) : (
+              project.architecture && (
+                <div className="flex flex-col justify-center">
+                  <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
+                    Architecture Pipeline
+                  </p>
+                  <div className="space-y-3">
+                    {project.architecture.steps.map((step, i) => (
+                      <div key={step} className="flex items-center gap-3">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/15 border border-accent/25 text-xs font-mono text-accent">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <div className="flex-1 rounded-lg border border-white/8 bg-white/[0.03] px-4 py-2.5">
+                          <p className="text-sm font-mono text-zinc-300">{step}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )
             )}
           </div>
         </div>

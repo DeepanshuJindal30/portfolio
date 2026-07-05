@@ -16,6 +16,7 @@ export interface ShowcaseProject {
     live?: string;
     github?: string;
     apk?: string;
+    caseStudy?: string;
   };
 }
 
@@ -77,6 +78,7 @@ export interface CaseStudy {
   links: {
     github?: string;
     apk?: string;
+    live?: string;
   };
 }
 
@@ -94,6 +96,7 @@ export const featuredShowcases: ShowcaseProject[] = [
     links: {
       live: "https://appurvaherbals.vercel.app",
       github: "https://github.com/DeepanshuJindal30/Appurva-Herbals",
+      caseStudy: "/projects/appurva-herbals",
     },
   },
   {
@@ -108,6 +111,7 @@ export const featuredShowcases: ShowcaseProject[] = [
     links: {
       live: "https://gmultichat.streamlit.app/",
       github: "https://github.com/DeepanshuJindal30/chatwithpdf1",
+      caseStudy: "/projects/docusense",
     },
   },
 ];
@@ -115,36 +119,37 @@ export const featuredShowcases: ShowcaseProject[] = [
 export const enterpriseProjects: ProductionProject[] = [
   {
     id: "agentic-ai-perf",
-    title: "Agentic AI Performance Testing Platform",
+    title: "LR Agentic AI — LoadRunner Automation Platform",
     logo: "adp",
     description:
-      "Built an end-to-end agentic AI platform that converts Jira tickets into executable performance testing assets such as API validations, LoadRunner VuGen scripts, and controller scenarios.",
+      "Production agentic platform at ADP that reads Jira performance tickets, extracts 10–40 API endpoints via multi-strategy parsing, validates them live against IPE/IAT/FIT environments, and auto-generates Bruno collections, VuGen C scripts, and LoadRunner Controller scenarios — with LLM-guided clarification and checkpoint-resume.",
     impact: [
-      "Reduced script creation time from 5 days to 3 hours (90% reduction)",
-      "Reduced manual QA effort by 60–80% across 4 engineering teams",
-      "Created structured validation and reporting workflow with idempotent execution",
+      "~90% reduction in load-test workflow setup time (days → hours)",
+      "Adopted by multiple internal ADP performance engineering teams",
+      "13-phase state machine with resume from validation, Bruno, or VuGen checkpoints",
+      "AI clarification loop catches payload mismatches & auth issues before execution",
     ],
     architecture: {
       steps: [
-        "Jira / Splunk / Excel",
-        "LLM + RAG + MCP",
-        "Canonical API Model",
-        "Validation Engine",
-        "Artifact Generation",
-        "Execution + Reporting",
+        "Jira Fetch & Extract",
+        "LLM Clarify + Validate",
+        "Bruno + VuGen Generate",
+        "Execute + Controller",
       ],
     },
     technologies: [
       "FastAPI",
       "React",
+      "Vite",
       "TypeScript",
-      "Kafka",
-      "LLMs",
-      "RAG",
-      "MCP",
+      "OpenAI",
+      "Azure OpenAI",
+      "PyWinAuto",
+      "Whisper",
+      "Bruno",
+      "VuGen",
       "LoadRunner",
-      "Docker",
-      "Redis",
+      "Pydantic",
     ],
     category: "enterprise",
     featured: true,
@@ -443,6 +448,111 @@ export const appurvaPharmacyCaseStudy: CaseStudy = {
   ],
   links: {
     apk: "/appurva-pharmacy.apk",
+  },
+};
+
+export const appurvaHerbalsCaseStudy: CaseStudy = {
+  slug: "appurva-herbals",
+  title: "Appurva Herbals",
+  tagline:
+    "Doctor-facing herbal product catalogue — search, filters, and one-tap WhatsApp enquiry.",
+  problem:
+    "Herbal product distributors need a fast, visual catalogue for doctors and field reps — without heavy backend complexity or slow PDF brochures.",
+  solution:
+    "Built a Next.js catalogue with Chakra UI and Framer Motion — 15 products, category filters, search, and WhatsApp deep-links for instant enquiries. Deployed on Vercel with NextAuth-ready structure.",
+  features: [
+    "15 herbal products with rich imagery",
+    "Search and category filters",
+    "Product detail pages with dosage info",
+    "One-tap WhatsApp enquiry per product",
+    "Responsive layout for mobile & desktop",
+    "Deployed on Vercel with CI/CD",
+  ],
+  techStack: [
+    "Next.js",
+    "Chakra UI",
+    "Framer Motion",
+    "NextAuth",
+    "Vercel",
+    "TypeScript",
+  ],
+  architecture: [
+    "Next.js App Router frontend",
+    "Static product catalogue data layer",
+    "Chakra UI component system",
+    "Framer Motion page transitions",
+    "WhatsApp deep-link enquiry flow",
+    "Vercel edge deployment",
+  ],
+  screenshots: ["/app-screenshots/catalog.png"],
+  screenshotGallery: [
+    { src: "/app-screenshots/catalog.png", label: "Product Catalogue" },
+  ],
+  demoVideo: "/videos/appurva-herbals-demo.mp4",
+  challenges: [
+    "Designing a medical-adjacent UI that feels trustworthy",
+    "Optimizing image-heavy catalogue for mobile networks",
+    "WhatsApp enquiry flow without a custom backend",
+  ],
+  futureImprovements: [
+    "Admin panel for product CRUD",
+    "Order tracking integration",
+    "Multi-language catalogue support",
+  ],
+  links: {
+    live: "https://appurvaherbals.vercel.app",
+    github: "https://github.com/DeepanshuJindal30/Appurva-Herbals",
+  },
+};
+
+export const docusenseCaseStudy: CaseStudy = {
+  slug: "docusense",
+  title: "DocuSense PDF Chatbot",
+  tagline:
+    "Upload PDFs and chat with your documents — Gemini + LangChain RAG pipeline.",
+  problem:
+    "Teams need to extract answers from long PDFs without manually reading every page — especially for research, compliance, and technical documentation.",
+  solution:
+    "Built a Streamlit app with LangChain RAG — PDF ingestion, FAISS vector search, and Gemini-powered Q&A with source-aware responses. Containerized with Docker for reproducible deployment.",
+  features: [
+    "Multi-PDF upload and indexing",
+    "FAISS vector similarity search",
+    "Gemini-powered conversational Q&A",
+    "LangChain document chunking pipeline",
+    "Streamlit interactive UI",
+    "Dockerized deployment",
+  ],
+  techStack: [
+    "Streamlit",
+    "Google Gemini",
+    "LangChain",
+    "FAISS",
+    "Python",
+    "Docker",
+  ],
+  architecture: [
+    "PDF upload & text extraction",
+    "Document chunking (LangChain)",
+    "FAISS embedding index",
+    "Gemini LLM query layer",
+    "Streamlit chat interface",
+    "Docker container deployment",
+  ],
+  screenshots: [],
+  demoVideo: "/videos/docusense-demo.mp4",
+  challenges: [
+    "Chunk size tuning for retrieval accuracy",
+    "Managing context window limits with Gemini",
+    "Handling large PDFs within Streamlit memory constraints",
+  ],
+  futureImprovements: [
+    "Multi-user session persistence",
+    "Citation highlighting in source PDFs",
+    "Support for scanned PDFs via OCR",
+  ],
+  links: {
+    live: "https://gmultichat.streamlit.app/",
+    github: "https://github.com/DeepanshuJindal30/chatwithpdf1",
   },
 };
 

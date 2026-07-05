@@ -49,8 +49,12 @@ export function HeroSection() {
               >
                 {siteConfig.heroRole}
               </h1>
-              <p className="text-sm sm:text-base md:text-lg text-stone-400 leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">
+              <p className="text-sm sm:text-base md:text-lg text-stone-400 leading-relaxed mb-3 sm:mb-4 max-w-lg mx-auto lg:mx-0">
                 {siteConfig.subheadline}
+              </p>
+              <p className="inline-flex items-center gap-2 text-xs sm:text-sm text-accent-muted mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+                {siteConfig.buildingNow}
               </p>
             </motion.div>
 

@@ -10,7 +10,7 @@ export const siteConfig = {
   description:
     "Software Engineer building scalable full-stack systems, distributed backends, agentic AI platforms, and production mobile apps. SDE-I @ ADP · 2× Patents · 7 IEEE Papers · LeetCode Guardian (2166).",
   url: "https://deepanshujindal30.github.io/portfolio",
-  ogImage: "/og-image.svg",
+  ogImage: "/og-image.png",
   email: "deepanshujindal.dev@gmail.com",
   phone: "+91-9760315073",
   location: "Hyderabad, Telangana, India",
@@ -27,6 +27,7 @@ export const siteConfig = {
   heroRole: "Software Engineer",
   subheadline:
     "Payroll at scale · Agentic AI · Full-stack & mobile products.",
+  buildingNow: "Currently building agentic AI tooling at ADP",
   proofStrip: [
     { label: "SDE-I @ ADP", href: "https://www.linkedin.com/in/deepanshu-jindal-65a163204/" },
     { label: "LeetCode 2166", href: "https://leetcode.com/Deepanshu_Jindal/" },

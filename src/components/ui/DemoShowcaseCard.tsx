@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import type { ShowcaseProject } from "@/data/projects";
 import { BrowserMockup } from "@/components/ui/BrowserMockup";
 import { PhoneMockup } from "@/components/ui/PhoneMockup";
@@ -72,6 +72,12 @@ export function DemoShowcaseCard({
               >
                 <Github className="w-4 h-4" aria-hidden="true" />
                 GitHub
+              </Button>
+            )}
+            {project.links.caseStudy && (
+              <Button href={project.links.caseStudy} variant="ghost">
+                Case Study
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Button>
             )}
           </div>
