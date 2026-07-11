@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { SkillOrbitCategory } from "@/data/skills";
-import { techIconMap } from "@/data/skills";
+import { TechIcon } from "@/components/ui/TechIcon";
 import { cn } from "@/lib/utils";
 
 interface SkillsOrbitVisualProps {
@@ -19,113 +19,215 @@ export function SkillsOrbitVisual({
   className,
 }: SkillsOrbitVisualProps) {
   const prefersReducedMotion = useReducedMotion();
+  const active =
+    categories.find((c) => c.id === activeId) ?? categories[0];
+
+  const orbitSkills = activeSkills.slice(0, 6);
 
   return (
     <div
       className={cn(
-        "relative w-full aspect-square max-w-[340px] mx-auto",
+        "relative w-full aspect-square max-w-[400px] mx-auto",
         className
       )}
       aria-hidden="true"
     >
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/20 via-transparent to-accent-secondary/15 blur-2xl" />
+      {/* Atmosphere glow */}
+      <motion.div
+        key={`glow-${active.id}`}
+        className="absolute inset-[6%] rounded-full blur-3xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.55 }}
+        style={{
+          background: `radial-gradient(circle, ${active.color}55 0%, transparent 68%)`,
+        }}
+      />
 
-      {[12, 22, 32].map((inset, i) => (
+      {/* Slow rotating rings */}
+      {[16, 28, 40].map((inset, i) => (
         <motion.div
           key={inset}
-          className="absolute rounded-full border border-accent/15"
-          style={{ inset: `${inset}%` }}
-          animate={prefersReducedMotion ? undefined : { rotate: i % 2 ? -360 : 360 }}
+          className="absolute rounded-full border border-dashed"
+          style={{
+            inset: `${inset}%`,
+            borderColor: `${active.color}${i === 1 ? "66" : "28"}`,
+          }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { rotate: i % 2 === 0 ? 360 : -360 }
+          }
           transition={{
-            duration: 40 + i * 12,
+            duration: 32 + i * 12,
             repeat: Infinity,
             ease: "linear",
           }}
         />
       ))}
 
-      <div className="absolute inset-0 flex items-center justify-center">
+      {/* Center core */}
+      <div className="absolute inset-0 flex items-center justify-center z-20">
         <motion.div
-          className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary shadow-glow flex items-center justify-center"
-          animate={prefersReducedMotion ? undefined : { scale: [1, 1.08, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          key={active.id}
+          initial={prefersReducedMotion ? false : { scale: 0.75, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 280, damping: 22 }}
         >
-          <span className="text-xs font-mono font-bold text-white">DEV</span>
+          <motion.div
+            className="w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-2xl flex flex-col items-center justify-center border"
+            style={{
+              background: `linear-gradient(145deg, ${active.color}dd, ${active.emissive}aa)`,
+              borderColor: `${active.color}aa`,
+              boxShadow: `0 0 32px ${active.color}55`,
+            }}
+            animate={
+              prefersReducedMotion
+                ? undefined
+                : { scale: [1, 1.05, 1] }
+            }
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <span className="text-[10px] font-mono font-bold text-white uppercase tracking-wider text-center px-1 leading-tight">
+              {active.label}
+            </span>
+            <span className="text-[8px] text-white/75 font-mono mt-0.5">
+              {orbitSkills.length} tools
+            </span>
+          </motion.div>
         </motion.div>
       </div>
 
+      {/* Category markers on outer rim */}
       {categories.map((cat, i) => {
         const angle = (i / categories.length) * Math.PI * 2 - Math.PI / 2;
-        const radius = 42;
+        const radius = 47;
         const x = 50 + Math.cos(angle) * radius;
         const y = 50 + Math.sin(angle) * radius;
-        const active = activeId === cat.id;
+        const isActive = cat.id === activeId;
 
         return (
           <motion.div
             key={cat.id}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
+            className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
             style={{ left: `${x}%`, top: `${y}%` }}
             animate={
               prefersReducedMotion
                 ? undefined
-                : { y: active ? [-3, 3, -3] : [0, -5, 0] }
+                : { scale: isActive ? [1.05, 1.15, 1.05] : 1 }
             }
             transition={{
-              duration: active ? 2 : 3 + i * 0.2,
+              duration: 2.2,
               repeat: Infinity,
               ease: "easeInOut",
             }}
           >
             <div
               className={cn(
-                "w-11 h-11 rounded-xl flex items-center justify-center border transition-all duration-300",
-                active
-                  ? "scale-110 border-white/30 shadow-lg"
-                  : "scale-100 border-white/10 opacity-70"
+                "w-7 h-7 rounded-md flex items-center justify-center border text-[7px] font-bold uppercase transition-all duration-300",
+                isActive ? "text-white" : "text-white/60 opacity-60"
               )}
               style={{
-                background: active
-                  ? `linear-gradient(135deg, ${cat.color}55, ${cat.emissive}33)`
+                background: isActive
+                  ? `linear-gradient(135deg, ${cat.color}99, ${cat.emissive}66)`
                   : "rgba(255,255,255,0.05)",
-                boxShadow: active ? `0 0 24px ${cat.color}66` : undefined,
+                borderColor: isActive
+                  ? `${cat.color}cc`
+                  : "rgba(255,255,255,0.1)",
+                boxShadow: isActive ? `0 0 14px ${cat.color}66` : undefined,
               }}
             >
-              <span className="text-[9px] font-bold uppercase text-white">
-                {cat.label.slice(0, 2)}
-              </span>
+              {cat.label.slice(0, 2)}
             </div>
           </motion.div>
         );
       })}
 
-      {activeSkills.slice(0, 4).map((skill, i) => {
-        const angle =
-          (i / 4) * Math.PI * 2 + Math.PI / 4 + (prefersReducedMotion ? 0 : 0);
-        const radius = 28;
-        const x = 50 + Math.cos(angle) * radius;
-        const y = 50 + Math.sin(angle) * radius;
-        const meta = techIconMap[skill];
-
-        return (
+      {/* Orbiting tech icons — actually rotate around center */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeId}
+          className="absolute inset-0 z-30"
+          initial={prefersReducedMotion ? false : { opacity: 0, rotate: -25 }}
+          animate={{ opacity: 1, rotate: 0 }}
+          exit={prefersReducedMotion ? undefined : { opacity: 0, rotate: 25 }}
+          transition={{ duration: 0.4 }}
+        >
           <motion.div
-            key={skill}
-            className="absolute -translate-x-1/2 -translate-y-1/2 w-7 h-7"
-            style={{ left: `${x}%`, top: `${y}%` }}
-            animate={prefersReducedMotion ? undefined : { rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0"
+            animate={
+              prefersReducedMotion ? undefined : { rotate: 360 }
+            }
+            transition={{
+              duration: 22,
+              repeat: Infinity,
+              ease: "linear",
+            }}
           >
-            {meta ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                src={`https://cdn.simpleicons.org/${meta.slug}/${meta.color}`}
-                alt=""
-                className="w-full h-full rounded-lg bg-zinc-900/80 p-0.5 border border-white/10 object-contain"
-              />
-            ) : null}
+            {orbitSkills.map((skill, i) => {
+              const count = orbitSkills.length || 1;
+              const angle = (i / count) * Math.PI * 2 - Math.PI / 2;
+              const radius = 30 + (i % 2) * 5;
+              const x = 50 + Math.cos(angle) * radius;
+              const y = 50 + Math.sin(angle) * radius;
+
+              return (
+                <div
+                  key={skill}
+                  className="absolute -translate-x-1/2 -translate-y-1/2"
+                  style={{ left: `${x}%`, top: `${y}%` }}
+                >
+                  {/* Counter-rotate so icons stay upright */}
+                  <motion.div
+                    animate={
+                      prefersReducedMotion ? undefined : { rotate: -360 }
+                    }
+                    transition={{
+                      duration: 22,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  >
+                    <motion.div
+                      className="rounded-xl p-0.5"
+                      style={{
+                        boxShadow: `0 0 18px ${active.color}44`,
+                        background: "rgba(10,10,12,0.75)",
+                      }}
+                      animate={
+                        prefersReducedMotion
+                          ? undefined
+                          : { y: [0, -4, 0] }
+                      }
+                      transition={{
+                        duration: 2.2 + i * 0.25,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      whileHover={
+                        prefersReducedMotion ? undefined : { scale: 1.15 }
+                      }
+                    >
+                      <TechIcon skill={skill} size={38} />
+                    </motion.div>
+                  </motion.div>
+                </div>
+              );
+            })}
           </motion.div>
-        );
-      })}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Soft conic sweep */}
+      {!prefersReducedMotion && (
+        <motion.div
+          className="absolute inset-[18%] rounded-full pointer-events-none mix-blend-screen"
+          style={{
+            background: `conic-gradient(from 0deg, transparent 0deg, ${active.color}28 50deg, transparent 100deg)`,
+          }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+        />
+      )}
     </div>
   );
 }

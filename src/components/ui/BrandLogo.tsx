@@ -14,6 +14,7 @@ export type BrandId =
   | "expo"
   | "supabase"
   | "appurva"
+  | "android"
   | "google-drive"
   | "patent"
   | "chandigarh";
@@ -100,14 +101,12 @@ function LogoSvg({ brand }: { brand: BrandId }) {
     case "leetcode":
       return (
         <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
-          <rect width="48" height="48" rx="10" fill="#1E1E1E" />
-          <g transform="translate(12, 12) scale(1)">
-            <path
-              fill="#FFA116"
-              d="M11.241 20.987h-5.641l5.6-9.5 1.402 2.402-4.202 7.098h3.841l1.402-2.402z"
-            />
-            <path fill="#B3B3B3" d="M5.6 5.9h2.8v13.5H5.6z" />
-          </g>
+          <rect width="48" height="48" rx="10" fill="#161616" />
+          <path
+            fill="#FFA116"
+            transform="translate(11.5, 11) scale(1.05)"
+            d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"
+          />
         </svg>
       );
     case "codechef":
@@ -181,9 +180,27 @@ function LogoSvg({ brand }: { brand: BrandId }) {
     case "appurva":
       return (
         <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
-          <rect width="48" height="48" rx="10" fill="#0F766E" />
-          <text x="13" y="30" fill="#F97316" fontSize="16" fontWeight="800" fontFamily="Arial, sans-serif">A</text>
-          <text x="26" y="30" fill="white" fontSize="16" fontWeight="800" fontFamily="Arial, sans-serif">P</text>
+          <rect width="48" height="48" rx="10" fill="#0B3D2E" />
+          <path
+            fill="#34D399"
+            d="M24 8c-1.2 6.5-6.8 10.2-6.8 16.2a6.8 6.8 0 0013.6 0C30.8 18.2 25.2 14.5 24 8z"
+          />
+          <path
+            fill="#F97316"
+            d="M24 18c.4 3.2 2.6 5.2 2.6 8.2a2.6 2.6 0 11-5.2 0c0-3 2.2-5 2.6-8.2z"
+            opacity="0.95"
+          />
+          <circle cx="24" cy="36.5" r="2" fill="#FBBF24" />
+        </svg>
+      );
+    case "android":
+      return (
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
+          <rect width="48" height="48" rx="10" fill="#073042" />
+          <path
+            fill="#3DDC84"
+            d="M16.2 20.5c0-4.3 3.5-7.8 7.8-7.8s7.8 3.5 7.8 7.8H16.2zm-1.8 2.2h19.2v10.4c0 1.3-1 2.4-2.3 2.4h-.7v4.2a1.5 1.5 0 11-3 0v-4.2H20.4v4.2a1.5 1.5 0 11-3 0v-4.2h-.7c-1.3 0-2.3-1.1-2.3-2.4V22.7zm-3.4 1.6a1.7 1.7 0 011.7 1.7v5.2a1.7 1.7 0 11-3.4 0v-5.2c0-.9.8-1.7 1.7-1.7zm24.4 0c.9 0 1.7.8 1.7 1.7v5.2a1.7 1.7 0 11-3.4 0v-5.2c0-.9.8-1.7 1.7-1.7zM19.4 14.2l-1.4-2.1a.6.6 0 01.2-.8.6.6 0 01.8.2l1.5 2.2a7.6 7.6 0 00-1.1.5zm9.2 0c.3-.2.7-.3 1.1-.5l1.5-2.2a.6.6 0 01.8-.2.6.6 0 01.2.8l-1.4 2.1z"
+          />
         </svg>
       );
     case "google-drive":
@@ -198,8 +215,15 @@ function LogoSvg({ brand }: { brand: BrandId }) {
     case "patent":
       return (
         <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-full w-full">
-          <rect width="48" height="48" rx="10" fill="#F97316" />
-          <path fill="white" d="M16 12h16v4H16v-4zm0 8h16v2H16v-2zm0 6h10v2H16v-2zm0 6h14v2H16v-2zm0 6h12v2H16v-2z" />
+          <rect width="48" height="48" rx="10" fill="#7C2D12" />
+          <circle cx="24" cy="20" r="9" fill="#FDBA74" />
+          <circle cx="24" cy="20" r="6.5" fill="none" stroke="#9A3412" strokeWidth="1.4" />
+          <path
+            fill="#9A3412"
+            d="M24 14.5l1.4 2.8 3.1.5-2.2 2.2.5 3.1L24 21.5l-2.8 1.6.5-3.1-2.2-2.2 3.1-.5L24 14.5z"
+          />
+          <path fill="#F97316" d="M18 28.5l2.2 12L24 37l3.8 3.5 2.2-12H18z" />
+          <path fill="#FB923C" d="M20.5 29.5l1.5 8.5L24 36l2 2 1.5-8.5h-7z" />
         </svg>
       );
     case "chandigarh":

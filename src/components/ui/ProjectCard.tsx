@@ -54,6 +54,11 @@ export function ProjectCard({
           <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">
             {project.description}
           </p>
+          {project.impact && project.impact[0] && (
+            <p className="mt-2 inline-flex text-[11px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-1">
+              Outcome: {project.impact[0]}
+            </p>
+          )}
         </div>
 
         {project.impact && project.impact.length > 0 && (

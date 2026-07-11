@@ -89,7 +89,7 @@ export const achievements: Achievement[] = [
     value: "Mobile Builder",
     description: "React Native apps with production APKs",
     icon: "smartphone",
-    logo: "appurva",
+    logo: "android",
     url: "https://github.com/DeepanshuJindal30/Appurva-Herbals",
   },
 ];

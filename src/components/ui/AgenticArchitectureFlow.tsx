@@ -1,208 +1,408 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
+  ArrowRightLeft,
+  BarChart3,
   Bot,
   CheckCircle2,
   ChevronDown,
+  Database,
   FileCode2,
+  FileSearch,
+  FolderKanban,
+  Gauge,
   GitBranch,
+  Link2,
+  Mic,
+  MonitorPlay,
   Play,
+  RotateCcw,
   ShieldCheck,
   Ticket,
   Workflow,
+  type LucideIcon,
 } from "lucide-react";
 import {
   agenticArchitectureGroups,
-  agenticArchitectureNodes,
+  agenticArchitectureLanes,
   agenticArchitectureHighlights,
+  agenticFlowSequence,
+  agenticStackRail,
+  type AgenticNodeIcon,
 } from "@/data/agenticArchitecture";
 import { cn } from "@/lib/utils";
 
-const groupIcons: Record<string, typeof Ticket> = {
-  ingest: Ticket,
-  intelligence: Bot,
+const nodeIcons: Record<AgenticNodeIcon, LucideIcon> = {
+  jira: Ticket,
+  splunk: BarChart3,
+  video: Mic,
+  bridge: ArrowRightLeft,
+  extract: FileSearch,
+  llm: Bot,
+  validate: ShieldCheck,
+  correlate: Link2,
+  bruno: FolderKanban,
+  vugen: FileCode2,
+  controller: Gauge,
+  run: MonitorPlay,
+  checkpoint: RotateCcw,
+};
+
+const laneIcons: Record<string, LucideIcon> = {
+  sources: Database,
+  bridge: ArrowRightLeft,
+  orchestrate: Bot,
   generate: FileCode2,
   execute: Play,
 };
 
-function FlowConnector({
+const railIcons = {
+  llm: Bot,
+  api: Workflow,
+  desktop: CheckCircle2,
+} as const;
+
+const railTone = {
+  violet: {
+    border: "border-violet-500/25",
+    bg: "bg-violet-500/5",
+    title: "text-violet-200",
+    icon: "text-violet-400",
+  },
+  sky: {
+    border: "border-sky-500/25",
+    bg: "bg-sky-500/5",
+    title: "text-sky-200",
+    icon: "text-sky-400",
+  },
+  emerald: {
+    border: "border-emerald-500/25",
+    bg: "bg-emerald-500/5",
+    title: "text-emerald-200",
+    icon: "text-emerald-400",
+  },
+} as const;
+
+function AnimatedConnector({
+  active,
+  color,
   vertical = false,
-  className,
 }: {
+  active: boolean;
+  color: string;
   vertical?: boolean;
-  className?: string;
 }) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <div
       className={cn(
-        "relative shrink-0 overflow-hidden",
-        vertical ? "w-px h-8 mx-auto" : "h-px w-6 md:w-10",
-        className
+        "relative shrink-0 flex items-center justify-center",
+        vertical ? "h-6 w-full" : "w-6 md:w-8 h-auto self-center"
       )}
       aria-hidden="true"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+      <div
+        className={cn("absolute rounded-full", vertical ? "w-px h-full" : "h-px w-full")}
+        style={{
+          background: `linear-gradient(${vertical ? "180deg" : "90deg"}, transparent, ${color}77, transparent)`,
+        }}
+      />
       {!prefersReducedMotion && (
-        <motion.div
-          className={cn(
-            "absolute bg-accent",
-            vertical ? "left-0 w-full h-2" : "top-0 h-full w-2"
-          )}
-          animate={{ x: vertical ? 0 : [0, 24, 0], y: vertical ? [0, 20, 0] : 0 }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+        <motion.span
+          className="absolute rounded-full"
+          style={{
+            backgroundColor: color,
+            boxShadow: `0 0 8px ${color}`,
+            width: vertical ? 4 : 7,
+            height: vertical ? 7 : 4,
+          }}
+          animate={
+            vertical
+              ? { y: ["-35%", "35%"], opacity: active ? [0.35, 1, 0.35] : 0.3 }
+              : { x: ["-35%", "35%"], opacity: active ? [0.35, 1, 0.35] : 0.3 }
+          }
+          transition={{
+            duration: active ? 0.85 : 1.7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
       )}
     </div>
   );
 }
 
-function FlowNode({
+function FlowNodeCard({
   label,
   detail,
+  phase,
   color,
+  icon,
+  tools,
   index,
-  compact = false,
+  active,
 }: {
   label: string;
   detail: string;
+  phase?: string;
   color: string;
+  icon: AgenticNodeIcon;
+  tools?: string[];
   index: number;
-  compact?: boolean;
+  active: boolean;
 }) {
   const prefersReducedMotion = useReducedMotion();
-
-  if (compact) {
-    return (
-      <span
-        className="text-[10px] font-mono text-zinc-400 px-2 py-1 rounded-md border border-white/8 bg-white/[0.03] whitespace-nowrap"
-        style={{ borderColor: `${color}33` }}
-      >
-        {label}
-      </span>
-    );
-  }
+  const Icon = nodeIcons[icon] ?? Workflow;
 
   return (
     <motion.div
-      initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.04 }}
-      className="group relative min-w-[140px] max-w-[170px] flex-1"
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 10, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: active ? 1.04 : 1 }}
+      transition={{ duration: 0.3, delay: index * 0.03 }}
+      className="relative min-w-[148px] max-w-[170px] flex-1"
     >
+      {active && !prefersReducedMotion && (
+        <motion.div
+          className="absolute -inset-1 rounded-xl blur-md"
+          style={{ background: `${color}30` }}
+          animate={{ opacity: [0.3, 0.65, 0.3] }}
+          transition={{ duration: 1.1, repeat: Infinity }}
+          aria-hidden="true"
+        />
+      )}
       <div
-        className="relative rounded-xl border bg-zinc-950/80 px-3 py-2.5 backdrop-blur-sm transition-colors group-hover:border-white/20"
-        style={{ borderColor: `${color}44` }}
+        className={cn(
+          "relative rounded-xl border bg-zinc-950/90 px-2.5 py-2.5 backdrop-blur-sm transition-all",
+          active && "shadow-lg"
+        )}
+        style={{
+          borderColor: active ? `${color}aa` : `${color}44`,
+          boxShadow: active ? `0 0 18px ${color}28` : undefined,
+        }}
       >
-        <p className="text-xs font-semibold text-white mb-0.5 leading-tight">
-          {label}
-        </p>
-        <p className="text-[10px] text-zinc-500 leading-snug line-clamp-2">
+        <div className="flex items-start gap-2 mb-1.5">
+          <span
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border"
+            style={{
+              borderColor: `${color}55`,
+              background: `${color}18`,
+              color,
+            }}
+          >
+            <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            {phase && (
+              <span
+                className="inline-block text-[8px] font-mono uppercase tracking-wider mb-0.5 px-1 py-px rounded"
+                style={{ color, background: `${color}18` }}
+              >
+                {phase}
+              </span>
+            )}
+            <p className="text-[11px] font-semibold text-white leading-tight">
+              {label}
+            </p>
+          </div>
+        </div>
+        <p className="text-[9px] text-zinc-500 leading-snug line-clamp-2 mb-1.5">
           {detail}
         </p>
+        {tools && tools.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {tools.map((tool) => (
+              <span
+                key={tool}
+                className="text-[8px] font-mono px-1.5 py-0.5 rounded border border-white/10 text-zinc-400 bg-white/[0.03]"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </motion.div>
   );
 }
 
-function GroupLane({
-  group,
-  nodes,
-  startIndex,
-  compact = false,
-}: {
-  group: (typeof agenticArchitectureGroups)[number];
-  nodes: typeof agenticArchitectureNodes;
-  startIndex: number;
-  compact?: boolean;
-}) {
-  const Icon = groupIcons[group.id] ?? Workflow;
-
-  if (compact) {
-    return (
-      <div className="flex items-center gap-1.5 shrink-0">
-        <div
-          className="flex h-6 w-6 items-center justify-center rounded-md border shrink-0"
-          style={{
-            borderColor: `${group.color}55`,
-            background: `${group.color}18`,
-          }}
-        >
-          <Icon className="h-3 w-3" style={{ color: group.color }} />
-        </div>
-        <span
-          className="text-[10px] font-mono uppercase tracking-wider hidden sm:inline"
-          style={{ color: group.color }}
-        >
-          {group.label}
-        </span>
-      </div>
-    );
-  }
-
+function CompactPreview({ activeIndex }: { activeIndex: number }) {
   return (
-    <div className="relative">
-      <div className="flex items-center gap-2 mb-2.5">
-        <div
-          className="flex h-7 w-7 items-center justify-center rounded-lg border"
-          style={{
-            borderColor: `${group.color}55`,
-            background: `${group.color}18`,
-          }}
-        >
-          <Icon className="h-3.5 w-3.5" style={{ color: group.color }} />
-        </div>
-        <span
-          className="text-[10px] font-mono uppercase tracking-[0.18em]"
-          style={{ color: group.color }}
-        >
-          {group.label}
-        </span>
-      </div>
-
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-0">
-        {nodes.map((node, i) => (
-          <div key={node.id} className="flex flex-col sm:flex-row items-center">
-            <FlowNode
-              label={node.label}
-              detail={node.detail}
-              color={group.color}
-              index={startIndex + i}
-            />
-            {i < nodes.length - 1 && (
-              <>
-                <FlowConnector className="hidden sm:block" />
-                <FlowConnector vertical className="sm:hidden" />
-              </>
+    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+      {agenticArchitectureGroups.map((group, i) => {
+        const active = activeIndex % agenticArchitectureGroups.length === i;
+        const Icon = laneIcons[group.id] ?? Workflow;
+        return (
+          <div key={group.id} className="flex items-center gap-1.5">
+            <motion.span
+              className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full border"
+              animate={{
+                borderColor: active ? `${group.color}99` : `${group.color}33`,
+                backgroundColor: active ? `${group.color}22` : `${group.color}0D`,
+                color: group.color,
+                scale: active ? 1.04 : 1,
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              <Icon className="w-3 h-3" aria-hidden="true" />
+              {group.label}
+            </motion.span>
+            {i < agenticArchitectureGroups.length - 1 && (
+              <span className="text-zinc-600 text-[10px]" aria-hidden="true">
+                →
+              </span>
             )}
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 }
 
-function CompactPreview() {
+function ExpandedPipeline({ activeNodeId }: { activeNodeId: string }) {
+  const prefersReducedMotion = useReducedMotion();
+  let nodeIndex = 0;
+
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 py-1">
-      {agenticArchitectureGroups.map((group, i) => (
-        <div key={group.id} className="flex items-center gap-2 sm:gap-3">
-          <GroupLane
-            group={group}
-            nodes={[]}
-            startIndex={0}
-            compact
-          />
-          {i < agenticArchitectureGroups.length - 1 && (
-            <span className="text-zinc-600 text-xs" aria-hidden="true">
+    <div className="mt-2 relative rounded-xl border border-white/8 bg-black/30 p-3 sm:p-4 overflow-hidden">
+      <div className="relative z-10 flex items-center justify-between mb-3">
+        <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500">
+          <Workflow className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
+          Connected agentic pipeline
+        </div>
+        <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400/90">
+          <GitBranch className="w-3 h-3" aria-hidden="true" />
+          Checkpoint resume
+        </div>
+      </div>
+
+      <div className="relative z-10 space-y-3">
+        {agenticArchitectureLanes.map((lane, laneIndex) => {
+          const LaneIcon = laneIcons[lane.id] ?? Workflow;
+          return (
+            <div key={lane.id}>
+              <div className="flex items-center gap-2 mb-2">
+                <span
+                  className="flex h-5 w-5 items-center justify-center rounded-md border"
+                  style={{
+                    borderColor: `${lane.color}55`,
+                    background: `${lane.color}18`,
+                    color: lane.color,
+                  }}
+                >
+                  <LaneIcon className="h-3 w-3" aria-hidden="true" />
+                </span>
+                <span
+                  className="text-[10px] font-mono uppercase tracking-[0.16em]"
+                  style={{ color: lane.color }}
+                >
+                  {lane.label}
+                </span>
+                {lane.id === "bridge" && (
+                  <span className="text-[9px] text-zinc-600 font-mono">
+                    /api/workload/export
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-0">
+                {lane.nodes.map((node, i) => {
+                  const idx = nodeIndex++;
+                  const active = activeNodeId === node.id;
+                  return (
+                    <div
+                      key={node.id}
+                      className="flex flex-col sm:flex-row items-center"
+                    >
+                      <FlowNodeCard
+                        label={node.label}
+                        detail={node.detail}
+                        phase={node.phase}
+                        color={lane.color}
+                        icon={node.icon}
+                        tools={node.tools}
+                        index={idx}
+                        active={active}
+                      />
+                      {i < lane.nodes.length - 1 && (
+                        <>
+                          <div className="hidden sm:block">
+                            <AnimatedConnector
+                              active={
+                                active ||
+                                activeNodeId === lane.nodes[i + 1]?.id
+                              }
+                              color={lane.color}
+                            />
+                          </div>
+                          <div className="sm:hidden w-full">
+                            <AnimatedConnector
+                              active={active}
+                              color={lane.color}
+                              vertical
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {laneIndex < agenticArchitectureLanes.length - 1 && (
+                <div className="flex justify-center my-0.5">
+                  <AnimatedConnector
+                    active={!prefersReducedMotion}
+                    color={agenticArchitectureLanes[laneIndex + 1].color}
+                    vertical
+                  />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="relative z-10 mt-3 pt-3 border-t border-white/8 grid grid-cols-1 sm:grid-cols-3 gap-2">
+        {agenticStackRail.map((item) => {
+          const Icon = railIcons[item.id as keyof typeof railIcons] ?? Bot;
+          const tone = railTone[item.color];
+          return (
+            <div
+              key={item.id}
+              className={cn(
+                "flex items-start gap-2 rounded-lg border px-2.5 py-2",
+                tone.border,
+                tone.bg
+              )}
+            >
+              <Icon className={cn("w-3.5 h-3.5 shrink-0 mt-0.5", tone.icon)} />
+              <div>
+                <p className={cn("text-[10px] font-semibold", tone.title)}>
+                  {item.title}
+                </p>
+                <p className="text-[9px] text-zinc-500">{item.detail}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <ul className="relative z-10 mt-3 space-y-1" role="list">
+        {agenticArchitectureHighlights.slice(0, 2).map((item) => (
+          <li
+            key={item}
+            className="text-[10px] text-zinc-500 flex items-start gap-1.5"
+          >
+            <span className="text-accent mt-0.5" aria-hidden="true">
               →
             </span>
-          )}
-        </div>
-      ))}
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -210,10 +410,21 @@ function CompactPreview() {
 export function AgenticArchitectureFlow() {
   const prefersReducedMotion = useReducedMotion();
   const [expanded, setExpanded] = useState(false);
-  let nodeIndex = 0;
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const id = window.setInterval(() => {
+      setActiveIndex((i) => (i + 1) % Math.max(agenticFlowSequence.length, 1));
+    }, 1100);
+    return () => window.clearInterval(id);
+  }, [prefersReducedMotion]);
+
+  const activeNodeId =
+    agenticFlowSequence[activeIndex % agenticFlowSequence.length]?.id ?? "";
 
   return (
-    <div className="relative" aria-label="LR Agentic AI system architecture pipeline">
+    <div aria-label="LR Agentic AI connected architecture pipeline">
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
@@ -222,115 +433,47 @@ export function AgenticArchitectureFlow() {
           "w-full text-left rounded-xl border transition-all duration-200",
           "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent",
           expanded
-            ? "border-accent/30 bg-black/30"
-            : "border-white/10 bg-white/[0.03] hover:border-accent/25 hover:bg-white/[0.05]"
+            ? "border-accent/30 bg-black/25"
+            : "border-white/10 bg-white/[0.03] hover:border-accent/25"
         )}
       >
-        <div className="flex items-center justify-between gap-3 px-4 py-3">
+        <div className="flex items-center justify-between gap-3 px-3 py-2.5">
           <div className="min-w-0">
-            <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-1">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mb-1">
               Architecture Pipeline
             </p>
-            {!expanded && (
-              <p className="text-sm text-zinc-400">
-                Jira → Validate → Generate → Execute
-                <span className="text-zinc-600"> · 13 phases · checkpoint resume</span>
+            {!expanded && <CompactPreview activeIndex={activeIndex} />}
+            {expanded && (
+              <p className="text-xs text-zinc-400">
+                Icon-rich connected flow · 13 phases
               </p>
             )}
           </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="text-xs text-accent hidden sm:inline">
-              {expanded ? "Hide" : "View pipeline"}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="text-[11px] text-accent hidden sm:inline">
+              {expanded ? "Hide" : "Expand"}
             </span>
             <ChevronDown
               className={cn(
-                "w-4 h-4 text-accent transition-transform duration-200",
+                "w-4 h-4 text-accent transition-transform",
                 expanded && "rotate-180"
               )}
               aria-hidden="true"
             />
           </div>
         </div>
-
-        {!expanded && (
-          <div className="px-4 pb-3 border-t border-white/5 pt-3">
-            <CompactPreview />
-          </div>
-        )}
       </button>
 
       <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
-            id="agentic-architecture-panel"
             initial={prefersReducedMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={prefersReducedMotion ? undefined : { opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+            transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="mt-3 relative rounded-2xl border border-white/8 bg-black/25 p-4 md:p-5">
-              <div className="flex items-center justify-end mb-4">
-                <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400/90">
-                  <GitBranch className="w-3 h-3" aria-hidden="true" />
-                  Checkpoint resume enabled
-                </div>
-              </div>
-
-              <div className="space-y-5 md:space-y-6 relative z-10">
-                {agenticArchitectureGroups.map((group) => {
-                  const nodes = agenticArchitectureNodes.filter(
-                    (n) => n.group === group.id
-                  );
-                  const start = nodeIndex;
-                  nodeIndex += nodes.length;
-                  return (
-                    <GroupLane
-                      key={group.id}
-                      group={group}
-                      nodes={nodes}
-                      startIndex={start}
-                    />
-                  );
-                })}
-              </div>
-
-              <div className="mt-5 pt-4 border-t border-white/8 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                <div className="flex items-start gap-2 rounded-lg border border-violet-500/20 bg-violet-500/5 px-3 py-2">
-                  <Bot className="w-3.5 h-3.5 text-violet-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <div>
-                    <p className="text-[10px] font-semibold text-violet-200">LLM Action Schema</p>
-                    <p className="text-[10px] text-zinc-500">OpenAI / Azure · structured JSON actions</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2 rounded-lg border border-sky-500/20 bg-sky-500/5 px-3 py-2">
-                  <ShieldCheck className="w-3.5 h-3.5 text-sky-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <div>
-                    <p className="text-[10px] font-semibold text-sky-200">FastAPI Orchestrator</p>
-                    <p className="text-[10px] text-zinc-500">React SPA · progress polling</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-3 py-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <div>
-                    <p className="text-[10px] font-semibold text-emerald-200">PyWinAuto + Whisper</p>
-                    <p className="text-[10px] text-zinc-500">UI fallback · video extraction</p>
-                  </div>
-                </div>
-              </div>
-
-              <ul className="mt-4 space-y-1" role="list">
-                {agenticArchitectureHighlights.map((item) => (
-                  <li
-                    key={item}
-                    className="text-[10px] text-zinc-500 flex items-start gap-2"
-                  >
-                    <span className="text-accent mt-0.5" aria-hidden="true">→</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ExpandedPipeline activeNodeId={activeNodeId} />
           </motion.div>
         )}
       </AnimatePresence>

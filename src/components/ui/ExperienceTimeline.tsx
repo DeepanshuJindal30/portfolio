@@ -1,6 +1,13 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import {
   Award,
   BookOpen,
@@ -39,144 +46,238 @@ interface ExperienceTimelineProps {
   items: ExperienceItem[];
 }
 
-function MetricChip({
+function MetricPill({
   icon,
   value,
   label,
-  index,
 }: {
   icon: ExperienceMetricIcon;
   value: string;
   label: string;
+}) {
+  const Icon = metricIcons[icon];
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent/10 px-2.5 py-1 text-[11px] text-accent-muted">
+      <Icon className="w-3 h-3 text-accent shrink-0" aria-hidden="true" />
+      <span className="font-semibold text-white">{value}</span>
+      <span className="text-zinc-500 font-mono uppercase tracking-wide text-[9px]">
+        {label}
+      </span>
+    </span>
+  );
+}
+
+function TimelineCard({
+  item,
+  index,
+  side,
+}: {
+  item: ExperienceItem;
   index: number;
+  side: "left" | "right";
 }) {
   const prefersReducedMotion = useReducedMotion();
-  const Icon = metricIcons[icon];
+  const fromX = side === "left" ? -48 : 48;
 
   return (
-    <motion.div
-      initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.85 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.35, delay: index * 0.06 }}
-      whileHover={prefersReducedMotion ? undefined : { y: -3, scale: 1.03 }}
-      className="rounded-xl p-3 sm:p-4 bg-white/[0.03] border border-white/8 hover:border-accent/25 transition-colors text-center min-w-[88px] flex-1"
+    <motion.article
+      role="listitem"
+      initial={
+        prefersReducedMotion ? false : { opacity: 0, x: fromX, y: 24 }
+      }
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, amount: 0.35, margin: "-40px" }}
+      transition={{
+        type: "spring",
+        stiffness: 90,
+        damping: 18,
+        delay: prefersReducedMotion ? 0 : index * 0.05,
+      }}
+      className={cn(
+        "relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4 sm:p-5",
+        "hover:border-accent/30 hover:bg-white/[0.05] transition-colors",
+        "md:w-[calc(50%-2rem)]",
+        side === "left" ? "md:mr-auto md:text-left" : "md:ml-auto md:text-left"
+      )}
     >
-      <div className="inline-flex p-2 rounded-lg bg-accent/10 border border-accent/20 mb-2">
-        <Icon className="w-4 h-4 text-accent" aria-hidden="true" />
+      <div className="flex flex-wrap items-start justify-between gap-2 mb-2.5">
+        <div className="flex items-center gap-2.5 min-w-0">
+          {item.logo ? (
+            <BrandLogoBadge brand={item.logo as BrandId} size={36} />
+          ) : (
+            <div className="h-9 w-9 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-sm font-bold">
+              {item.company.charAt(0)}
+            </div>
+          )}
+          <div className="min-w-0">
+            <h3 className="text-base sm:text-lg font-semibold text-white leading-snug">
+              {item.role}
+            </h3>
+            <p className="text-accent text-sm font-medium truncate">
+              {item.company}
+            </p>
+          </div>
+        </div>
+        <span
+          className={cn(
+            "text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full shrink-0",
+            item.type === "full-time"
+              ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+              : item.type === "internship"
+                ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                : "bg-accent/10 text-accent border border-accent/20"
+          )}
+        >
+          {item.period}
+        </span>
       </div>
-      <p className="text-base sm:text-lg font-bold text-white leading-none mb-1">
-        {value}
-      </p>
-      <p className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
-        {label}
-      </p>
-    </motion.div>
+
+      {item.location && (
+        <p className="flex items-center gap-1.5 text-[11px] text-zinc-500 mb-2.5">
+          <MapPin className="w-3 h-3" aria-hidden="true" />
+          {item.location}
+        </p>
+      )}
+
+      <p className="text-sm text-zinc-400 mb-3 leading-relaxed">{item.tagline}</p>
+
+      {item.metrics && item.metrics.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {item.metrics.map((metric) => (
+            <MetricPill key={metric.label} {...metric} />
+          ))}
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-1.5 items-center">
+        {item.technologies.slice(0, 6).map((tech) => (
+          <SkillBadge key={tech} label={tech} variant="subtle" />
+        ))}
+        {item.link && (
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-[11px] text-accent hover:text-accent-muted ml-0.5 transition-colors"
+          >
+            <ExternalLink className="w-3 h-3" aria-hidden="true" />
+            Certificate
+          </a>
+        )}
+      </div>
+    </motion.article>
   );
 }
 
 export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   const prefersReducedMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 80%", "end 20%"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
+  const lineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className="relative" role="list">
+    <div ref={containerRef} className="relative" role="list">
+      {/* Center spine (desktop) */}
       <div
-        className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/50 via-accent/20 to-transparent hidden md:block"
+        className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/8 hidden sm:block"
         aria-hidden="true"
       />
-      <div className="space-y-6 md:space-y-8">
-        {items.map((item, index) => (
-          <motion.article
-            key={item.id}
-            role="listitem"
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-            whileHover={prefersReducedMotion ? undefined : { y: -4 }}
-            className={cn(
-              "relative md:pl-14",
-              "rounded-2xl p-5 sm:p-6 md:p-7 glass-card gradient-border transition-shadow hover:shadow-glow-sm"
-            )}
-          >
-            <motion.div
-              className="hidden md:flex absolute left-3 top-8 w-3 h-3 rounded-full bg-accent border-2 border-background ring-4 ring-accent/20"
-              animate={
-                prefersReducedMotion
-                  ? undefined
-                  : { scale: [1, 1.25, 1], opacity: [0.8, 1, 0.8] }
-              }
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              aria-hidden="true"
-            />
+      <motion.div
+        className="absolute left-4 md:left-1/2 top-0 w-px -translate-x-1/2 origin-top hidden sm:block"
+        style={{
+          height: prefersReducedMotion ? "100%" : lineHeight,
+          background:
+            "linear-gradient(180deg, #f97316 0%, #fb923c 50%, #34d399 100%)",
+          boxShadow: "0 0 12px rgba(249,115,22,0.45)",
+        }}
+        aria-hidden="true"
+      />
 
-            <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
-              <div className="flex items-center gap-3">
-                {item.logo ? (
-                  <BrandLogoBadge brand={item.logo as BrandId} size={44} />
-                ) : (
-                  <div className="p-2.5 rounded-xl bg-accent/10 border border-accent/20">
-                    <span className="text-accent text-sm font-bold" aria-hidden="true">
-                      {item.company.charAt(0)}
-                    </span>
-                  </div>
-                )}
-                <div>
-                  <h3 className="text-lg md:text-xl font-semibold text-white">
-                    {item.role}
-                  </h3>
-                  <p className="text-accent font-medium text-sm">{item.company}</p>
-                </div>
-              </div>
-              <span
+      {/* Mobile spine */}
+      <div
+        className="absolute left-4 top-0 bottom-0 w-px bg-white/8 sm:hidden"
+        aria-hidden="true"
+      />
+      <motion.div
+        className="absolute left-4 top-0 w-px origin-top sm:hidden"
+        style={{
+          height: prefersReducedMotion ? "100%" : lineHeight,
+          background:
+            "linear-gradient(180deg, #f97316 0%, #fb923c 55%, #34d399 100%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="space-y-8 md:space-y-12">
+        {items.map((item, index) => {
+          const side = index % 2 === 0 ? "left" : "right";
+          return (
+            <div key={item.id} className="relative md:min-h-[1px]">
+              {/* Timeline node */}
+              <motion.div
                 className={cn(
-                  "text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-full shrink-0",
-                  item.type === "full-time"
-                    ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                    : item.type === "internship"
-                      ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
-                      : "bg-accent/10 text-accent border border-accent/20"
+                  "absolute z-10 flex items-center justify-center",
+                  "left-4 -translate-x-1/2 sm:left-4 md:left-1/2",
+                  "top-6"
+                )}
+                initial={prefersReducedMotion ? false : { scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ type: "spring", stiffness: 200, damping: 14 }}
+                aria-hidden="true"
+              >
+                <span className="relative flex h-4 w-4 items-center justify-center">
+                  {!prefersReducedMotion && (
+                    <motion.span
+                      className="absolute inset-0 rounded-full bg-accent/40"
+                      animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
+                      transition={{
+                        duration: 2.2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.2,
+                      }}
+                    />
+                  )}
+                  <span className="relative h-3.5 w-3.5 rounded-full bg-accent border-2 border-background shadow-[0_0_12px_rgba(249,115,22,0.7)]" />
+                </span>
+              </motion.div>
+
+              {/* Year marker near center on desktop */}
+              <motion.span
+                className={cn(
+                  "hidden md:block absolute top-5 text-[10px] font-mono uppercase tracking-wider text-zinc-500",
+                  side === "left" ? "left-[calc(50%+1.25rem)]" : "right-[calc(50%+1.25rem)]"
+                )}
+                initial={prefersReducedMotion ? false : { opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                {item.period.split("—")[0]?.trim() ?? item.period}
+              </motion.span>
+
+              <div
+                className={cn(
+                  "pl-10 sm:pl-10 md:pl-0",
+                  side === "left" ? "md:pr-[calc(50%+2rem)]" : "md:pl-[calc(50%+2rem)]"
                 )}
               >
-                {item.period}
-              </span>
-            </div>
-
-            {item.location && (
-              <p className="flex items-center gap-1.5 text-xs text-zinc-500 mb-4">
-                <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
-                {item.location}
-              </p>
-            )}
-
-            <p className="text-sm text-zinc-400 mb-4 max-w-2xl">{item.tagline}</p>
-
-            {item.metrics && item.metrics.length > 0 && (
-              <div className="flex flex-wrap gap-2 sm:gap-3 mb-4">
-                {item.metrics.map((metric, i) => (
-                  <MetricChip key={metric.label} {...metric} index={i} />
-                ))}
+                <TimelineCard item={item} index={index} side={side} />
               </div>
-            )}
-
-            <div className="flex flex-wrap gap-2 items-center">
-              {item.technologies.slice(0, 8).map((tech) => (
-                <SkillBadge key={tech} label={tech} variant="subtle" />
-              ))}
-              {item.link && (
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent-muted ml-1 transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                  View Certificate
-                </a>
-              )}
             </div>
-          </motion.article>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
