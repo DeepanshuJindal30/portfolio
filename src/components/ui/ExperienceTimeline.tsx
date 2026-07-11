@@ -67,60 +67,104 @@ function MetricPill({
   );
 }
 
-function TimelineCard({
+function PeriodSide({ item }: { item: ExperienceItem }) {
+  const [start, end] = item.period.split("—").map((s) => s.trim());
+
+  return (
+    <div className="md:text-right md:pr-2">
+      <p
+        className={cn(
+          "inline-flex md:inline-flex flex-col md:items-end gap-0.5",
+          "text-[11px] sm:text-xs font-mono uppercase tracking-wider",
+          item.type === "full-time"
+            ? "text-emerald-400"
+            : item.type === "internship"
+              ? "text-amber-400"
+              : "text-accent"
+        )}
+      >
+        <span className="font-semibold text-sm sm:text-base tracking-wide">
+          {start}
+        </span>
+        {end && (
+          <span className="text-zinc-500 normal-case tracking-normal">
+            — {end}
+          </span>
+        )}
+      </p>
+      {item.location && (
+        <p className="hidden md:flex items-center md:justify-end gap-1.5 text-[11px] text-zinc-500 mt-2">
+          <MapPin className="w-3 h-3 shrink-0" aria-hidden="true" />
+          <span className="text-right leading-snug">{item.location}</span>
+        </p>
+      )}
+      <span
+        className={cn(
+          "hidden md:inline-flex mt-2.5 text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full",
+          item.type === "full-time"
+            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+            : item.type === "internship"
+              ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+              : "bg-accent/10 text-accent border border-accent/20"
+        )}
+      >
+        {item.type === "full-time"
+          ? "Full-time"
+          : item.type === "internship"
+            ? "Internship"
+            : "Other"}
+      </span>
+    </div>
+  );
+}
+
+function DetailsCard({
   item,
   index,
-  side,
 }: {
   item: ExperienceItem;
   index: number;
-  side: "left" | "right";
 }) {
   const prefersReducedMotion = useReducedMotion();
-  const fromX = side === "left" ? -48 : 48;
 
   return (
     <motion.article
       role="listitem"
-      initial={
-        prefersReducedMotion ? false : { opacity: 0, x: fromX, y: 24 }
-      }
+      initial={prefersReducedMotion ? false : { opacity: 0, x: 36, y: 16 }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, amount: 0.35, margin: "-40px" }}
+      viewport={{ once: true, amount: 0.3, margin: "-40px" }}
       transition={{
         type: "spring",
         stiffness: 90,
         damping: 18,
-        delay: prefersReducedMotion ? 0 : index * 0.05,
+        delay: prefersReducedMotion ? 0 : index * 0.04,
       }}
       className={cn(
         "relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4 sm:p-5",
-        "hover:border-accent/30 hover:bg-white/[0.05] transition-colors",
-        "md:w-[calc(50%-2rem)]",
-        side === "left" ? "md:mr-auto md:text-left" : "md:ml-auto md:text-left"
+        "hover:border-accent/30 hover:bg-white/[0.05] transition-colors"
       )}
     >
-      <div className="flex flex-wrap items-start justify-between gap-2 mb-2.5">
-        <div className="flex items-center gap-2.5 min-w-0">
-          {item.logo ? (
-            <BrandLogoBadge brand={item.logo as BrandId} size={36} />
-          ) : (
-            <div className="h-9 w-9 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-sm font-bold">
-              {item.company.charAt(0)}
-            </div>
-          )}
-          <div className="min-w-0">
-            <h3 className="text-base sm:text-lg font-semibold text-white leading-snug">
-              {item.role}
-            </h3>
-            <p className="text-accent text-sm font-medium truncate">
-              {item.company}
-            </p>
+      <div className="flex flex-wrap items-start gap-2.5 mb-2.5">
+        {item.logo ? (
+          <BrandLogoBadge brand={item.logo as BrandId} size={36} />
+        ) : (
+          <div className="h-9 w-9 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-sm font-bold">
+            {item.company.charAt(0)}
           </div>
+        )}
+        <div className="min-w-0 flex-1">
+          <h3 className="text-base sm:text-lg font-semibold text-white leading-snug">
+            {item.role}
+          </h3>
+          <p className="text-accent text-sm font-medium">{item.company}</p>
         </div>
+      </div>
+
+      {/* Mobile-only date + location (desktop shows on left) */}
+      <div className="md:hidden mb-2.5 space-y-1">
         <span
           className={cn(
-            "text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full shrink-0",
+            "inline-block text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full",
             item.type === "full-time"
               ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
               : item.type === "internship"
@@ -130,14 +174,13 @@ function TimelineCard({
         >
           {item.period}
         </span>
+        {item.location && (
+          <p className="flex items-center gap-1.5 text-[11px] text-zinc-500">
+            <MapPin className="w-3 h-3" aria-hidden="true" />
+            {item.location}
+          </p>
+        )}
       </div>
-
-      {item.location && (
-        <p className="flex items-center gap-1.5 text-[11px] text-zinc-500 mb-2.5">
-          <MapPin className="w-3 h-3" aria-hidden="true" />
-          {item.location}
-        </p>
-      )}
 
       <p className="text-sm text-zinc-400 mb-3 leading-relaxed">{item.tagline}</p>
 
@@ -188,13 +231,13 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
 
   return (
     <div ref={containerRef} className="relative" role="list">
-      {/* Center spine (desktop) */}
+      {/* Spine — left on mobile, between date/details on desktop */}
       <div
-        className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/8 hidden sm:block"
+        className="absolute left-4 md:left-[28%] top-0 bottom-0 w-px -translate-x-1/2 bg-white/8"
         aria-hidden="true"
       />
       <motion.div
-        className="absolute left-4 md:left-1/2 top-0 w-px -translate-x-1/2 origin-top hidden sm:block"
+        className="absolute left-4 md:left-[28%] top-0 w-px -translate-x-1/2 origin-top"
         style={{
           height: prefersReducedMotion ? "100%" : lineHeight,
           background:
@@ -204,80 +247,55 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
         aria-hidden="true"
       />
 
-      {/* Mobile spine */}
-      <div
-        className="absolute left-4 top-0 bottom-0 w-px bg-white/8 sm:hidden"
-        aria-hidden="true"
-      />
-      <motion.div
-        className="absolute left-4 top-0 w-px origin-top sm:hidden"
-        style={{
-          height: prefersReducedMotion ? "100%" : lineHeight,
-          background:
-            "linear-gradient(180deg, #f97316 0%, #fb923c 55%, #34d399 100%)",
-        }}
-        aria-hidden="true"
-      />
+      <div className="space-y-8 md:space-y-10">
+        {items.map((item, index) => (
+          <div
+            key={item.id}
+            className="relative grid grid-cols-1 md:grid-cols-[28%_1fr] gap-0 md:gap-0"
+          >
+            {/* Date column (desktop) */}
+            <motion.div
+              className="hidden md:flex md:justify-end md:items-start md:pt-5 md:pr-8"
+              initial={prefersReducedMotion ? false : { opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.4, delay: index * 0.04 }}
+            >
+              <PeriodSide item={item} />
+            </motion.div>
 
-      <div className="space-y-8 md:space-y-12">
-        {items.map((item, index) => {
-          const side = index % 2 === 0 ? "left" : "right";
-          return (
-            <div key={item.id} className="relative md:min-h-[1px]">
-              {/* Timeline node */}
-              <motion.div
-                className={cn(
-                  "absolute z-10 flex items-center justify-center",
-                  "left-4 -translate-x-1/2 sm:left-4 md:left-1/2",
-                  "top-6"
+            {/* Node on spine */}
+            <motion.div
+              className="absolute z-10 left-4 md:left-[28%] -translate-x-1/2 top-6 md:top-7 flex items-center justify-center"
+              initial={prefersReducedMotion ? false : { scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ type: "spring", stiffness: 200, damping: 14 }}
+              aria-hidden="true"
+            >
+              <span className="relative flex h-4 w-4 items-center justify-center">
+                {!prefersReducedMotion && (
+                  <motion.span
+                    className="absolute inset-0 rounded-full bg-accent/40"
+                    animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
+                    transition={{
+                      duration: 2.2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.2,
+                    }}
+                  />
                 )}
-                initial={prefersReducedMotion ? false : { scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true, amount: 0.6 }}
-                transition={{ type: "spring", stiffness: 200, damping: 14 }}
-                aria-hidden="true"
-              >
-                <span className="relative flex h-4 w-4 items-center justify-center">
-                  {!prefersReducedMotion && (
-                    <motion.span
-                      className="absolute inset-0 rounded-full bg-accent/40"
-                      animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
-                      transition={{
-                        duration: 2.2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.2,
-                      }}
-                    />
-                  )}
-                  <span className="relative h-3.5 w-3.5 rounded-full bg-accent border-2 border-background shadow-[0_0_12px_rgba(249,115,22,0.7)]" />
-                </span>
-              </motion.div>
+                <span className="relative h-3.5 w-3.5 rounded-full bg-accent border-2 border-background shadow-[0_0_12px_rgba(249,115,22,0.7)]" />
+              </span>
+            </motion.div>
 
-              {/* Year marker near center on desktop */}
-              <motion.span
-                className={cn(
-                  "hidden md:block absolute top-5 text-[10px] font-mono uppercase tracking-wider text-zinc-500",
-                  side === "left" ? "left-[calc(50%+1.25rem)]" : "right-[calc(50%+1.25rem)]"
-                )}
-                initial={prefersReducedMotion ? false : { opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                {item.period.split("—")[0]?.trim() ?? item.period}
-              </motion.span>
-
-              <div
-                className={cn(
-                  "pl-10 sm:pl-10 md:pl-0",
-                  side === "left" ? "md:pr-[calc(50%+2rem)]" : "md:pl-[calc(50%+2rem)]"
-                )}
-              >
-                <TimelineCard item={item} index={index} side={side} />
-              </div>
+            {/* Details column */}
+            <div className="pl-10 md:pl-8 md:pt-0">
+              <DetailsCard item={item} index={index} />
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );

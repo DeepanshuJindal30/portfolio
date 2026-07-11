@@ -5,6 +5,7 @@ import { Sparkles } from "lucide-react";
 import type { ProductionProject } from "@/data/projects";
 import { BrandLogoBadge, type BrandId } from "@/components/ui/BrandLogo";
 import { AgenticArchitectureFlow } from "@/components/ui/AgenticArchitectureFlow";
+import { ArchitectureDiagramImage } from "@/components/ui/ArchitectureDiagramImage";
 import { SkillBadge } from "./SkillBadge";
 import { GlowCard } from "./GlowCard";
 
@@ -78,7 +79,10 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
             </div>
 
             {isAgentic ? (
-              <AgenticArchitectureFlow />
+              <div className="space-y-1">
+                <AgenticArchitectureFlow />
+                <ArchitectureDiagramImage />
+              </div>
             ) : (
               project.architecture && (
                 <div className="flex flex-wrap items-center gap-2">
