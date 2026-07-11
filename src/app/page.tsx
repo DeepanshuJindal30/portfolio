@@ -5,7 +5,6 @@ import { Footer } from "@/components/layout/Footer";
 import { StickyCTA } from "@/components/layout/StickyCTA";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { MetricsSection } from "@/components/sections/MetricsSection";
-import { PillarsSection } from "@/components/sections/PillarsSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { SectionSkeleton } from "@/components/ui/SectionSkeleton";
 
@@ -73,7 +72,6 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <MetricsSection />
-        <PillarsSection />
         <AboutSection />
         <ExperienceSection />
         <ProjectsSection />
