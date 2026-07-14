@@ -4,9 +4,21 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StickyCTA } from "@/components/layout/StickyCTA";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { MetricsSection } from "@/components/sections/MetricsSection";
-import { AboutSection } from "@/components/sections/AboutSection";
 import { SectionSkeleton } from "@/components/ui/SectionSkeleton";
+
+const MetricsSection = dynamic(
+  () =>
+    import("@/components/sections/MetricsSection").then(
+      (m) => m.MetricsSection
+    ),
+  { loading: () => <SectionSkeleton className="py-8" /> }
+);
+
+const AboutSection = dynamic(
+  () =>
+    import("@/components/sections/AboutSection").then((m) => m.AboutSection),
+  { loading: () => <SectionSkeleton /> }
+);
 
 const ExperienceSection = dynamic(
   () =>

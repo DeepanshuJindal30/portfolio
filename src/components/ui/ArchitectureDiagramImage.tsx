@@ -5,7 +5,9 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Expand, X, ZoomIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const DIAGRAM_SRC = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/images/agentic-architecture.png`;
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const PREVIEW_SRC = `${base}/images/agentic-architecture-preview.webp`;
+const FULL_SRC = `${base}/images/agentic-architecture.webp`;
 
 interface ArchitectureDiagramImageProps {
   className?: string;
@@ -48,10 +50,13 @@ export function ArchitectureDiagramImage({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={DIAGRAM_SRC}
-            alt="Agentic AI end-to-end workflow: Jira and Splunk discovery through LoadRunner Controller execution"
+            src={PREVIEW_SRC}
+            alt="Agentic AI end-to-end workflow preview"
             className="w-full h-auto max-h-[180px] sm:max-h-[220px] object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity"
             loading="lazy"
+            decoding="async"
+            width={1200}
+            height={675}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
           <span className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2">
@@ -107,7 +112,7 @@ export function ArchitectureDiagramImage({
                 </div>
                 <div className="flex items-center gap-1.5 shrink-0">
                   <a
-                    href={DIAGRAM_SRC}
+                    href={FULL_SRC}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-zinc-400 hover:text-white px-2 py-1.5 rounded-lg border border-white/10 hover:border-white/20 transition-colors"
@@ -128,9 +133,10 @@ export function ArchitectureDiagramImage({
               <div className="overflow-auto flex-1 p-2 sm:p-3 bg-black/40">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={DIAGRAM_SRC}
+                  src={FULL_SRC}
                   alt="Full Agentic AI end-to-end architecture diagram"
                   className="w-full h-auto rounded-lg"
+                  decoding="async"
                 />
               </div>
             </motion.div>

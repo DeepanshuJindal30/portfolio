@@ -1,13 +1,36 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import type { ProductionProject } from "@/data/projects";
 import { BrandLogoBadge, type BrandId } from "@/components/ui/BrandLogo";
-import { AgenticArchitectureFlow } from "@/components/ui/AgenticArchitectureFlow";
-import { ArchitectureDiagramImage } from "@/components/ui/ArchitectureDiagramImage";
 import { SkillBadge } from "./SkillBadge";
 import { GlowCard } from "./GlowCard";
+
+const AgenticArchitectureFlow = dynamic(
+  () =>
+    import("@/components/ui/AgenticArchitectureFlow").then(
+      (m) => m.AgenticArchitectureFlow
+    ),
+  {
+    loading: () => (
+      <div className="h-16 rounded-xl bg-white/[0.03] border border-white/8 animate-pulse" />
+    ),
+  }
+);
+
+const ArchitectureDiagramImage = dynamic(
+  () =>
+    import("@/components/ui/ArchitectureDiagramImage").then(
+      (m) => m.ArchitectureDiagramImage
+    ),
+  {
+    loading: () => (
+      <div className="mt-3 h-[180px] rounded-xl bg-white/[0.03] border border-white/8 animate-pulse" />
+    ),
+  }
+);
 
 interface FeaturedProjectCardProps {
   project: ProductionProject;

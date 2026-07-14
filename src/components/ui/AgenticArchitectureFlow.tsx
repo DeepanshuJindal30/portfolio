@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   ArrowRightLeft,
@@ -411,20 +411,39 @@ export function AgenticArchitectureFlow() {
   const prefersReducedMotion = useReducedMotion();
   const [expanded, setExpanded] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [inView, setInView] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "80px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion || !inView) return;
     const id = window.setInterval(() => {
       setActiveIndex((i) => (i + 1) % Math.max(agenticFlowSequence.length, 1));
     }, 1100);
     return () => window.clearInterval(id);
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, inView]);
 
   const activeNodeId =
     agenticFlowSequence[activeIndex % agenticFlowSequence.length]?.id ?? "";
 
   return (
-    <div aria-label="LR Agentic AI connected architecture pipeline">
+    <div
+      ref={rootRef}
+      aria-label="LR Agentic AI connected architecture pipeline"
+    >
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}

@@ -8,7 +8,6 @@ import { Tilt3D } from "@/components/ui/Tilt3D";
 import { BrandLogo, type BrandId } from "@/components/ui/BrandLogo";
 import { ProfileImage } from "@/components/ui/ProfileImage";
 import { useVisualPerformance } from "@/hooks/useVisualPerformance";
-import { HeroCharacterPreloader } from "@/components/three/HeroCharacterPreloader";
 
 const HeroDeveloperCharacter = dynamic(
   () =>
@@ -45,11 +44,13 @@ function HeroPortrait({
   name,
   onClick,
   interactive,
+  priority,
 }: {
   avatar: string;
   name: string;
   onClick?: () => void;
   interactive?: boolean;
+  priority?: boolean;
 }) {
   const frame = (
     <div className="relative h-56 w-56 sm:h-64 sm:w-64 md:h-72 md:w-72 shrink-0">
@@ -63,6 +64,7 @@ function HeroPortrait({
             src={avatar}
             alt={`${name} portrait`}
             className="h-full w-full object-cover"
+            priority={priority}
           />
         </div>
       </div>
@@ -120,16 +122,21 @@ export function HeroIllustration({
 }: HeroIllustrationProps) {
   const prefersReducedMotion = useReducedMotion();
   const { enableHero3D } = useVisualPerformance();
+  // Photo-first: never auto-load Three.js / the encrypted model
   const [showCharacter, setShowCharacter] = useState(false);
   const [characterReady, setCharacterReady] = useState(false);
   const avatarSrc = avatar;
 
   useEffect(() => {
-    setShowCharacter(enableHero3D);
-    if (!enableHero3D) onViewChange?.(false);
-  }, [enableHero3D, onViewChange]);
+    if (!enableHero3D && showCharacter) {
+      setShowCharacter(false);
+      setCharacterReady(false);
+      onViewChange?.(false);
+    }
+  }, [enableHero3D, showCharacter, onViewChange]);
 
   const toggleView = () => {
+    if (!enableHero3D && !showCharacter) return;
     setShowCharacter((prev) => {
       const next = !prev;
       if (next) setCharacterReady(false);
@@ -148,6 +155,8 @@ export function HeroIllustration({
     setCharacterReady(true);
   };
 
+  const canShow3D = showCharacter && enableHero3D && !prefersReducedMotion;
+
   return (
     <div
       className={cn(
@@ -155,7 +164,6 @@ export function HeroIllustration({
         className
       )}
     >
-      <HeroCharacterPreloader />
       <LightningBolt className="absolute -left-2 sm:-left-8 top-8 w-16 sm:w-24 h-28 sm:h-40 text-accent rotate-12 opacity-80 pointer-events-none z-0" />
       <LightningBolt className="absolute -right-1 sm:-right-4 bottom-24 w-14 sm:w-20 h-24 sm:h-32 text-accent -rotate-12 scale-x-[-1] opacity-80 pointer-events-none z-0" />
 
@@ -163,7 +171,7 @@ export function HeroIllustration({
 
       <div className="relative z-10 h-full min-h-[360px] sm:min-h-[440px] lg:min-h-[540px]">
         <AnimatePresence mode="wait">
-          {showCharacter && enableHero3D && !prefersReducedMotion ? (
+          {canShow3D ? (
             <motion.div
               key="character"
               initial={{ opacity: 0, scale: 0.96 }}
@@ -198,7 +206,11 @@ export function HeroIllustration({
                 innerClassName="flex items-center justify-center"
               >
                 <motion.div
-                  animate={prefersReducedMotion ? undefined : { y: [0, -10, 0] }}
+                  animate={
+                    prefersReducedMotion
+                      ? undefined
+                      : { y: [0, -8, 0] }
+                  }
                   transition={{
                     duration: 4,
                     repeat: Infinity,
@@ -208,8 +220,9 @@ export function HeroIllustration({
                   <HeroPortrait
                     avatar={avatarSrc}
                     name={name}
-                    onClick={toggleView}
-                    interactive={!prefersReducedMotion}
+                    onClick={enableHero3D ? toggleView : undefined}
+                    interactive={enableHero3D}
+                    priority
                   />
                 </motion.div>
               </Tilt3D>
@@ -225,17 +238,16 @@ export function HeroIllustration({
             "absolute z-[5] w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl sm:rounded-2xl",
             "flex items-center justify-center text-[10px] sm:text-xs font-bold text-white shadow-lg",
             "border border-white/20 ring-2 ring-accent/20 pointer-events-none",
-            badge.brand ? "bg-surface/90 p-0" : cn("bg-gradient-to-br", badge.color),
-            showCharacter && "opacity-80 scale-90"
+            badge.brand
+              ? "bg-surface/90 p-0"
+              : cn("bg-gradient-to-br", badge.color),
+            canShow3D && "opacity-80 scale-90"
           )}
-          style={{ left: badge.x, top: badge.y, transformStyle: "preserve-3d" }}
+          style={{ left: badge.x, top: badge.y }}
           animate={
             prefersReducedMotion
               ? undefined
-              : {
-                  y: [0, -6, 0],
-                  rotate: [0, 2, 0],
-                }
+              : { y: [0, -6, 0], rotate: [0, 2, 0] }
           }
           transition={{
             duration: 3 + badge.delay,

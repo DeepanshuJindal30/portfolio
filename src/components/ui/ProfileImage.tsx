@@ -9,9 +9,16 @@ interface ProfileImageProps {
   src: string;
   alt: string;
   className?: string;
+  /** Marks hero LCP image for earlier fetch */
+  priority?: boolean;
 }
 
-export function ProfileImage({ src, alt, className }: ProfileImageProps) {
+export function ProfileImage({
+  src,
+  alt,
+  className,
+  priority = false,
+}: ProfileImageProps) {
   const resolved = withBasePath(src);
 
   return (
@@ -27,7 +34,8 @@ export function ProfileImage({ src, alt, className }: ProfileImageProps) {
         }
       }}
       decoding="async"
-      loading="eager"
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
     />
   );
 }
