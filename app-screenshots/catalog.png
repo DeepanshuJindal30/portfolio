@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="780" viewBox="0 0 360 780">
+  <rect width="360" height="780" fill="#0f172a"/>
+  <rect x="0" y="0" width="360" height="60" fill="#1e1b4b"/>
+  <text x="24" y="38" fill="#f8fafc" font-family="system-ui" font-size="18" font-weight="bold">Product Catalog</text>
+  <rect x="24" y="80" width="100" height="32" rx="16" fill="#f97316"/><text x="44" y="101" fill="white" font-family="system-ui" font-size="12">All</text>
+  <rect x="134" y="80" width="100" height="32" rx="16" fill="#1e293b"/><text x="148" y="101" fill="#94a3b8" font-family="system-ui" font-size="12">Tablets</text>
+  <rect x="244" y="80" width="100" height="32" rx="16" fill="#1e293b"/><text x="252" y="101" fill="#94a3b8" font-family="system-ui" font-size="12">Syrups</text>
+  <rect x="24" y="130" width="312" height="100" rx="12" fill="#1e293b"/>
+  <rect x="40" y="146" width="68" height="68" rx="8" fill="#334155"/>
+  <text x="120" y="168" fill="#f8fafc" font-family="system-ui" font-size="14" font-weight="bold">Paracetamol 500mg</text>
+  <text x="120" y="190" fill="#94a3b8" font-family="system-ui" font-size="12">Pain Relief " 10 tablets</text>
+  <text x="120" y="215" fill="#f97316" font-family="system-ui" font-size="14" font-weight="bold">�25</text>
+  <rect x="24" y="250" width="312" height="100" rx="12" fill="#1e293b"/>
+  <rect x="40" y="266" width="68" height="68" rx="8" fill="#334155"/>
+  <text x="120" y="288" fill="#f8fafc" font-family="system-ui" font-size="14" font-weight="bold">Vitamin C 1000mg</text>
+  <text x="120" y="310" fill="#94a3b8" font-family="system-ui" font-size="12">Immunity " 30 tablets</text>
+  <text x="120" y="335" fill="#f97316" font-family="system-ui" font-size="14" font-weight="bold">�199</text>
+</svg>
