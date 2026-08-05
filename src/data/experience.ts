@@ -27,6 +27,9 @@ export interface ExperienceItem {
   metrics?: ExperienceMetric[];
   technologies: string[];
   link?: string;
+  /** Internal portfolio page (e.g. ADP enterprise work) */
+  workHref?: string;
+  workLabel?: string;
 }
 
 export const experience: ExperienceItem[] = [
@@ -56,6 +59,8 @@ export const experience: ExperienceItem[] = [
       "Splunk",
       "Docker",
     ],
+    workHref: "/work/adp",
+    workLabel: "View ADP Enterprise work",
   },
   {
     id: "adp-intern",
@@ -80,6 +85,8 @@ export const experience: ExperienceItem[] = [
       "JWT",
     ],
     link: "https://drive.google.com/file/d/1aM2JT2qNjE4OsQrocBAUqvcJiizPxd0K/view?usp=sharing",
+    workHref: "/work/adp",
+    workLabel: "View ADP Enterprise work",
   },
   {
     id: "ieee",

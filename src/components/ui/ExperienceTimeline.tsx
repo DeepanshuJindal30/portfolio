@@ -20,15 +20,17 @@ import {
   Server,
   Users,
   Zap,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
+import Link from "next/link";
 import type {
   ExperienceItem,
   ExperienceMetricIcon,
 } from "@/data/experience";
 import { BrandLogoBadge, type BrandId } from "@/components/ui/BrandLogo";
 import { SkillBadge } from "./SkillBadge";
-import { cn } from "@/lib/utils";
+import { cn, withBasePath } from "@/lib/utils";
 
 const metricIcons: Record<ExperienceMetricIcon, LucideIcon> = {
   server: Server,
@@ -156,7 +158,17 @@ function DetailsCard({
           <h3 className="text-base sm:text-lg font-semibold text-white leading-snug">
             {item.role}
           </h3>
-          <p className="text-accent text-sm font-medium">{item.company}</p>
+          {item.workHref ? (
+            <Link
+              href={withBasePath(item.workHref)}
+              className="text-accent text-sm font-medium hover:text-accent-muted transition-colors inline-flex items-center gap-1"
+            >
+              {item.company}
+              <ArrowRight className="w-3.5 h-3.5 opacity-70" aria-hidden="true" />
+            </Link>
+          ) : (
+            <p className="text-accent text-sm font-medium">{item.company}</p>
+          )}
         </div>
       </div>
 
@@ -196,6 +208,15 @@ function DetailsCard({
         {item.technologies.slice(0, 6).map((tech) => (
           <SkillBadge key={tech} label={tech} variant="subtle" />
         ))}
+        {item.workHref && (
+          <Link
+            href={withBasePath(item.workHref)}
+            className="inline-flex items-center gap-1 text-[11px] font-medium text-accent hover:text-accent-muted ml-0.5 transition-colors"
+          >
+            {item.workLabel ?? "View work"}
+            <ArrowRight className="w-3 h-3" aria-hidden="true" />
+          </Link>
+        )}
         {item.link && (
           <a
             href={item.link}

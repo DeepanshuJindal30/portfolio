@@ -79,6 +79,7 @@ Beyond enterprise systems, I'm a published IEEE-SCOPUS researcher with 7 papers 
     { label: "About", href: "#about" },
     { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
+    { label: "Research", href: "/work/research" },
     { label: "Skills", href: "#skills" },
     { label: "Contact", href: "#contact" },
   ],

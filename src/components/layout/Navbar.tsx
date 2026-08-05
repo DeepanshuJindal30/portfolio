@@ -1,17 +1,30 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { usePathname } from "next/navigation";
 import { Download, Menu, X } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { cn, withBasePath } from "@/lib/utils";
 
+function resolveNavHref(href: string) {
+  if (href.startsWith("#")) {
+    return withBasePath(`/${href}`);
+  }
+  return withBasePath(href);
+}
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname() || "";
+  const normalizedPath = pathname.replace(/\/$/, "") || "/";
 
   const sectionIds = useMemo(
-    () => siteConfig.navLinks.map((link) => link.href.replace("#", "")),
+    () =>
+      siteConfig.navLinks
+        .filter((link) => link.href.startsWith("#"))
+        .map((link) => link.href.replace("#", "")),
     []
   );
   const activeSection = useActiveSection(sectionIds);
@@ -29,16 +42,21 @@ export function Navbar() {
     };
   }, [isOpen]);
 
-  const linkClass = (href: string) => {
-    const id = href.replace("#", "");
-    const isActive = activeSection === id;
-    return cn(
+  const isLinkActive = (href: string) => {
+    if (href.startsWith("#")) {
+      return activeSection === href.replace("#", "");
+    }
+    const path = href.replace(/\/$/, "");
+    return normalizedPath === path || normalizedPath.endsWith(path);
+  };
+
+  const linkClass = (href: string) =>
+    cn(
       "relative px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg",
-      isActive
+      isLinkActive(href)
         ? "nav-link-active text-accent"
         : "text-stone-400 hover:text-white"
     );
-  };
 
   return (
     <>
@@ -55,7 +73,7 @@ export function Navbar() {
           aria-label="Main navigation"
         >
           <a
-            href="#hero"
+            href={withBasePath("/")}
             className="text-base sm:text-lg font-display font-bold text-white tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded lowercase"
             onClick={() => setIsOpen(false)}
           >
@@ -65,7 +83,7 @@ export function Navbar() {
           <ul className="hidden lg:flex items-center gap-2" role="list">
             {siteConfig.navLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className={linkClass(link.href)}>
+                <a href={resolveNavHref(link.href)} className={linkClass(link.href)}>
                   {link.label}
                 </a>
               </li>
@@ -103,14 +121,17 @@ export function Navbar() {
           aria-label="Mobile navigation"
         >
           <div className="flex flex-col h-full pt-14 sm:pt-16">
-            <ul className="flex flex-col flex-1 px-4 py-6 gap-1 overflow-y-auto" role="list">
+            <ul
+              className="flex flex-col flex-1 px-4 py-6 gap-1 overflow-y-auto"
+              role="list"
+            >
               {siteConfig.navLinks.map((link) => (
                 <li key={link.href}>
                   <a
-                    href={link.href}
+                    href={resolveNavHref(link.href)}
                     className={cn(
                       "block px-4 py-4 text-xl font-display font-semibold rounded-xl transition-colors",
-                      activeSection === link.href.replace("#", "")
+                      isLinkActive(link.href)
                         ? "text-accent bg-accent/10"
                         : "text-stone-200 hover:text-white hover:bg-white/5"
                     )}
