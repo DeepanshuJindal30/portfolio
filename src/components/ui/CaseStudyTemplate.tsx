@@ -159,13 +159,13 @@ export function CaseStudyTemplate({
               </div>
             </section>
 
-            {study.demoVideo && (
+            {(study.demoVideo || study.links.live) && (
               <section aria-labelledby="demo-heading">
                 <h2
                   id="demo-heading"
                   className="text-xl font-semibold text-white mb-6"
                 >
-                  Demo Video
+                  {study.demoVideo ? "Demo Video" : "Live Preview"}
                 </h2>
                 <div className="rounded-2xl glass-card gradient-border p-8 md:p-12 flex justify-center">
                   {demoLayout === "browser" ? (
@@ -173,6 +173,7 @@ export function CaseStudyTemplate({
                       videoSrc={study.demoVideo}
                       alt={study.title}
                       poster={study.screenshotGallery?.[0]?.src}
+                      liveUrl={study.links.live}
                     />
                   ) : (
                     <PhoneMockup

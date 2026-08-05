@@ -33,15 +33,14 @@ function computeVisualState(prefersReducedMotion: boolean | null) {
   ).connection;
   const saveData = connection?.saveData ?? false;
   const lowCores = (navigator.hardwareConcurrency ?? 8) <= 4;
-  // 3D character is opt-in in the hero UI; only expose it on capable desktops
-  const enableHero3D =
-    !prefersReducedMotion && !saveData && !isMobile && !lowCores;
-  const enable3D = enableHero3D;
+  // Hero 3D on by default (desktop + mobile); skip only for save-data / reduced motion
+  const enableHero3D = !prefersReducedMotion && !saveData;
+  const enable3D = enableHero3D && !isMobile && !lowCores;
 
   return {
     enable3D,
     enableHero3D,
-    enableSkills3D: enableHero3D && !isMobile,
+    enableSkills3D: enableHero3D,
     canvasDpr: (isMobile ? 1 : enable3D ? [1, 1.25] : 1) as
       | number
       | [number, number],

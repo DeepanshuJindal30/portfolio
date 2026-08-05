@@ -95,6 +95,7 @@ export function DemoShowcaseCard({
               videoSrc={project.demoVideo}
               alt={project.title}
               poster={project.poster}
+              liveUrl={project.links.live}
             />
           )}
         </div>

@@ -1,0 +1,5 @@
+KayKit Character Pack – Adventures (Rogue)
+Source: https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0
+License: CC0 1.0 Universal (public domain) — free for personal and commercial use.
+Author: Kay Lousberg / KayKit
+File used: Characters/gltf/Rogue.glb → cartoon-hero.glb

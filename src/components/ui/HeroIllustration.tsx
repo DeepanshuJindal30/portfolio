@@ -8,6 +8,7 @@ import { Tilt3D } from "@/components/ui/Tilt3D";
 import { BrandLogo, type BrandId } from "@/components/ui/BrandLogo";
 import { ProfileImage } from "@/components/ui/ProfileImage";
 import { useVisualPerformance } from "@/hooks/useVisualPerformance";
+import { HeroCharacterPreloader } from "@/components/three/HeroCharacterPreloader";
 
 const HeroDeveloperCharacter = dynamic(
   () =>
@@ -122,21 +123,23 @@ export function HeroIllustration({
 }: HeroIllustrationProps) {
   const prefersReducedMotion = useReducedMotion();
   const { enableHero3D } = useVisualPerformance();
-  // Photo-first: never auto-load Three.js / the encrypted model
+  // 3D by default when capable — photo is the fallback / toggle
   const [showCharacter, setShowCharacter] = useState(false);
   const [characterReady, setCharacterReady] = useState(false);
   const avatarSrc = avatar;
 
   useEffect(() => {
-    if (!enableHero3D && showCharacter) {
+    if (enableHero3D && !prefersReducedMotion) {
+      setShowCharacter(true);
+      onViewChange?.(true);
+    } else {
       setShowCharacter(false);
       setCharacterReady(false);
       onViewChange?.(false);
     }
-  }, [enableHero3D, showCharacter, onViewChange]);
+  }, [enableHero3D, prefersReducedMotion, onViewChange]);
 
   const toggleView = () => {
-    if (!enableHero3D && !showCharacter) return;
     setShowCharacter((prev) => {
       const next = !prev;
       if (next) setCharacterReady(false);
@@ -164,10 +167,41 @@ export function HeroIllustration({
         className
       )}
     >
+      {enableHero3D && !prefersReducedMotion && <HeroCharacterPreloader />}
+
       <LightningBolt className="absolute -left-2 sm:-left-8 top-8 w-16 sm:w-24 h-28 sm:h-40 text-accent rotate-12 opacity-80 pointer-events-none z-0" />
       <LightningBolt className="absolute -right-1 sm:-right-4 bottom-24 w-14 sm:w-20 h-24 sm:h-32 text-accent -rotate-12 scale-x-[-1] opacity-80 pointer-events-none z-0" />
 
       <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent-secondary/10 rounded-3xl blur-3xl pointer-events-none" />
+
+      <div
+        className="absolute inset-[12%] sm:inset-[10%] pointer-events-none z-[1]"
+        aria-hidden="true"
+      >
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full border"
+            style={{
+              inset: `${8 + i * 10}%`,
+              borderColor:
+                i === 1
+                  ? "rgba(249,115,22,0.28)"
+                  : "rgba(249,115,22,0.12)",
+            }}
+            animate={
+              prefersReducedMotion
+                ? undefined
+                : { rotate: i % 2 === 0 ? 360 : -360 }
+            }
+            transition={{
+              duration: 28 + i * 10,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
 
       <div className="relative z-10 h-full min-h-[360px] sm:min-h-[440px] lg:min-h-[540px]">
         <AnimatePresence mode="wait">
@@ -182,7 +216,7 @@ export function HeroIllustration({
             >
               {!characterReady && (
                 <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-                  <HeroPortrait avatar={avatarSrc} name={name} />
+                  <HeroPortrait avatar={avatarSrc} name={name} priority />
                 </div>
               )}
               <HeroDeveloperCharacter
@@ -207,9 +241,7 @@ export function HeroIllustration({
               >
                 <motion.div
                   animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : { y: [0, -8, 0] }
+                    prefersReducedMotion ? undefined : { y: [0, -8, 0] }
                   }
                   transition={{
                     duration: 4,
@@ -221,7 +253,7 @@ export function HeroIllustration({
                     avatar={avatarSrc}
                     name={name}
                     onClick={enableHero3D ? toggleView : undefined}
-                    interactive={enableHero3D}
+                    interactive={Boolean(enableHero3D)}
                     priority
                   />
                 </motion.div>
@@ -235,7 +267,7 @@ export function HeroIllustration({
         <motion.div
           key={badge.brand ?? badge.label}
           className={cn(
-            "absolute z-[5] w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl sm:rounded-2xl",
+            "absolute z-[25] w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl sm:rounded-2xl",
             "flex items-center justify-center text-[10px] sm:text-xs font-bold text-white shadow-lg",
             "border border-white/20 ring-2 ring-accent/20 pointer-events-none",
             badge.brand
@@ -268,12 +300,14 @@ export function HeroIllustration({
         </motion.div>
       ))}
 
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-sm whitespace-nowrap flex items-center gap-2 z-[6] pointer-events-none">
-        <BrandLogo brand="adp" size={22} className="rounded-md border-0" />
-        <span className="text-[10px] sm:text-xs font-mono text-accent-muted uppercase tracking-wider">
-          SDE-I @ ADP
-        </span>
-      </div>
+      {!canShow3D && (
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-sm whitespace-nowrap flex items-center gap-2 z-[6] pointer-events-none">
+          <BrandLogo brand="adp" size={22} className="rounded-md border-0" />
+          <span className="text-[10px] sm:text-xs font-mono text-accent-muted uppercase tracking-wider">
+            SDE-I @ ADP
+          </span>
+        </div>
+      )}
     </div>
   );
 }

@@ -8,7 +8,7 @@ export interface ShowcaseProject {
   tagline: string;
   category: string;
   technologies: string[];
-  demoVideo: string;
+  demoVideo?: string;
   layout: "browser" | "phone";
   poster?: string;
   screenshots?: string[];
@@ -83,6 +83,49 @@ export interface CaseStudy {
 }
 
 export const featuredShowcases: ShowcaseProject[] = [
+  {
+    id: "jobpilot",
+    title: "JobPilot",
+    tagline:
+      "Human-approved job search desk — hunt openings, score resume fit, rank who to contact, and copy LinkedIn/email drafts. Never auto-submits.",
+    category: "Product · FastAPI · React · Render",
+    technologies: [
+      "FastAPI",
+      "React",
+      "Vite",
+      "JobSpy",
+      "Firecrawl",
+      "Python",
+    ],
+    layout: "browser",
+    links: {
+      live: "https://jobpilot-s69n.onrender.com/",
+      github: "https://github.com/DeepanshuJindal30/JobPilot",
+      caseStudy: "/projects/jobpilot",
+    },
+  },
+  {
+    id: "agentmesh",
+    title: "AgentMesh",
+    tagline:
+      "Multi-tenant AI agent execution platform — durable queues, gRPC runtime, live SSE, RBAC, and Kubernetes-ready infra.",
+    category: "Platform · FastAPI · Next.js · K8s",
+    technologies: [
+      "FastAPI",
+      "Next.js",
+      "gRPC",
+      "RabbitMQ",
+      "Celery",
+      "PostgreSQL",
+      "Redis",
+      "Kubernetes",
+    ],
+    layout: "browser",
+    links: {
+      github: "https://github.com/DeepanshuJindal30/AgentMesh",
+      caseStudy: "/projects/agentmesh",
+    },
+  },
   {
     id: "appurva-herbals",
     title: "Appurva Herbals",
@@ -554,6 +597,120 @@ export const docusenseCaseStudy: CaseStudy = {
   links: {
     live: "https://gmultichat.streamlit.app/",
     github: "https://github.com/DeepanshuJindal30/chatwithpdf1",
+  },
+};
+
+export const jobpilotCaseStudy: CaseStudy = {
+  slug: "jobpilot",
+  title: "JobPilot",
+  tagline:
+    "Human-approved job search desk — collect openings, score resume fit, rank contacts, pause before submit.",
+  problem:
+    "Job hunting is noisy: openings are scattered across LinkedIn, Indeed, Naukri, and niche boards; resume fit is guesswork; and outreach drafts are repetitive. Auto-apply tools invent facts and spam employers.",
+  solution:
+    "Built a FastAPI + React desk that hunts openings (JobSpy + optional Firecrawl), applies strict YOE/salary/company/work-mode filters, scores each JD against a pasted resume, ranks TA/HM/referral contacts, and generates copyable LinkedIn/email drafts — never auto-submitting or auto-sending mail.",
+  features: [
+    "Hunt form — role, max YOE, min LPA, locations, openings count, resume paste",
+    "Strict filters — date posted, job type, remote/hybrid/onsite, product vs service",
+    "Apply-first table — priority, role link, location, resume fit %, why it matches",
+    "People to contact — ranked TA / HM / referral with LinkedIn when found",
+    "Copyable LinkedIn + email drafts (never auto-sent)",
+    "Dashboard — found / applied / avg match + gap advice",
+    "Optional Firecrawl & RocketReach keys — never auto-spend credits",
+    "Live on Render with one-click Blueprint deploy",
+  ],
+  techStack: [
+    "Python 3.12",
+    "FastAPI",
+    "React",
+    "Vite",
+    "JobSpy",
+    "Firecrawl",
+    "RocketReach",
+    "Render",
+  ],
+  architecture: [
+    "React + Vite hunt UI + apply-first table + dashboard",
+    "FastAPI orchestration (POST /api/hunt, dashboard, score)",
+    "JobSpy collectors (Indeed / LinkedIn / Naukri) + optional Firecrawl",
+    "Strict filters — YOE, salary LPA, company type, work mode",
+    "Resume match % + brief outreach drafts",
+    "Free contact stack first, optional RocketReach enrichment",
+    "Persisted last hunt for dashboard metrics",
+  ],
+  screenshots: [],
+  challenges: [
+    "LinkedIn often blocked/slow on cloud — Fast hunt skips it by default",
+    "Strict product/service filters drop unknowns — empty beats wrong",
+    "Render free-tier cold starts add latency before hunts begin",
+    "Contact enrichment must stay free-first and never invent people",
+  ],
+  futureImprovements: [
+    "Calendar reminders for follow-ups",
+    "Saved profiles / multi-resume workspaces",
+    "Deeper ATS portal integrations",
+  ],
+  links: {
+    live: "https://jobpilot-s69n.onrender.com/",
+    github: "https://github.com/DeepanshuJindal30/JobPilot",
+  },
+};
+
+export const agentmeshCaseStudy: CaseStudy = {
+  slug: "agentmesh",
+  title: "AgentMesh",
+  tagline:
+    "Multi-tenant AI agent execution platform — durable queues, gRPC runtime, live SSE, RBAC, K8s.",
+  problem:
+    "Chatbots and CRUD demos do not prove the skills needed for agent platforms: multi-tenant isolation, durable queues, crash recovery, idempotency, live observability, and secure identity.",
+  solution:
+    "Built a production-quality platform with Next.js console, FastAPI API, Celery/RabbitMQ workers, gRPC AgentRuntimeService streaming, Redis Pub/Sub + SSE live UI, Keycloak OIDC + RBAC, pgvector similarity (Ticket Similarity Agent), Docker Compose, Kubernetes manifests, and CI.",
+  features: [
+    "OAuth2 / OIDC login via Keycloak (local bypass for offline demos)",
+    "Multi-tenant orgs with RBAC (Admin, Developer, Operator, Viewer)",
+    "Immutable agent versioning and publish workflow",
+    "Async executions via RabbitMQ + Celery (retries, DLQ, idempotency)",
+    "gRPC AgentRuntimeService with server-streaming step events",
+    "Live execution UI via SSE + Redis Pub/Sub",
+    "Ticket Similarity Agent with mock embeddings (optional real LLM)",
+    "Rate limits, quotas, hashed API keys, append-only audit logs",
+    "Marketing site + in-app docs; Compose + K8s + Prometheus/Grafana/Jaeger",
+  ],
+  techStack: [
+    "Next.js",
+    "FastAPI",
+    "PostgreSQL",
+    "pgvector",
+    "Redis",
+    "RabbitMQ",
+    "Celery",
+    "gRPC",
+    "Keycloak",
+    "Docker",
+    "Kubernetes",
+  ],
+  architecture: [
+    "Next.js web → FastAPI REST API",
+    "API → PostgreSQL + RabbitMQ queue",
+    "Celery workers → gRPC runtime + Postgres",
+    "Redis Pub/Sub → SSE live event fan-out",
+    "Keycloak OIDC / JWT RBAC at the service layer",
+    "Compose local stack; Kustomize Kubernetes manifests",
+  ],
+  screenshots: [],
+  challenges: [
+    "At-least-once delivery requires idempotent handlers (no false exactly-once claims)",
+    "Tenant isolation must come from membership, never client-trusted org IDs",
+    "Demo auth uses bearer tokens — production needs BFF + HttpOnly cookies",
+    "Mock LLM by default; quality depends on optional providers",
+  ],
+  futureImprovements: [
+    "Production BFF cookie sessions",
+    "Richer Alembic migration history",
+    "Load-test numbers published with methodology",
+  ],
+  links: {
+    github: "https://github.com/DeepanshuJindal30/AgentMesh",
   },
 };
 

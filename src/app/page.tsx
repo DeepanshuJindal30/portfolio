@@ -36,18 +36,10 @@ const ProjectsSection = dynamic(
   { loading: () => <SectionSkeleton /> }
 );
 
-const EnterpriseProjectsSection = dynamic(
+const ProfessionalWorkSection = dynamic(
   () =>
-    import("@/components/sections/EnterpriseProjectsSection").then(
-      (m) => m.EnterpriseProjectsSection
-    ),
-  { loading: () => <SectionSkeleton /> }
-);
-
-const ResearchSection = dynamic(
-  () =>
-    import("@/components/sections/ResearchSection").then(
-      (m) => m.ResearchSection
+    import("@/components/sections/ProfessionalWorkSection").then(
+      (m) => m.ProfessionalWorkSection
     ),
   { loading: () => <SectionSkeleton /> }
 );
@@ -87,8 +79,7 @@ export default function HomePage() {
         <AboutSection />
         <ExperienceSection />
         <ProjectsSection />
-        <EnterpriseProjectsSection />
-        <ResearchSection />
+        <ProfessionalWorkSection />
         <CredentialsSection />
         <SkillsSection />
         <ContactSection />

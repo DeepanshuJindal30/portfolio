@@ -33,7 +33,7 @@ export function ProjectsSection() {
         <SectionHeader
           label="My Work"
           title="Projects"
-          description="Production apps, deployed products, and AI/ML builds."
+          description="Production apps, JobPilot, AgentMesh, and other deployed / AI builds."
           align="center"
         />
 
